@@ -1,14 +1,14 @@
 const Restaurant = require('../models/restaurant')
 
 const registerRestaurant = async (req,res)=>{
-    let {country, city, address,restaurant, name, surname, phone, email, password}= req.body
+    let {country, city, address,restaurant, name, surname, phone, email, password, filter}= req.body
     const findEmail = await Restaurant.findOne({email})
     try{
         if (findEmail){
             res.send({ok:true, data:"This email is already registered in Foodies"})
         }
         else{
-            await Customer.create({country, city, address,restaurant, name, surname, phone, email, password})
+            await Restaurant.create({country, city, address,restaurant, name, surname, phone, email, password, filter})
             res.send({ok:true, data:"The restaurant was successfully added"})
         }
     }
@@ -22,7 +22,7 @@ const removeRestaurant = async (req,res)=>{
     const findEmail = await Restaurant.findOne({email})
     try{
         if (findEmail){
-            await Customer.deleteOne({email})
+            await Restaurant.deleteOne({email})
             res.send({ok:true, data:"The restaurant was successfully removed"})  
         }
         else{

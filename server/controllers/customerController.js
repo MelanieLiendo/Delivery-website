@@ -34,8 +34,28 @@ const removeCustomer = async (req,res)=>{
         res.send({ok:false,data:{error}})
     }
 }
+// BUEN DIA!!!!! NOS QUEDAMOS ACA CON EL PROBLEMA DE QUE NO LO ACTUALIZA! :)
+const updateCustomer = async (req,res)=>{
+    let {newName, email, newEmail, newPassword, newAddress}= req.body 
+    const findEmail = await Customer.findOne({email})
+    try{
+        if (findEmail){
+            await Customer.updateOne({email},{name: newName}, {email: newEmail}, {password:newPassword}, {address:newAddress})
+            res.send({ok:true, data:"The customer was successfully updated"})   
+        }
+        else{
+            res.send({ok:true, data:"This email is not registered in Foodies"})
+        }
+    }
+    catch(error){
+        res.send({ok:false,data:{error}})
+    }
+}
+
+
 
 module.exports={
     registerCustomer,
     removeCustomer,
+    updateCustomer
 }
