@@ -13,14 +13,14 @@ Controllers
 
 
 -customerController
-    -registerCustomer (if email not in use)
-    -updateCustomer (if email exists)
-    -removeCustomer (if customer exists)
+    -registerCustomer (if email not in use)     DONE
+    -updateCustomer (if email exists)           NO FUNCIONA PORQUE NOS DEJA UPDATE MUCHAS VECES CON EL MISMO EMAIL
+    -removeCustomer (if customer exists)     DONE  missing that email should be the one of the user logged in not an input
 
 -restaurantController
-    -registerRestaurant 
-    -updateRestaurant
-    -removeRestaurant
+    -registerRestaurant      DONE
+    -updateRestaurant       
+    -removeRestaurant       DONE missing that email should be the one of the restaurant logged in not an input
 
 
 -productController
