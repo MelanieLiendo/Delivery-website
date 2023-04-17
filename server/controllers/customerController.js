@@ -1,14 +1,14 @@
 const Customer = require('../models/customer')
 
 const registerCustomer = async (req,res)=>{
-    let {name,email,password, address}= req.body
+    let {name,email,password, address,admin}= req.body
     const findEmail = await Customer.findOne({email})
     try{
         if (findEmail){
             res.send({ok:true, data:"This email is already registered in Foodies"})
         }
         else{
-            await Customer.create({name,email,password, address})
+            await Customer.create({name,email,password, address, admin})
             res.send({ok:true, data:"The customer was successfully added"})
         }
     }
@@ -56,13 +56,7 @@ const loginCustomer = async (req,res)=>{
     let {newName, email, newEmail, newPassword, newAddress}= req.body 
     const findEmail = await Customer.findOne({email})
     try{
-        if (!findEmail){
-            res.send({ok:true, data:"This email is not registered in Foodies"})
-        }
-        else{
-            await Customer.findOneAndUpdate({email}, {name: newName, email: newEmail, password:newPassword,address:newAddress})
-            res.send({ok:true, data:"The customer was successfully updated"})   
-        }
+        
     }
     catch(error){
         res.send({ok:false,data:{error}})
