@@ -5,7 +5,7 @@ router        = express.Router(),
 router.post('/register', controller.registerCustomer)
 router.post('/update', controller.updateCustomer)
 router.post('/remove', controller.removeCustomer)
-
+router.post('/login', controller.loginCustomer)
 
 
 module.exports=router;

@@ -26,7 +26,7 @@ Controllers
 -menuController
     -addMenu     DONE 
     -removeMenu (if product exists) DONE
-    -updateMenu (if prod exists)
+    -updateMenu (if prod exists)   DONE
 
 -orderController
     -addProductCart

@@ -43,7 +43,21 @@ const removeMenu = async (req,res)=>{
     }
 }
 
+const updateMenu = async (req,res)=>{
+    let {name, restaurant, newName, newDescription, newPrice, newPicture, newCategory}= req.body
+    const findRestaurant = await Restaurant.findOne({restaurant})
+    const sku= `${name + findRestaurant._id.toString()}`
+    const findSku = await Menu.findOne({sku})
+    try{
+       
+    }
+    catch(error){
+        res.send({ok:false,data:{error}})
+    }
+}
+
 module.exports={
    addMenu,
    removeMenu,
+   updateMenu,
 }
