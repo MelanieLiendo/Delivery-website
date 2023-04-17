@@ -34,13 +34,13 @@ const removeCustomer = async (req,res)=>{
         res.send({ok:false,data:{error}})
     }
 }
-// BUEN DIA!!!!! NOS QUEDAMOS ACA CON EL PROBLEMA DE QUE NO LO ACTUALIZA! :)
+
 const updateCustomer = async (req,res)=>{
     let {newName, email, newEmail, newPassword, newAddress}= req.body 
     const findEmail = await Customer.findOne({email})
     try{
         if (findEmail){
-            await Customer.updateMany({name: newName}, {email: newEmail}, {password:newPassword}, {address:newAddress})
+            await Customer.findOneAndUpdate({email},{name: newName, email: newEmail, password:newPassword,address:newAddress})
             res.send({ok:true, data:"The customer was successfully updated"})   
         }
         else{
