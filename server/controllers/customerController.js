@@ -40,7 +40,7 @@ const updateCustomer = async (req,res)=>{
     const findEmail = await Customer.findOne({email})
     try{
         if (findEmail){
-            await Customer.updateOne({email},{name: newName}, {email: newEmail}, {password:newPassword}, {address:newAddress})
+            await Customer.updateMany({name: newName}, {email: newEmail}, {password:newPassword}, {address:newAddress})
             res.send({ok:true, data:"The customer was successfully updated"})   
         }
         else{
