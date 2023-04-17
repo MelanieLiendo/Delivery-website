@@ -7,11 +7,7 @@ const menuSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   picture: {type:String, required:true},
   category: [{ type: String, required: true, unique: false }], /*promos,starters,main dishes,desserts,beverages*/
-  restaurant_id:{
-    type:restaurantSchema.ObjectId,
-    required:true,
-    ref:'restaurant'
-}
+  restaurant_id: {type : String, required: true}
 });
 
 module.exports = mongoose.model("menu", menuSchema);
