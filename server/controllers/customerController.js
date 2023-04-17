@@ -56,13 +56,7 @@ const loginCustomer = async (req,res)=>{
     let {newName, email, newEmail, newPassword, newAddress}= req.body 
     const findEmail = await Customer.findOne({email})
     try{
-        if (!findEmail){
-            res.send({ok:true, data:"This email is not registered in Foodies"})
-        }
-        else{
-            await Customer.findOneAndUpdate({email}, {name: newName, email: newEmail, password:newPassword,address:newAddress})
-            res.send({ok:true, data:"The customer was successfully updated"})   
-        }
+        
     }
     catch(error){
         res.send({ok:false,data:{error}})

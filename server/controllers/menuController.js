@@ -49,7 +49,14 @@ const updateMenu = async (req,res)=>{
     const sku= `${name + findRestaurant._id.toString()}`
     const findSku = await Menu.findOne({sku})
     try{
-       
+        if (findRestaurant && findSku){
+            await Menu.findOneAndUpdate({sku}, {name: newName, description: newDescription, price: newPrice, picture: newPicture, category: newCategory});
+            res.send({ok:true, data:"The dish was successfully updated"})
+        } else if (!findRestaurant){
+            res.send({ok:true, data:"The restaurant doesn´t exist"})
+        } else if (!findSku) {
+            res.send({ok:true, data:"The dish doesn´t exist"})
+        }
     }
     catch(error){
         res.send({ok:false,data:{error}})
