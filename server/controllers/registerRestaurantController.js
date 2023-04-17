@@ -2,6 +2,7 @@ const Restaurant = require('../models/restaurant')
 const argon2 = require("argon2"); 
 const jwt = require("jsonwebtoken");
 const validator = require("validator");
+const restaurant = require('../models/restaurant');
 const jwt_secret = process.env.JWT_SECRET;
 
 
@@ -35,8 +36,40 @@ const registerRestaurant = async (req,res)=>{
     }
 }
 
+const loginRestaurant = async (req, res) => {
+    const { email, password } = req.body;
+    if (!email || !password){
+      return res.json({ ok: false, message: "All fields are required" });
+    }
+    if (!validator.isEmail(email)){
+      return res.json({ ok: false, message: "Invalid email provided" });
+    }
+    try {
+      const restaurant = await Restaurant.findOne({ email });
+      if (!restaurant) return res.json({ ok: false, message: "Invalid email provided" });
+      const match = await argon2.verify(restaurant.password, password);
+      if (match) {
+        const token = jwt.sign({userEmail:restaurant.email}, jwt_secret, { expiresIn: "1h" }); 
+        // after we send the payload to the client you can see how to get it in the client's Login component inside handleSubmit function
+        res.json({ ok: true, message: "welcome back", token, email });
+      } else return res.json({ ok: false, message: "Invalid data provided" });
+    } catch (error) {
+      res.json({ ok: false, error });
+    }
+  };
+
+  const verify_tokenRestaurant = (req, res) => {
+    const token = req.headers.authorization;
+    jwt.verify(token, jwt_secret, (err, succ) => {
+      err
+        ? res.json({ ok: false, message: "Token is corrupted" })
+        : res.json({ ok: true, succ });
+    });
+  };
 
 module.exports={
     registerRestaurant,
+    loginRestaurant,
+    verify_tokenRestaurant
 }
 

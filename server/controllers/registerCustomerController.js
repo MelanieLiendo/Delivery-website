@@ -32,8 +32,40 @@ const registerCustomer = async (req,res)=>{
     }
 }
 
+const loginCustomer = async (req, res) => {
+    const { email, password } = req.body;
+    if (!email || !password){
+      return res.json({ ok: false, message: "All fields are required" });
+    }
+    if (!validator.isEmail(email)){
+      return res.json({ ok: false, message: "Invalid email provided" });
+    }
+    try {
+      const customer = await Customer.findOne({ email });
+      if (!customer) return res.json({ ok: false, message: "Invalid email provided" });
+      const match = await argon2.verify(customer.password, password);
+      if (match) {
+        const token = jwt.sign({userEmail:customer.email}, jwt_secret, { expiresIn: "1h" }); 
+        res.json({ ok: true, message: "welcome back", token, email });
+      } else return res.json({ ok: false, message: "Invalid data provided" });
+    } catch (error) {
+      res.json({ ok: false, error });
+    }
+  };
+
+  const verify_tokenCustomer = (req, res) => {
+    const token = req.headers.authorization;
+    jwt.verify(token, jwt_secret, (err, succ) => {
+      err
+        ? res.json({ ok: false, message: "Token is corrupted" })
+        : res.json({ ok: true, succ });
+    });
+  };
+
 
 
 module.exports={
     registerCustomer,
+    loginCustomer,
+    verify_tokenCustomer
 }
