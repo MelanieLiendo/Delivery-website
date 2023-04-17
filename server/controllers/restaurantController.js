@@ -3,8 +3,9 @@ const Restaurant = require('../models/restaurant')
 const registerRestaurant = async (req,res)=>{
     let {country, city, address,restaurant, name, surname, phone, email, password, filter}= req.body
     const findEmail = await Restaurant.findOne({email})
+    const findRestaurant = await Restaurant.findOne({restaurant})
     try{
-        if (findEmail){
+        if (findEmail || findRestaurant){
             res.send({ok:true, data:"This email is already registered in Foodies"})
         }
         else{
