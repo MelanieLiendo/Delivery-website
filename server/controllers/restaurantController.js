@@ -34,7 +34,26 @@ const removeRestaurant = async (req,res)=>{
     }
 }
 
+
+const updateRestaurant = async (req,res)=>{
+    let {newCountry, newCity, newAddress, newRestaurant, newName, newSurname, newPhone, email, newEmail, newPassword, newFilter}= req.body 
+    const findEmail = await Restaurant.findOne({email})
+    try{
+        if (!findEmail){
+            res.send({ok:true, data:"This email is not registered in Foodies"})
+        }
+        else{
+            await Restaurant.findOneAndUpdate({email}, {country: newCountry, city: newCity, address: newAddress, restaurant: newRestaurant, name: newName, surname: newSurname, phone: newPhone, email: newEmail, password:newPassword, filter: newFilter})
+            res.send({ok:true, data:"The restaurant was successfully updated"})   
+        }
+    }
+    catch(error){
+        res.send({ok:false,data:{error}})
+    }
+}
+
 module.exports={
     registerRestaurant,
     removeRestaurant,
+    updateRestaurant,
 }
