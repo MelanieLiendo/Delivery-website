@@ -70,6 +70,7 @@ const loginCustomer = async (req,res)=>{
 }
 
 
+
 module.exports={
     registerCustomer,
     removeCustomer,
