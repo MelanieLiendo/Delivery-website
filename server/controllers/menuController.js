@@ -4,12 +4,13 @@ const Restaurant = require('../models/restaurant')
 
 const addMenu = async (req,res)=>{
     let {name, description, price, picture, category, restaurant}= req.body
-
     try{
         const findRestaurant = await Restaurant.findOne({restaurant})
+        let findSku = []
+        let sku = {}
         if(findRestaurant){
-            const sku= `${name + findRestaurant._id.toString()}`
-            const findSku = await Menu.findOne({sku})}
+            sku= `${name + findRestaurant._id.toString()}`
+            findSku = await Menu.findOne({sku})}
         if (findRestaurant && !findSku){
             await Menu.create({restaurant_id: new ObjectId(findRestaurant._id), name, description, price, picture, category, sku});
             res.send({ok:true, message:"The dish was successfully added"})

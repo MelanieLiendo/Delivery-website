@@ -13,7 +13,8 @@ const removeRestaurant = async (req,res)=>{
         const findEmail = await Restaurant.findOne({email})
         if (findEmail){
             await Restaurant.deleteOne({email})
-            res.send({ok:true, message:"The restaurant was successfully removed"})  
+            await Menu.find({restaurant_id:findEmail._id}).delete()
+            res.send({ok:true, message:"The restaurant was successfully removed"})
         }
         else{
             res.send({ok:true, message:"This email is not registered in Foodies"})
