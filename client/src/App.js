@@ -5,6 +5,8 @@ import axios from "axios";
 import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom'
 import Navbar from "./components/Navbar.js";
 import { URL } from "./config";
+import RegisterCust from './containers/RegisterCust';
+import ResgisterRest from './containers/ResgisterRest';
 
 function App() {
 
@@ -49,20 +51,20 @@ function App() {
     <Route path="/homeCustomer" element={<HomeCustomer/>} />
     <Route path="/homeRestaurant" element={<HomeRestaurant/>} />
     <Route
-    path="/Customer/login"
-    element ={ isLoggedIn ? <Navigate to='/homeCustomer' /> : <Login login={login} /> } 
+    path="/customer/login"
+    element ={ isLoggedIn ? <Navigate to='/homeCustomer' /> : <LoginCust login={login} /> } 
     />
     <Route
-    path="/Customer/register"
-    element ={ isLoggedIn ? <Navigate to='/homeCustomer' /> : <Register/> } 
+    path="/customer/register"
+    element ={ isLoggedIn ? <Navigate to='/homeCustomer' /> : <RegisterCust/> } 
     />
     <Route
-    path="/Restaurant/login"
-    element ={ isLoggedIn ? <Navigate to='/homeRestaurant' /> : <Login login={login} /> } 
+    path="/restaurant/login"
+    element ={ isLoggedIn ? <Navigate to='/homeRestaurant' /> : <LoginRest login={login} /> } 
     />
     <Route
-    path="/Restaurant/register"
-    element ={ isLoggedIn ? <Navigate to='/homeRestaurant' /> : <Register/> } 
+    path="/restaurant/register"
+    element ={ isLoggedIn ? <Navigate to='/homeRestaurant' /> : <RegisterRest/> } 
     />
     </Routes>
     </Router>

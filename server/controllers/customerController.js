@@ -7,43 +7,45 @@ const jwt_secret = process.env.JWT_SECRET;
 
 const removeCustomer = async (req,res)=>{
     let {email}= req.body /* the email of the logged in customer*/
-    const findEmail = await Customer.findOne({email})
+    
     try{
+        const findEmail = await Customer.findOne({email})
         if (findEmail){
             await Customer.deleteOne({email})
-            res.send({ok:true, data:"The customer was successfully removed"})
+            res.send({ok:true, message:"The customer was successfully removed"})
             
         }
         else{
-            res.send({ok:true, data:"This email is not registered in Foodies"})
+            res.send({ok:true, message:"This email is not registered in Foodies"})
         }
     }
     catch(error){
-        res.send({ok:false,data:{error}})
+        res.send({ok:false,message:{error}})
     }
 }
 
 const updateCustomer = async (req,res)=>{
     let {newName, email, newEmail, newPassword, newAddress}= req.body 
-    const findEmail = await Customer.findOne({email})
+    
     try{
+        const findEmail = await Customer.findOne({email})
         if (!findEmail){
-            res.send({ok:true, data:"This email is not registered in Foodies"})
+            res.send({ok:true, message:"This email is not registered in Foodies"})
         }
         else{
             await Customer.findOneAndUpdate({email}, {name: newName, email: newEmail, password:newPassword,address:newAddress})
-            res.send({ok:true, data:"The customer was successfully updated"})   
+            res.send({ok:true, message:"The customer was successfully updated"})   
         }
     }
     catch(error){
-        res.send({ok:false,data:{error}})
+        res.send({ok:false,message:{error}})
     }
 }
 
 const registerCustomer = async (req,res)=>{
     let {name,email,password, password2, address,admin}= req.body
     const salt = "corazones429"
-    const findEmail = await Customer.findOne({email})
+    
     if (!email || !password || !password2){
         return res.json({ ok: false, message: "All fields required" });
       }
@@ -54,17 +56,18 @@ const registerCustomer = async (req,res)=>{
         return res.json({ ok: false, message: "Invalid email" });
       }
     try{
+        const findEmail = await Customer.findOne({email})
         if (findEmail){
-            res.send({ok:true, data:"This email is already registered in Foodies"})
+            res.send({ok:true, message:"This email is already registered in Foodies"})
         }
         else{
             const hash = await argon2.hash(password,salt);
             await Customer.create({name,email,password:hash, address, admin})
-            res.send({ok:true, data:"The customer was successfully added"})
+            res.send({ok:true, message:"The customer was successfully added"})
         }
     }
     catch(error){
-        res.send({ok:false,data:{error}})
+        res.send({ok:false,message:{error}})
     }
 }
 
