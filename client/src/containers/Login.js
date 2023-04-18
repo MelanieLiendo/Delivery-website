@@ -3,8 +3,6 @@ import LoginCust from './LoginCust'
 import LoginRest from './LoginRest'
 
 function Login({userType}) {
-
-   
     return (
         <div>
         {userType === "restaurant" ? 

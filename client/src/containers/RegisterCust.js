@@ -13,7 +13,7 @@ function RegisterCust(props) {
          e.prevent.default()
          try{
              const response = await axios.post(`${URL}/customer/register`, {
-                 email:data.email,
+                 email:data.email.toLowerCase(),
                  name:data.name,
                  password:data.password,
                  password2:data.password2})
