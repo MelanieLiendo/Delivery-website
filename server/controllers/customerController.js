@@ -90,7 +90,7 @@ const loginCustomer = async (req, res) => {
       if (!customer) return res.json({ ok: false, message: "Invalid email provided" });
       const match = await argon2.verify(customer.password, password);
       if (match) {
-        const token = jwt.sign({userEmail:customer.email}, jwt_secret, { expiresIn: "1h" }); 
+        const token = jwt.sign({userEmail:customer.email, userType:"customer"}, jwt_secret, { expiresIn: "1h" }); 
         res.json({ ok: true, message: "welcome back", token, email });
       } else return res.json({ ok: false, message: "Invalid data provided" });
     } catch (error) {

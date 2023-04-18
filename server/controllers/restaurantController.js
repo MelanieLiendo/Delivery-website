@@ -33,7 +33,7 @@ const removeRestaurant = async (req,res)=>{
 const updateRestaurant = async (req,res)=>{
     let {newCountry, newCity, newAddress, newRestaurant, newName, newSurname, newPhone, email, newEmail, newPassword, newFilter}= req.body 
     const salt = "corazones429"
-    
+
       if (newEmail && !validator.isEmail(newEmail)){
         return res.json({ ok: false, message: "Invalid email" });
       }
@@ -96,7 +96,7 @@ const loginRestaurant = async (req, res) => {
       if (!restaurant) return res.json({ ok: false, message: "Invalid email provided" });
       const match = await argon2.verify(restaurant.password, password);
       if (match) {
-        const token = jwt.sign({userEmail:restaurant.email}, jwt_secret, { expiresIn: "1h" }); 
+        const token = jwt.sign({userEmail:restaurant.email, userType:"restaurant"}, jwt_secret, { expiresIn: "1h" }); 
         res.json({ ok: true, message: "welcome back", token, email });
       } else return res.json({ ok: false, message: "Invalid data provided" });
     } catch (error) {

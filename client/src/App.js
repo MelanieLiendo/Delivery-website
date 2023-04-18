@@ -5,11 +5,12 @@ import axios from "axios";
 import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom'
 import Navbar from "./components/Navbar.js";
 import { URL } from "./config";
-import RegisterCust from './containers/RegisterCust';
-import ResgisterRest from './containers/ResgisterRest';
+import Register from './containers/Register';
+import * as jose from "jose"
 
 function App() {
 
+  const [userType, setUserType] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')));
 
@@ -22,7 +23,9 @@ function App() {
           else {
           axios.defaults.headers.common['Authorization'] = token;
           const response = await axios.post(`${URL}/verify_token`);
-          return response.data.ok ? login(token) : logout();
+          let decodedToken = jose.decodeJwt(token)
+
+          return response.data.ok ? login(token, decodedToken.userType) : logout();
           }
         } catch (error) {
           console.log(error);
@@ -34,8 +37,9 @@ function App() {
     [token]
     );
 
-  const login = (token) => {
+  const login = (token, userType) => {
     localStorage.setItem("token", JSON.stringify(token));
+    setUserType(userType)
     setIsLoggedIn(true);
   };
   const logout = () => {
@@ -47,24 +51,14 @@ function App() {
     <Router>
     <Navbar  isLoggedIn={isLoggedIn}/>
     <Routes>
-    <Route path="/" element={<Home/>} />
-    <Route path="/homeCustomer" element={<HomeCustomer/>} />
-    <Route path="/homeRestaurant" element={<HomeRestaurant/>} />
+    <Route path="/" element={<Home userType = {userType}/>} />
     <Route
-    path="/customer/login"
-    element ={ isLoggedIn ? <Navigate to='/homeCustomer' /> : <LoginCust login={login} /> } 
+    path="/login"
+    element ={ isLoggedIn ? <Navigate to='/' /> : <Login userType = {userType} login={login} /> } 
     />
     <Route
-    path="/customer/register"
-    element ={ isLoggedIn ? <Navigate to='/homeCustomer' /> : <RegisterCust/> } 
-    />
-    <Route
-    path="/restaurant/login"
-    element ={ isLoggedIn ? <Navigate to='/homeRestaurant' /> : <LoginRest login={login} /> } 
-    />
-    <Route
-    path="/restaurant/register"
-    element ={ isLoggedIn ? <Navigate to='/homeRestaurant' /> : <RegisterRest/> } 
+    path="/register"
+    element ={ isLoggedIn ? <Navigate to='/' /> : <Register userType = {userType}/> } 
     />
     </Routes>
     </Router>
