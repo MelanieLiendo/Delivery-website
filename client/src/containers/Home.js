@@ -3,7 +3,7 @@ import HomeCust from './HomeCust'
 import HomeRest from './HomeRest'
 import { NavLink } from 'react-router-dom'
 
-function Home({userType, setUserType}) {
+function Home({isLoggedIn,userType, setUserType}) {
 
 
   const handleClick =()=>{
@@ -11,8 +11,8 @@ function Home({userType, setUserType}) {
   }
     return (
         <div>
-        {userType === "restaurant" ? 
-       (   <HomeRest />): userType === "customer"? 
+        {userType === "restaurant" && isLoggedIn===true ? 
+       (   <HomeRest />): userType === "customer" && isLoggedIn===true ? 
        (< HomeCust />): 
        <>
        <h2>If you are a restaurant..</h2>

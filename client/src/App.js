@@ -53,7 +53,7 @@ function App() {
     <Router>
     <Navbar  isLoggedIn={isLoggedIn} userType = {userType} setUserType={setUserType}/>
     <Routes>
-    <Route path="/" element={<Home userType = {userType} setUserType={setUserType}/>} />
+    <Route path="/" element={<Home isLoggedIn={isLoggedIn} userType = {userType} setUserType={setUserType}/>} />
     <Route
     path="/login"
     element ={ isLoggedIn ? <Navigate to='/' /> : <Login userType = {userType} login={login} /> } 
