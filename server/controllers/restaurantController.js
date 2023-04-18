@@ -105,7 +105,7 @@ const loginRestaurant = async (req, res) => {
 
   const displayAllRestaurant = async (req,res)=>{
     try{
-        const restaurants = await Restaurant.findAll()
+        const restaurants = await Restaurant.find()
         res.send({ok:true, message:restaurants})   
         }
     catch(error){
@@ -114,10 +114,9 @@ const loginRestaurant = async (req, res) => {
 }
 
 const displayFilterRestaurant = async (req,res)=>{
-    let {search}= req.params 
+    let {restaurant}= req.params 
     try{
-        const restaurants = await Restaurant.findAll({restaurant:search})
-        const restMenu = await Menu.findAll({name:search})
+        const restaurants = await Restaurant.find({restaurant})
         res.send({ok:true, message:restaurants})
         console.log(restMenu)   
         }

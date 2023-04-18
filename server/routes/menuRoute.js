@@ -5,7 +5,7 @@ router        = express.Router(),
 router.post('/add', controller.addMenu)
 router.post('/remove', controller.removeMenu)
 router.post('/update', controller.updateMenu)
-
+router.get('/:name', controller.displayFilterMenu)
 
 
 
