@@ -103,6 +103,28 @@ const loginRestaurant = async (req, res) => {
     });
   };
 
+  const displayAllRestaurant = async (req,res)=>{
+    try{
+        const restaurants = await Restaurant.findAll()
+        res.send({ok:true, message:restaurants})   
+        }
+    catch(error){
+        res.send({ok:false,message:{error}})
+    }
+}
+
+const displayFilterRestaurant = async (req,res)=>{
+    let {search}= req.params 
+    try{
+        const restaurants = await Restaurant.findAll({restaurant:search})
+        const restMenu = await Menu.findAll({name:search})
+        res.send({ok:true, message:restaurants})
+        console.log(restMenu)   
+        }
+    catch(error){
+        res.send({ok:false,message:{error}})
+    }
+}
 
 
 module.exports={
@@ -110,5 +132,7 @@ module.exports={
     updateRestaurant,
     registerRestaurant,
     loginRestaurant,
-    verify_tokenRestaurant
+    verify_tokenRestaurant,
+    displayAllRestaurant,
+    displayFilterRestaurant 
 }
