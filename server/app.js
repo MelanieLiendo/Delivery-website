@@ -22,7 +22,6 @@ connecting()
 app.use('/customer', require('./routes/customerRoute'))
 app.use('/restaurant', require('./routes/restaurantRoute'))
 app.use('/menu', require('./routes/menuRoute'))
-app.use('/Customer', require('./routes/registerCustRoute'))
-app.use('/Restaurant', require('./routes/registerRestaurantRoute'))
+
 
 app.listen(4000, () => console.log(`listening on port 4000`))

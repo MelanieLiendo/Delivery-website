@@ -4,6 +4,10 @@ router        = express.Router(),
 
 router.post('/remove', controller.removeRestaurant)
 router.post('/update', controller.updateRestaurant)
+router.post('/register', controller.registerRestaurant)
+router.post('/login', controller.loginRestaurant)
+router.post('/verify_token', controller.verify_tokenRestaurant)
+
 
 
 
