@@ -13,34 +13,21 @@ function App() {
 
   useEffect(
     () => {
-      const verify_tokenCustomer = async () => {
+      const verify_token = async () => {
         try {
           if (!token) {
             setIsLoggedIn(false)}
           else {
           axios.defaults.headers.common['Authorization'] = token;
-          const response = await axios.post(`${URL}/Customer/verify_token`);
+          const response = await axios.post(`${URL}/verify_token`);
           return response.data.ok ? login(token) : logout();
           }
         } catch (error) {
           console.log(error);
         }
       };
-      const verify_tokenRestaurant = async () => {
-        try {
-          if (!token) {
-            setIsLoggedIn(false)}
-          else {
-          axios.defaults.headers.common['Authorization'] = token;
-          const response = await axios.post(`${URL}/Restaurant/verify_token`);
-          return response.data.ok ? login(token) : logout();
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      verify_tokenCustomer();
-      verify_tokenRestaurant();
+      
+      verify_token();
     },
     [token]
     );

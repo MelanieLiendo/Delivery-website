@@ -8,7 +8,10 @@ Models
 - new user
 - new partner
 
-Controllers
+
+
+
+EXPRESS - BACKEND
 
 
 
@@ -28,21 +31,27 @@ Controllers
     -removeMenu (if product exists) DONE
     -updateMenu (if prod exists)   DONE
 
+-registerCustomerController
+    -registerCustomer
+    -loginCustomer
+    -token_verify  
+    
+
+-registerRestaurantController        
+    -registerRestaurant
+    -loginRestaurant
+    -token_verify
+
+
+    REACT - FRONTEND
+
 -orderController
     -addProductCart
     -removeProductCart
     -increaseCart
     -decreaseCart
 
--loginController
-    -loginCustomer
-    -loginRestaurant
 
--logoutController
-    -logoutCustomer
-    -logoutRestaurant
-
--adressController
     
 
 
