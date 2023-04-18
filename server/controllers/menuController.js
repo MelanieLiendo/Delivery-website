@@ -30,7 +30,7 @@ const removeMenu = async (req,res)=>{
     
     try{
         if (_id){
-            await Menu.deleteOne({sku});
+            await Menu.deleteOne({_id});
             res.send({ok:true, message:"The dish was successfully removed"})}
         
         else if (!_id) {
@@ -44,12 +44,14 @@ const removeMenu = async (req,res)=>{
 
 const updateMenu = async (req,res)=>{
     let {name, restaurant, newName, newDescription, newPrice, newPicture, newCategory}= req.body
+    let findSku = []
+        let sku = {}
     
     try{
         const findRestaurant = await Restaurant.findOne({restaurant})
         if(findRestaurant){
-            const sku= `${name + findRestaurant._id.toString()}`
-            const findSku = await Menu.findOne({sku})}
+             sku= `${name + findRestaurant._id.toString()}`
+             findSku = await Menu.findOne({sku})}
         if (findRestaurant && findSku){
             await Menu.findOneAndUpdate({sku}, {name: newName, description: newDescription, price: newPrice, picture: newPicture, category: newCategory});
             res.send({ok:true, message:"The dish was successfully updated"})

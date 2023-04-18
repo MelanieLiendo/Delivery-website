@@ -1,4 +1,5 @@
 const Restaurant = require('../models/restaurant')
+const Menu = require("../models/menu")
 const argon2 = require("argon2"); 
 const jwt = require("jsonwebtoken");
 const validator = require("validator");
@@ -10,10 +11,13 @@ const removeRestaurant = async (req,res)=>{
     let {email}= req.body /* the email of the logged in restaurant*/
     
     try{
-        const findEmail = await Restaurant.findOne({email})
-        if (findEmail){
-            await Restaurant.deleteOne({email})
-            await Menu.find({restaurant_id:findEmail._id}).delete()
+        const findRestaurant = await Restaurant.findOne({email})
+        console.log(findRestaurant);
+        if (findRestaurant){
+           const removeMenu = await Menu.deleteMany({restaurant_id: findRestaurant._id})
+            const removeRes = await Restaurant.deleteOne({email})
+            console.log(removeMenu);
+            console.log(removeRes);
             res.send({ok:true, message:"The restaurant was successfully removed"})
         }
         else{
@@ -28,14 +32,19 @@ const removeRestaurant = async (req,res)=>{
 
 const updateRestaurant = async (req,res)=>{
     let {newCountry, newCity, newAddress, newRestaurant, newName, newSurname, newPhone, email, newEmail, newPassword, newFilter}= req.body 
-   
+    const salt = "corazones429"
+    
+      if (newEmail && !validator.isEmail(newEmail)){
+        return res.json({ ok: false, message: "Invalid email" });
+      }
     try{
         const findEmail = await Restaurant.findOne({email})
         if (!findEmail){
             res.send({ok:true, message:"This email is not registered in Foodies"})
         }
         else{
-            await Restaurant.findOneAndUpdate({email}, {country: newCountry, city: newCity, address: newAddress, restaurant: newRestaurant, name: newName, surname: newSurname, phone: newPhone, email: newEmail, password:newPassword, filter: newFilter})
+            const hash = await argon2.hash(newPassword,salt);
+            await Restaurant.findOneAndUpdate({email}, {country: newCountry, city: newCity, address: newAddress, restaurant: newRestaurant, name: newName, surname: newSurname, phone: newPhone, email: newEmail, password:hash, filter: newFilter})
             res.send({ok:true, message:"The restaurant was successfully updated"})   
         }
     }

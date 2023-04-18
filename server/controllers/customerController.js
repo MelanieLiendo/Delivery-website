@@ -26,6 +26,11 @@ const removeCustomer = async (req,res)=>{
 
 const updateCustomer = async (req,res)=>{
     let {newName, email, newEmail, newPassword, newAddress}= req.body 
+    const salt = "corazones429"
+    
+    if (newEmail && !validator.isEmail(newEmail)){
+        return res.json({ ok: false, message: "Invalid email" });
+      }
     
     try{
         const findEmail = await Customer.findOne({email})
@@ -33,7 +38,8 @@ const updateCustomer = async (req,res)=>{
             res.send({ok:true, message:"This email is not registered in Foodies"})
         }
         else{
-            await Customer.findOneAndUpdate({email}, {name: newName, email: newEmail, password:newPassword,address:newAddress})
+            const hash = await argon2.hash(newPassword,salt);
+            await Customer.findOneAndUpdate({email}, {name: newName, email: newEmail, password:hash,address:newAddress})
             res.send({ok:true, message:"The customer was successfully updated"})   
         }
     }
