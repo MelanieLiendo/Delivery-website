@@ -7,6 +7,8 @@ import Navbar from "./components/Navbar.js";
 import { URL } from "./config";
 import Register from './containers/Register';
 import * as jose from "jose"
+import Home from './containers/Home';
+import Login from './containers/Login';
 
 function App() {
 

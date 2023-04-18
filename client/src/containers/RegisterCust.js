@@ -7,23 +7,31 @@ function RegisterCust(props) {
 
     const [message,setMessage]= useState('')
     const [data,setData]= useState({email:'', name:'', password:'', password2:''})
+    const navigate = useNavigate()
 
-    // const handleSubmit = async (e)=>{
-    //     e.prevent.default()
-    //     try{
-    //         const response = await axios.post(`${URL}/customer/register`, {
-    //             email:data.email,
-    //             name:data.name,
-    //             password:data.password,
-    //             password2:data.password2})
-            
-    //     }
-    //     setMessage(response.message.message)
-    //     catch(error){
-    //         console.log(error);
-    //     }
+     const handleSubmit = async (e)=>{
+         e.prevent.default()
+         try{
+             const response = await axios.post(`${URL}/customer/register`, {
+                 email:data.email,
+                 name:data.name,
+                 password:data.password,
+                 password2:data.password2})
 
-    // }
+             setMessage(response.message.message)
+             console.log(response)
+
+             if (response.message.ok) {
+				setTimeout(() => {
+					navigate('/login');
+				}, 2000);
+         }}
+        
+         catch(error){
+             console.log(error);
+         }
+
+     }
 
     const handleChange = (e)=>{
         setData({...data,[e.target.name]:e.target.value})
