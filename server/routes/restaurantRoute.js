@@ -4,6 +4,7 @@ router        = express.Router(),
 
 router.post('/remove', controller.removeRestaurant)
 router.post('/update', controller.updateRestaurant)
+router.post('/updatePassword', controller.updatePassRestaurant)
 router.post('/register', controller.registerRestaurant)
 router.post('/login', controller.loginRestaurant)
 router.get('/displayAll', controller.displayAllRestaurant)

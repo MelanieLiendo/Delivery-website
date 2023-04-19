@@ -30,8 +30,7 @@ const removeRestaurant = async (req,res)=>{
 
 
 const updateRestaurant = async (req,res)=>{
-    let {newCountry, newCity, newAddress, newRestaurant, newName, newSurname, newPhone, email, newEmail, newPassword, newFilter}= req.body 
-    const salt = "corazones429"
+    let {newCountry, newCity, newAddress, newRestaurant, newName, newSurname, newPhone, email, newEmail, newFilter}= req.body 
 
       if (newEmail && !validator.isEmail(newEmail)){
         return res.json({ ok: false, message: "Invalid email" });
@@ -42,14 +41,28 @@ const updateRestaurant = async (req,res)=>{
             res.send({ok:true, message:"This email is not registered in Foodies"})
         }
         else{
-            const hash = await argon2.hash(newPassword,salt);
-            await Restaurant.findOneAndUpdate({email}, {country: newCountry, city: newCity, address: newAddress, restaurant: newRestaurant, name: newName, surname: newSurname, phone: newPhone, email: newEmail, password:hash, filter: newFilter})
+            await Restaurant.findOneAndUpdate({email}, {country: newCountry, city: newCity, address: newAddress, restaurant: newRestaurant, name: newName, surname: newSurname, phone: newPhone, email: newEmail, filter: newFilter})
             res.send({ok:true, message:"The restaurant was successfully updated"})   
         }
     }
     catch(error){
         res.send({ok:false,message:{error}})
     }
+}
+
+const updatePassRestaurant = async (req,res)=>{
+  let {newPassword,newPassword2}= req.body 
+  const salt = "corazones429"
+  if (newPassword !== newPassword2){
+    return res.json({ ok: false, message: "Passwords must match" });}
+  try{
+          const hash = await argon2.hash(newPassword,salt);
+          await Restaurant.findOneAndUpdate({password},{password:hash})
+          res.send({ok:true, message:"The password was successfully updated"})   
+      }
+  catch(error){
+      res.send({ok:false,message:{error}})
+  }
 }
 
 const registerRestaurant = async (req,res)=>{
@@ -116,7 +129,8 @@ const loginRestaurant = async (req, res) => {
 const displayRestaurantInfo = async (req,res)=>{
   let {email}= req.body
   try{
-      const restaurantInfo = await Restaurant.find({email})
+
+      const restaurantInfo = await Restaurant.findOne({email})
       res.send({ok:true, message:restaurantInfo}) 
       }
   catch(error){
@@ -146,5 +160,6 @@ module.exports={
     loginRestaurant,
     displayAllRestaurant,
     displayFilterRestaurant,
-    displayRestaurantInfo 
+    displayRestaurantInfo,
+    updatePassRestaurant
 }
