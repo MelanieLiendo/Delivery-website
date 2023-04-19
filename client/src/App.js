@@ -39,9 +39,8 @@ function App() {
     [token]
     );
 
-  const login = (token, userType) => {
+  const login = (token) => {
     localStorage.setItem("token", JSON.stringify(token));
-    setUserType(userType)
     setIsLoggedIn(true);
   };
   const logout = () => {
@@ -56,7 +55,7 @@ function App() {
     <Route path="/" element={<Home isLoggedIn={isLoggedIn} userType = {userType} setUserType={setUserType}/>} />
     <Route
     path="/login"
-    element ={ isLoggedIn ? <Navigate to='/' /> : <Login userType = {userType} login={login} /> } 
+    element ={ isLoggedIn ? <Navigate to='/' /> : <Login userType = {userType} setUserType={setUserType} login={login} /> } 
     />
     <Route
     path="/register"

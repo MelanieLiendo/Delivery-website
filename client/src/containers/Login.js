@@ -2,12 +2,12 @@ import React from 'react'
 import LoginCust from './LoginCust'
 import LoginRest from './LoginRest'
 
-function Login({userType}) {
+function Login({userType, setUserType, login}) {
     return (
         <div>
         {userType === "restaurant" ? 
-       (   <LoginRest />) : 
-       (< LoginCust />)
+       (   <LoginRest login = {login}/>) : 
+       (< LoginCust login = {login} setUserType={setUserType}/>)
         }
 
         </div>

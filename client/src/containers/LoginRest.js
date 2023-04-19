@@ -25,12 +25,12 @@ function LoginRest(props) {
             email: data.email.toLowerCase(),
             password: data.password,
           });
-          setMessage(response.message.message);
-          if (response.message.ok) { 
+          setMessage(response.data.message);
+          if (response.data.ok) { 
             let decodedToken = jose.decodeJwt(response.data.token)
             console.log("Email extracted from the JWT token after login: ", decodedToken.userEmail)
             setTimeout(() => {
-              props.login(response.message.token);
+              props.login(response.data.token);
               navigate("/");
             }, 2000);
           }
