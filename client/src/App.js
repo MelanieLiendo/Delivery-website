@@ -53,7 +53,7 @@ function App() {
 
   return (
     <Router>
-    <Navbar  isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userType = {userType} setUserType={setUserType}/>
+    <Navbar  isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userType = {userType} setUserType={setUserType} logout={logout}/>
     <Routes>
     <Route path="/" element={<Home isLoggedIn={isLoggedIn} userType = {userType} setUserType={setUserType}/>} />
     <Route

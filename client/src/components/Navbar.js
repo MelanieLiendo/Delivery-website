@@ -1,14 +1,13 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { NavLink } from 'react-router-dom'
 
 
-function Navbar({isLoggedIn, setIsLoggedIn, userType, setUserType}) {
+function Navbar({isLoggedIn, setIsLoggedIn, userType, setUserType, logout}) {
   const handleClick =()=>{
     setUserType('customer')
   }
   const handleLogOut =()=>{
-    setUserType('')
-    setIsLoggedIn(false);
+      logout()
    }
 
   return (
