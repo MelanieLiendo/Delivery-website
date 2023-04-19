@@ -47,7 +47,6 @@ function App() {
   };
   const logout = () => {
     localStorage.removeItem("token");
-    setUserType("")
     setIsLoggedIn(false);
   };
 

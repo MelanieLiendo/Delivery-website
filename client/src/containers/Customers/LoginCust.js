@@ -37,10 +37,6 @@ function LoginCust(props) {
         } catch (error) {
           console.log(error);
         }
-
-        
-         
-        
       };
       return (
         <form
