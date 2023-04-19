@@ -1,6 +1,6 @@
 import React from 'react'
-import LoginCust from './LoginCust'
-import LoginRest from './LoginRest'
+import LoginCust from './Customers/LoginCust'
+import LoginRest from './Restaurant/LoginRest'
 
 function Login({userType, setUserType, login}) {
     return (

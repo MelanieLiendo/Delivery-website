@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import axios from "axios";
-import { URL } from "../config";
+import { URL } from "../../config";
 import {useNavigate} from 'react-router-dom'
 import * as jose from 'jose'
 
-function LoginCust(props) {
+function LoginRest(props) {
     const [data, setData] = useState({
         email: "",
         password: "",
@@ -21,7 +21,7 @@ function LoginCust(props) {
       const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const response = await axios.post(`${URL}/customer/login`, {
+          const response = await axios.post(`${URL}/restaurant/login`, {
             email: data.email.toLowerCase(),
             password: data.password,
           });
@@ -37,10 +37,6 @@ function LoginCust(props) {
         } catch (error) {
           console.log(error);
         }
-
-        
-         
-        
       };
       return (
         <form
@@ -57,7 +53,7 @@ function LoginCust(props) {
         <h4>{message}</h4>
         </div>
         </form>
-  )
+        );
 }
 
-export default LoginCust
+export default LoginRest

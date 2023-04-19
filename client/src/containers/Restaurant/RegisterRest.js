@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import axios from 'axios';
-import { URL } from '../config';
+import { URL } from '../../config';
 import {useNavigate} from 'react-router-dom'
 
 function ResgisterRest() {

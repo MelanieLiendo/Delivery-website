@@ -1,6 +1,6 @@
 import React from 'react'
-import HomeCust from './HomeCust'
-import HomeRest from './HomeRest'
+import HomeCust from './Customers/HomeCust'
+import HomeRest from './Restaurant/HomeRest'
 import { NavLink } from 'react-router-dom'
 
 function Home({isLoggedIn,userType, setUserType}) {

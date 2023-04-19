@@ -1,6 +1,6 @@
 import React from 'react'
-import RegisterCust from './RegisterCust'
-import RegisterRest from './RegisterRest'
+import RegisterCust from './Customers/RegisterCust'
+import RegisterRest from './Restaurant/RegisterRest'
 
 function Register({userType}) {
 
