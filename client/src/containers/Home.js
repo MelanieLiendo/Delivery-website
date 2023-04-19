@@ -2,22 +2,18 @@ import React from 'react'
 import HomeCust from './Customers/HomeCust'
 import HomeRest from './Restaurant/HomeRest'
 import { NavLink } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
-function Home({isLoggedIn,userType, setUserType}) {
-
-
-  const handleClick =()=>{
-    setUserType('restaurant')
-  }
+function Home({isLoggedIn,user}) {
+  const params = useParams()
     return (
         <div>
-        {userType === "restaurant" && isLoggedIn===true ? 
-       (   <HomeRest />): userType === "customer" && isLoggedIn===true ? 
-       (< HomeCust />): 
+        { isLoggedIn ? 
+       user.userType === "restaurant" ? <HomeRest /> : < HomeCust />: 
        <>
        <h2>If you are a restaurant..</h2>
-       <button onClick={handleClick}><NavLink to="/register">Register as a Restaurant</NavLink></button>
-       <button onClick={handleClick}><NavLink to="/login">Login as a Restaurant</NavLink></button>
+       <NavLink to="/register/restaurant">Register as a Restaurant</NavLink>
+      <NavLink to="/login/restaurant">Login as a Restaurant</NavLink>
        </>
         }
 

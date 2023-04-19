@@ -12,7 +12,7 @@ import Login from './containers/Login';
 
 function App() {
 
-  const [userType, setUserType] = useState('');
+  const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')));
 
@@ -26,8 +26,8 @@ function App() {
       
           axios.defaults.headers.common['Authorization'] = token;
           const response = await axios.post(`${URL}/verify_token`);
-          let decodedToken = jose.decodeJwt(token)
-          return response.data.ok ? login(token, decodedToken.userType) : logout();
+         
+          return response.data.ok ? login(token) : logout();
           }
         } catch (error) {
           console.log(error);
@@ -39,29 +39,31 @@ function App() {
     [token]
     );
 
-  const login = (token, userType) => {
+  const login = (token) => {
 
     localStorage.setItem("token", JSON.stringify(token));
-    setUserType(userType)
+    let decodedToken = jose.decodeJwt(token)
+    setUser(decodedToken)
     setIsLoggedIn(true);
   };
   const logout = () => {
     localStorage.removeItem("token");
+    setUser(null);
     setIsLoggedIn(false);
   };
 
   return (
     <Router>
-    <Navbar  isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userType = {userType} setUserType={setUserType} logout={logout}/>
+    <Navbar  isLoggedIn={isLoggedIn} logout={logout} user= {user}/>
     <Routes>
-    <Route path="/" element={<Home isLoggedIn={isLoggedIn} userType = {userType} setUserType={setUserType}/>} />
+    <Route path="/" element={<Home isLoggedIn={isLoggedIn} user={user}/>} />
     <Route
-    path="/login"
-    element ={ isLoggedIn ? <Navigate to='/' /> : <Login userType = {userType} login={login} /> } 
+    path="/login/:type"
+    element ={ isLoggedIn ? <Navigate to='/' /> : <Login  login={login} /> } 
     />
     <Route
-    path="/register"
-    element ={ isLoggedIn ? <Navigate to='/' /> : <Register userType = {userType}/> } 
+    path="/register/:type"
+    element ={ isLoggedIn ? <Navigate to='/' /> : <Register/> } 
     />
     </Routes>
     </Router>

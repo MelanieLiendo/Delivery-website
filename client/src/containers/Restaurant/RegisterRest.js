@@ -42,7 +42,7 @@ function ResgisterRest() {
 
              if (response.data.ok) {
 				setTimeout(() => {
-					navigate('/login');
+					navigate('/login/restaurant');
 				}, 2000);
          }}
         

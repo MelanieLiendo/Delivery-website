@@ -19,6 +19,7 @@ function LoginCust(props) {
       };
     
       const handleSubmit = async (e) => {
+        
         e.preventDefault();
         try {
           const response = await axios.post(`${URL}/customer/login`, {
@@ -26,9 +27,9 @@ function LoginCust(props) {
             password: data.password,
           });
           setMessage(response.data.message);
+          
           if (response.data.ok) { 
-            let decodedToken = jose.decodeJwt(response.data.token)
-            console.log("Email extracted from the JWT token after login: ", decodedToken.userEmail)
+          
             setTimeout(() => {
               props.login(response.data.token);
               navigate("/");

@@ -1,13 +1,13 @@
 import React from 'react'
 import RegisterCust from './Customers/RegisterCust'
 import RegisterRest from './Restaurant/RegisterRest'
+import { useParams } from 'react-router-dom'
 
-function Register({userType}) {
-
-   
+function Register({}) {
+  const params = useParams()   
     return (
         <div>
-        {userType === "restaurant" ? 
+        {params.type === "restaurant" ? 
        (   <RegisterRest />) : 
        (< RegisterCust />)
         }

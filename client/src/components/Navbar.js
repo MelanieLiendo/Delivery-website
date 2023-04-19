@@ -1,11 +1,16 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
+import InfoCust from '../containers/Customers/InfoCust';
+import { useParams } from 'react-router-dom';
+import Orders from '../containers/Customers/Orders';
+import Modal from 'react-modal'
+Modal.setAppElement("#root");
 
 
-function Navbar({isLoggedIn, setIsLoggedIn, userType, setUserType, logout}) {
-  const handleClick =()=>{
-    setUserType('customer')
-  }
+
+function Navbar({isLoggedIn, logout, user}) {
+  const params = useParams()
+
   const handleLogOut =()=>{
       logout()
    }
@@ -14,20 +19,23 @@ function Navbar({isLoggedIn, setIsLoggedIn, userType, setUserType, logout}) {
     <div>
       <NavLink to = {'/'}><h1>Foodies</h1></NavLink>
 
-      {isLoggedIn===true && userType=== 'customer'?
+      {isLoggedIn===true && user.userType=== 'customer'?
         <>
-        <NavLink to="/profileCustomer">Personal Information</NavLink>
-        <NavLink to="/orders">Orders</NavLink>
+       
+        <InfoCust/>
+        <Orders/>
         <button onClick={handleLogOut}>Log Out</button>
         </>
-        :isLoggedIn===true && userType=== 'restaurant' ? 
+        :isLoggedIn===true && user.userType=== 'restaurant' ? 
         <>
         <NavLink to="/profileRestaurant">Restaurant Information</NavLink>
         <button onClick={handleLogOut}>Log Out</button> 
         </>:
         <>
-      <button onClick={handleClick}><NavLink to="/register">Register</NavLink></button>
-       <button onClick={handleClick}><NavLink to="/login">Login</NavLink></button>
+        <NavLink to="/login/customer" >Login</NavLink>
+        <NavLink to="/register/customer" >Register</NavLink>
+
+
         </>
         }
     </div>

@@ -1,11 +1,13 @@
 import React from 'react'
 import LoginCust from './Customers/LoginCust'
 import LoginRest from './Restaurant/LoginRest'
+import { useParams } from 'react-router-dom'
 
-function Login({userType,login}) {
+function Login({login}) {
+  const params = useParams()
     return (
         <div>
-        {userType === "restaurant" ? 
+        {params.type === "restaurant" ? 
        (   <LoginRest login = {login}/>) : 
        (< LoginCust login = {login}/>)
         }

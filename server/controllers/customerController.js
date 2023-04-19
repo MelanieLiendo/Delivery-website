@@ -113,6 +113,5 @@ module.exports={
     updateCustomer,
     loginCustomer,
     registerCustomer,
-    loginCustomer,
     displayCustomer
 }

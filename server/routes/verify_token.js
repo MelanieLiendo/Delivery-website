@@ -1,6 +1,6 @@
 const express = require ('express')
 router        = express.Router(),
-    controller    = require('../controllers/verifyToken');
+    controller    = require('../controllers/verifyTokenController');
 
 router.post('/', controller.verify_token)
 
