@@ -6,7 +6,6 @@ router.post('/update', controller.updateCustomer)
 router.post('/remove', controller.removeCustomer)
 router.post('/register', controller.registerCustomer)
 router.post('/login', controller.loginCustomer)
-router.post('/verify_token', controller.verify_tokenCustomer)
 router.get('/customer', controller.displayCustomer)
 
 

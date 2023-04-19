@@ -23,10 +23,10 @@ function App() {
           if (!token) {
             setIsLoggedIn(false)}
           else {
+      
           axios.defaults.headers.common['Authorization'] = token;
           const response = await axios.post(`${URL}/verify_token`);
           let decodedToken = jose.decodeJwt(token)
-
           return response.data.ok ? login(token, decodedToken.userType) : logout();
           }
         } catch (error) {
@@ -39,23 +39,26 @@ function App() {
     [token]
     );
 
-  const login = (token) => {
+  const login = (token, userType) => {
+
     localStorage.setItem("token", JSON.stringify(token));
+    setUserType(userType)
     setIsLoggedIn(true);
   };
   const logout = () => {
     localStorage.removeItem("token");
+    setUserType("")
     setIsLoggedIn(false);
   };
 
   return (
     <Router>
-    <Navbar  isLoggedIn={isLoggedIn} userType = {userType} setUserType={setUserType}/>
+    <Navbar  isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userType = {userType} setUserType={setUserType}/>
     <Routes>
     <Route path="/" element={<Home isLoggedIn={isLoggedIn} userType = {userType} setUserType={setUserType}/>} />
     <Route
     path="/login"
-    element ={ isLoggedIn ? <Navigate to='/' /> : <Login userType = {userType} setUserType={setUserType} login={login} /> } 
+    element ={ isLoggedIn ? <Navigate to='/' /> : <Login userType = {userType} login={login} /> } 
     />
     <Route
     path="/register"
