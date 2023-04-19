@@ -10,16 +10,18 @@ function RegisterCust(props) {
     const navigate = useNavigate()
 
      const handleSubmit = async (e)=>{
-         e.prevent.default()
+         e.preventDefault()
          try{
+            debugger
              const response = await axios.post(`${URL}/customer/register`, {
                  email:data.email.toLowerCase(),
                  name:data.name,
                  password:data.password,
                  password2:data.password2})
-
+                
+debugger
              setMessage(response.message.message)
-             console.log(response)
+
 
              if (response.message.ok) {
 				setTimeout(() => {
@@ -48,7 +50,7 @@ function RegisterCust(props) {
             <label>Repeat Password</label>
             <input name='password2'/>
             <button>Register</button>
-            <div><h4>{message}</h4></div>
+            <h4>{message}</h4>
         </form>
   )
 }

@@ -63,17 +63,16 @@ const registerCustomer = async (req,res)=>{
       }
     try{
         const findEmail = await Customer.findOne({email})
-        if (findEmail){
-            res.send({ok:true, message:"This email is already registered in Foodies"})
-        }
-        else{
-            const hash = await argon2.hash(password,salt);
-            await Customer.create({name,email,password:hash, address, admin})
-            res.send({ok:true, message:"The customer was successfully added"})
-        }
+        if (findEmail)
+          return  res.json({ok:false, message:"This email is already registered in Foodies"})
+        
+          const hash = await argon2.hash(password,salt);
+          await Customer.create({name,email,password:hash, address, admin})
+          res.json({ok:true, message:"The customer was successfully added"})
+        
     }
     catch(error){
-        res.send({ok:false,message:{error}})
+        res.json({ok:false,message:{error}})
     }
 }
 
