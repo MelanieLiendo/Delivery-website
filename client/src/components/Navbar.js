@@ -23,21 +23,18 @@ function Navbar({isLoggedIn, logout, user}) {
       {isLoggedIn===true && user.userType=== 'customer'?
         <>
        
-        <InfoCust/>
-        <Orders/>
+        <InfoCust user={user}/>
+        <Orders user={user}/>
         <button onClick={handleLogOut}>Log Out</button>
         </>
         :isLoggedIn===true && user.userType=== 'restaurant' ? 
         <>
-        <InfoRest/>
-        <NavLink to="/profileRestaurant">Restaurant Information</NavLink>
+        <InfoRest user={user}/>
         <button onClick={handleLogOut}>Log Out</button> 
         </>:
         <>
         <NavLink to="/login/customer" >Login</NavLink>
         <NavLink to="/register/customer" >Register</NavLink>
-
-
         </>
         }
     </div>
