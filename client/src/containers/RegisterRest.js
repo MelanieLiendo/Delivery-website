@@ -21,7 +21,7 @@ function ResgisterRest() {
     const navigate = useNavigate()
 
      const handleSubmit = async (e)=>{
-         e.prevent.default()
+         e.preventDefault()
          try{
              const response = await axios.post(`${URL}/restaurant/register`, {
                  country:data.country, 
@@ -37,10 +37,10 @@ function ResgisterRest() {
                  filter:data.filter
                 })
 
-             setMessage(response.message.message)
+             setMessage(response.data.message)
              console.log(response)
 
-             if (response.message.ok) {
+             if (response.data.ok) {
 				setTimeout(() => {
 					navigate('/login');
 				}, 2000);

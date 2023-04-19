@@ -12,18 +12,19 @@ function RegisterCust(props) {
      const handleSubmit = async (e)=>{
          e.preventDefault()
          try{
-            debugger
              const response = await axios.post(`${URL}/customer/register`, {
                  email:data.email.toLowerCase(),
                  name:data.name,
+                 address:data.address,
                  password:data.password,
                  password2:data.password2})
                 
 debugger
-             setMessage(response.message.message)
+console.log(response)
+             setMessage(response.data.message)
 
 
-             if (response.message.ok) {
+             if (response.data.ok) {
 				setTimeout(() => {
 					navigate('/login');
 				}, 2000);
@@ -45,6 +46,8 @@ debugger
             <input name='email'/>
             <label>Name</label>
             <input name='name'/>
+            <label>Address</label>
+            <input name='address'/>
             <label>Password</label>
             <input name='password'/>
             <label>Repeat Password</label>
