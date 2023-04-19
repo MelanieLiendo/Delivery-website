@@ -97,16 +97,16 @@ const loginCustomer = async (req, res) => {
     }
   };
 
-  const verify_tokenCustomer = (req, res) => {
-    const token = req.headers.authorization;
-    jwt.verify(token, jwt_secret, (err, succ) => {
-      err
-        ? res.json({ ok: false, message: "Token is corrupted" })
-        : res.json({ ok: true, succ });
-    });
-  };
-
-
+  const displayCustomer = async (req,res)=>{
+    let {email}= req.params 
+    try{
+        const customerInfo = await Customer.find({email})
+        res.send({ok:true, message:customerInfo}) 
+        }
+    catch(error){
+        res.send({ok:false,message:{error}})
+    }
+}
 
 module.exports={
     removeCustomer,
@@ -114,5 +114,5 @@ module.exports={
     loginCustomer,
     registerCustomer,
     loginCustomer,
-    verify_tokenCustomer
+    displayCustomer
 }

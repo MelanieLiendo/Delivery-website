@@ -22,6 +22,7 @@ connecting()
 app.use('/customer', require('./routes/customerRoute'))
 app.use('/restaurant', require('./routes/restaurantRoute'))
 app.use('/menu', require('./routes/menuRoute'))
+app.use('/verify_token', require('./routes/verify_token'))
 
 
 app.listen(4000, () => console.log(`listening on port 4000`))

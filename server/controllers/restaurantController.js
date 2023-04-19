@@ -3,7 +3,6 @@ const Menu = require("../models/menu")
 const argon2 = require("argon2"); 
 const jwt = require("jsonwebtoken");
 const validator = require("validator");
-const restaurant = require('../models/restaurant');
 const jwt_secret = process.env.JWT_SECRET;
 
 
@@ -104,15 +103,6 @@ const loginRestaurant = async (req, res) => {
     }
   };
 
-  const verify_tokenRestaurant = (req, res) => {
-    const token = req.headers.authorization;
-    jwt.verify(token, jwt_secret, (err, succ) => {
-      err
-        ? res.json({ ok: false, message: "Token is corrupted" })
-        : res.json({ ok: true, succ });
-    });
-  };
-
   const displayAllRestaurant = async (req,res)=>{
     try{
         const restaurants = await Restaurant.find()
@@ -135,13 +125,24 @@ const displayFilterRestaurant = async (req,res)=>{
     }
 }
 
+const displayRestaurantInfo = async (req,res)=>{
+  let {email}= req.params 
+  try{
+      const restaurantInfo = await Restaurant.find({email})
+      res.send({ok:true, message:restaurantInfo}) 
+      }
+  catch(error){
+      res.send({ok:false,message:{error}})
+  }
+}
+
 
 module.exports={
     removeRestaurant,
     updateRestaurant,
     registerRestaurant,
     loginRestaurant,
-    verify_tokenRestaurant,
     displayAllRestaurant,
-    displayFilterRestaurant 
+    displayFilterRestaurant,
+    displayRestaurantInfo 
 }
