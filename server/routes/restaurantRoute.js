@@ -8,7 +8,7 @@ router.post('/register', controller.registerRestaurant)
 router.post('/login', controller.loginRestaurant)
 router.get('/displayAll', controller.displayAllRestaurant)
 router.get('/:restaurant', controller.displayFilterRestaurant)
-router.get('/restaurant', controller.displayRestaurantInfo)
+router.post('/restaurant', controller.displayRestaurantInfo)
 
 
 

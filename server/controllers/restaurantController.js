@@ -113,6 +113,17 @@ const loginRestaurant = async (req, res) => {
     }
 }
 
+const displayRestaurantInfo = async (req,res)=>{
+  let {email}= req.body
+  try{
+      const restaurantInfo = await Restaurant.find({email})
+      res.send({ok:true, message:restaurantInfo}) 
+      }
+  catch(error){
+      res.send({ok:false,message:{error}})
+  }
+}
+
 const displayFilterRestaurant = async (req,res)=>{
     let {restaurant}= req.params 
     try{
@@ -125,16 +136,7 @@ const displayFilterRestaurant = async (req,res)=>{
     }
 }
 
-const displayRestaurantInfo = async (req,res)=>{
-  let {email}= req.params 
-  try{
-      const restaurantInfo = await Restaurant.find({email})
-      res.send({ok:true, message:restaurantInfo}) 
-      }
-  catch(error){
-      res.send({ok:false,message:{error}})
-  }
-}
+
 
 
 module.exports={
