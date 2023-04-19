@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import InfoCust from '../containers/Customers/InfoCust';
+import InfoRest from '../containers/Restaurant/InfoRest';
 import { useParams } from 'react-router-dom';
 import Orders from '../containers/Customers/Orders';
 import Modal from 'react-modal'
@@ -28,6 +29,7 @@ function Navbar({isLoggedIn, logout, user}) {
         </>
         :isLoggedIn===true && user.userType=== 'restaurant' ? 
         <>
+        <InfoRest/>
         <NavLink to="/profileRestaurant">Restaurant Information</NavLink>
         <button onClick={handleLogOut}>Log Out</button> 
         </>:
