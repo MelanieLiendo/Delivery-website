@@ -42,31 +42,22 @@ const updateCustomer = async (req,res)=>{
     }
 }
 
-/*
-
-const updateCustomer = async (req,res)=>{
-  let {newName, email, newEmail, newPassword, newAddress}= req.body 
+const updatePassCustomer = async (req,res)=>{
+  let {email, newPassword, newPassword2}= req.body 
   const salt = "corazones429"
-  
-  if (newEmail && !validator.isEmail(newEmail)){
-      return res.json({ ok: false, message: "Invalid email" });
-    }
-  
+    if (newPassword != newPassword2) {
+      return res.json({ok: false, message: "Passwords must match"})
+    }    
   try{
-      const findEmail = await Customer.findOne({email})
-      if (!findEmail){
-          res.send({ok:true, message:"This email is not registered in Foodies"})
-      }
-      else{
-          const hash = await argon2.hash(newPassword,salt);
-          await Customer.findOneAndUpdate({email}, {name: newName, email: newEmail, password:hash,address:newAddress})
-          res.send({ok:true, message:"The customer was successfully updated"})   
-      }
+    const hash = await argon2.hash(newPassword,salt);
+    await Customer.findOneAndUpdate({email}, { password:hash})
+    res.send({ok:true, message:"The password was successfully updated"})   
+      
   }
   catch(error){
       res.send({ok:false,message:{error}})
   }
-} */
+} 
 
 const registerCustomer = async (req,res)=>{
     let {name,email,password, password2, address,admin}= req.body
@@ -118,7 +109,7 @@ const loginCustomer = async (req, res) => {
   };
 
   const displayCustomer = async (req,res)=>{
-    let {email}= req.params 
+    let {email}= req.body
     try{
         const customerInfo = await Customer.find({email})
         res.send({ok:true, message:customerInfo}) 
@@ -136,5 +127,6 @@ module.exports={
     updateCustomer,
     loginCustomer,
     registerCustomer,
-    displayCustomer
+    displayCustomer,
+    updatePassCustomer
 }

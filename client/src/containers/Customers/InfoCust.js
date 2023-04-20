@@ -78,10 +78,7 @@ function InfoCust({user}) {
       <button onClick={openModal}>Customer's Information</button>
       <Modal
         isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Example Modal">
-
-    <button onClick={closeModal}>Close</button>
+        onRequestClose={closeModal}>
 
     <form onChange={handleChange} onSubmit={handleSubmit}>
     <label>Address:</label> <input name="address" defaultValue={data.address} disabled={!changeDetails}/>
@@ -91,6 +88,8 @@ function InfoCust({user}) {
     {/* <h3>{message}</h3> */}
     </form>
     <ChangePass user={user}/>
+
+    <button onClick={closeModal}>Close</button>
 
       </Modal>
     </div>
