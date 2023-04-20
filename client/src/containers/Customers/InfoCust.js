@@ -14,7 +14,7 @@ function InfoCust({user}) {
 
   const [changeDetails, setChangeDetails]=useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
-  // const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('');
   const [openClose, setOpenClose]= useState('')
 
   const openModal = () =>{
@@ -33,9 +33,9 @@ function InfoCust({user}) {
     try {
       const response = await axios.post(`${URL}/customer/customer`, {email:user.userEmail});
       setData({ 
-        address:response.data.message.address, 
-        name:response.data.message.name, 
-        email:response.data.message.email, 
+        address:response.data.message[0].address, 
+        name:response.data.message[0].name, 
+        email:response.data.message[0].email, 
         })
 
       console.log(response);
@@ -62,16 +62,15 @@ function InfoCust({user}) {
           newName:data.name,  
           email:data.email, })
           
-        // setMessage(response.data.message)
-        console.log(response);
+        setMessage(response.data.message)
         }
       catch (error) {
         console.log(error);
       }
     }
-    // useEffect(()=>{
-    //   setMessage('');
-    //   },[,openClose])
+    useEffect(()=>{
+      setMessage('');
+      },[openClose])
 
   return (
     <div>
@@ -80,16 +79,16 @@ function InfoCust({user}) {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}>
 
+    <button onClick={closeModal}>Close</button>
+
     <form onChange={handleChange} onSubmit={handleSubmit}>
     <label>Address:</label> <input name="address" defaultValue={data.address} disabled={!changeDetails}/>
     <label>Name:</label> <input name="name" defaultValue= {data.name} disabled={!changeDetails}/>
     <label>Email:{data.email}</label> 
-    <button onClick={changeButton}>{changeDetails?"Save Changes": "Edit"}</button>
-    {/* <h3>{message}</h3> */}
+    <button name={changeDetails? "Save Changes":"Edit"} onClick={changeButton} >{changeDetails?"Save Changes": "Edit"}</button>
+    {!changeDetails && <h3>{message}</h3>}
     </form>
     <ChangePass user={user}/>
-
-    <button onClick={closeModal}>Close</button>
 
       </Modal>
     </div>
