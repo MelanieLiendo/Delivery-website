@@ -16,7 +16,20 @@ const addOrder = async (req,res)=>{
     }
 }
 
+const displayFilterOrder = async (req,res)=>{
+    let {email}= req.body
+    try{
+        const findCustomer = await Customer.findOne({email})
+        const orders = await Orders.find({customer_id:findCustomer.customer_id})
+        res.send({ok:true, message:orders})
+           
+        }
+    catch(error){
+        res.send({ok:false,message:{error}})
+    }
+}
 module.exports={
     addOrder,
+    displayFilterOrder
 }
 
