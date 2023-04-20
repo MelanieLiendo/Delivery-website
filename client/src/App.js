@@ -65,6 +65,10 @@ function App() {
     path="/register/:type"
     element ={ isLoggedIn ? <Navigate to='/' /> : <Register/> } 
     />
+    <Route
+    path="/customer/allOptions"
+    element ={ isLoggedIn ? <Navigate to='/' /> : <Register/> } 
+    />
     </Routes>
     </Router>
   );
