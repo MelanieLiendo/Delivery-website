@@ -30,18 +30,14 @@ const removeRestaurant = async (req,res)=>{
 
 
 const updateRestaurant = async (req,res)=>{
-    let {newCountry, newCity, newAddress, newRestaurant, newName, newSurname, newPhone, email, newEmail, newFilter}= req.body 
-
-      if (newEmail && !validator.isEmail(newEmail)){
-        return res.json({ ok: false, message: "Invalid email" });
-      }
+    let {newCountry, newCity, newAddress, newRestaurant, newName, newSurname, newPhone, email, newFilter}= req.body 
     try{
         const findEmail = await Restaurant.findOne({email})
         if (!findEmail){
             res.send({ok:true, message:"This email is not registered in Foodies"})
         }
         else{
-            await Restaurant.findOneAndUpdate({email}, {country: newCountry, city: newCity, address: newAddress, restaurant: newRestaurant, name: newName, surname: newSurname, phone: newPhone, email: newEmail, filter: newFilter})
+            await Restaurant.findOneAndUpdate({email}, {country: newCountry, city: newCity, address: newAddress, restaurant: newRestaurant, name: newName, surname: newSurname, phone: newPhone, filter: newFilter})
             res.send({ok:true, message:"The restaurant was successfully updated"})   
         }
     }
@@ -51,13 +47,13 @@ const updateRestaurant = async (req,res)=>{
 }
 
 const updatePassRestaurant = async (req,res)=>{
-  let {newPassword,newPassword2}= req.body 
+  let {email,newPassword,newPassword2}= req.body 
   const salt = "corazones429"
   if (newPassword !== newPassword2){
     return res.json({ ok: false, message: "Passwords must match" });}
   try{
           const hash = await argon2.hash(newPassword,salt);
-          await Restaurant.findOneAndUpdate({password},{password:hash})
+          await Restaurant.findOneAndUpdate({email},{password:hash})
           res.send({ok:true, message:"The password was successfully updated"})   
       }
   catch(error){

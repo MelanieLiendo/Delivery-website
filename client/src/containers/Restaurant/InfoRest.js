@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import Modal from 'react-modal'
 import axios from 'axios';
 import {URL} from '../../config'
-import ChangePass from './ChangePass' 
+import ChangePass from './ChangePass'
+import EditRest from './EditRest'; 
 
 function InfoRest({user}) {
   const [data,setData]= useState({
@@ -18,7 +19,6 @@ function InfoRest({user}) {
     password:"",
     filter:""})
 
-    console.log(user);
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const openModal = () =>{
@@ -73,9 +73,8 @@ function InfoRest({user}) {
     <h3>Phone:{data.phone}</h3>
     <h3>Email:{data.email}</h3>
     <h3>Filter:{data.filter}</h3>
-    <ChangePass/>
-  
-       <button>Edit</button>
+    <ChangePass user={user}/>
+    <EditRest user={user}/>
       </Modal>
     </div>
   );
