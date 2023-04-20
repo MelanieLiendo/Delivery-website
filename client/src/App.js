@@ -9,6 +9,7 @@ import Register from './containers/Register';
 import * as jose from "jose"
 import Home from './containers/Home';
 import Login from './containers/Login';
+import Explorer from './containers/Customers/Explorer';
 
 function App() {
 
@@ -66,8 +67,8 @@ function App() {
     element ={ isLoggedIn ? <Navigate to='/' /> : <Register/> } 
     />
     <Route
-    path="/customer/allOptions"
-    element ={ isLoggedIn ? <Navigate to='/' /> : <Register/> } 
+    path="/customer/explorer"
+    element ={ isLoggedIn ? <Explorer/> : <Navigate to='/'/> } 
     />
     </Routes>
     </Router>
