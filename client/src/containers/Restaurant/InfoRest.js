@@ -99,7 +99,7 @@ function InfoRest({user}) {
     <button onClick={closeModal}>Close</button>
 
     <form onChange={handleChange} onSubmit={handleSubmit}>
-    <label>Country:</label> <input name="country" value={data.country} disabled={!changeDetails}/> 
+    <label>Country:</label> <input name="country" defaultValue={data.country} disabled={!changeDetails}/> 
     <label>City:</label> <input name="city" defaultValue={data.city} disabled={!changeDetails}/> 
     <label>Address:</label> <input name="address" defaultValue={data.address} disabled={!changeDetails}/>
     <label>Restaurant's name:</label> <input name="restaurant" defaultValue= {data.restaurant} disabled={!changeDetails}/>
