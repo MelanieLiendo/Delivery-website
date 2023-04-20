@@ -9,7 +9,7 @@ function Home({isLoggedIn,user}) {
     return (
         <div>
         { isLoggedIn ? 
-       user.userType === "restaurant" ? <HomeRest /> : < HomeCust />: 
+       user.userType === "restaurant" ? <HomeRest /> : < HomeCust user={user}/>: 
        <>
        <h2>If you are a restaurant..</h2>
        <NavLink to="/register/restaurant">Register as a Restaurant</NavLink>

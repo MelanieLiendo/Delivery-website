@@ -26,7 +26,6 @@ function InfoCust({user}) {
     setIsOpen(false);
     setOpenClose("close")
   }
-
   useEffect(
     () => {
   const customerInfo = async () => {
