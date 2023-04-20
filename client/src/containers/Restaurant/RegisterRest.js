@@ -16,7 +16,8 @@ function ResgisterRest() {
     email:"", 
     password:"", 
     password2:"", 
-    filter:""})
+    filter:"",
+    picture:""})
 
     const navigate = useNavigate()
 
@@ -34,7 +35,8 @@ function ResgisterRest() {
                  email:data.email.toLowerCase(), 
                  password:data.password, 
                  password2:data.password2, 
-                 filter:data.filter
+                 filter:data.filter,
+                 picture:data.picture
                 })
 
              setMessage(response.data.message)
@@ -80,6 +82,8 @@ function ResgisterRest() {
             <input name='password2'/>
             <label>Filter</label>
             <input name='filter'/>
+            <label>Picture</label>
+            <input name='picture'/>
             <button>Register</button>
             <div><h4>{message}</h4></div>
         </form>

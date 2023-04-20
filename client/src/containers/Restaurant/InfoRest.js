@@ -16,7 +16,8 @@ function InfoRest({user}) {
     phone:"", 
     email:"", 
     password:"",
-    filter:""})
+    filter:"",
+  picture:""})
 
   const [changeDetails, setChangeDetails]=useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -46,7 +47,9 @@ function InfoRest({user}) {
         surname:response.data.message.surname,
         phone:response.data.message.phone, 
         email:response.data.message.email, 
-        filter:response.data.message.filter})
+        filter:response.data.message.filter,
+        picture:response.data.message.picture
+      })
 
       console.log(response);
       }
@@ -76,7 +79,9 @@ function InfoRest({user}) {
           newSurname:data.surname,
           newPhone:data.phone, 
           email:data.email, 
-          newFilter:data.filter})
+          newFilter:data.filter,
+        picture:data.picture
+        })
           
         setMessage(response.data.message)
         }
@@ -108,6 +113,7 @@ function InfoRest({user}) {
     <label>Phone:</label><input name="phone" defaultValue= {data.phone} disabled={!changeDetails}/>
     <label>Email:{data.email}</label> 
     <label>Filter:</label><input name="filter"defaultValue = {data.filter} disabled={!changeDetails}/>
+    <label>Picture:</label><input name="picture"defaultValue = {data.picture} disabled={!changeDetails}/>
     <button name={changeDetails? "Save Changes":"Edit"} onClick={changeButton} >{changeDetails?"Save Changes": "Edit"}</button>
     {!changeDetails && <h3>{message}</h3>}
     </form>
