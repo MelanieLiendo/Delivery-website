@@ -20,7 +20,7 @@ function InfoRest({user}) {
 
   const [changeDetails, setChangeDetails]=useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
-  // const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('');
   const [openClose, setOpenClose]= useState('')
 
   const openModal = () =>{
@@ -78,16 +78,15 @@ function InfoRest({user}) {
           email:data.email, 
           newFilter:data.filter})
           
-        // setMessage(response.data.message)
-        console.log(response);
+        setMessage(response.data.message)
         }
       catch (error) {
         console.log(error);
       }
     }
-    // useEffect(()=>{
-    //   setMessage('');
-    //   },[,openClose])
+    useEffect(()=>{
+       setMessage('');
+       },[openClose])
 
   return (
     <div>
@@ -109,8 +108,8 @@ function InfoRest({user}) {
     <label>Phone:</label><input name="phone" defaultValue= {data.phone} disabled={!changeDetails}/>
     <label>Email:{data.email}</label> 
     <label>Filter:</label><input name="filter"defaultValue = {data.filter} disabled={!changeDetails}/>
-    <button onClick={changeButton}>{changeDetails?"Save Changes": "Edit"}</button>
-    {/* <h3>{message}</h3> */}
+    <button name={changeDetails? "Save Changes":"Edit"} onClick={changeButton} >{changeDetails?"Save Changes": "Edit"}</button>
+    {!changeDetails && <h3>{message}</h3>}
     </form>
     <ChangePass user={user}/>
 
