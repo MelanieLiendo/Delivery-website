@@ -30,14 +30,14 @@ const removeRestaurant = async (req,res)=>{
 
 
 const updateRestaurant = async (req,res)=>{
-    let {newCountry, newCity, newAddress, newRestaurant, newName, newSurname, newPhone, email, newFilter}= req.body 
+    let {newCountry, newCity, newAddress, newRestaurant, newName, newSurname, newPhone, email, newFilter, newPicture}= req.body 
     try{
         const findEmail = await Restaurant.findOne({email})
         if (!findEmail){
             res.send({ok:true, message:"This email is not registered in Foodies"})
         }
         else{
-            await Restaurant.findOneAndUpdate({email}, {country: newCountry, city: newCity, address: newAddress, restaurant: newRestaurant, name: newName, surname: newSurname, phone: newPhone, filter: newFilter})
+            await Restaurant.findOneAndUpdate({email}, {country: newCountry, city: newCity, address: newAddress, restaurant: newRestaurant, name: newName, surname: newSurname, phone: newPhone, filter: newFilter, picture: newPicture})
             res.send({ok:true, message:"The restaurant was successfully updated"})   
         }
     }
@@ -62,7 +62,7 @@ const updatePassRestaurant = async (req,res)=>{
 }
 
 const registerRestaurant = async (req,res)=>{
-    let {country, city, address,restaurant, name, surname, phone, email, password, password2, filter}= req.body
+    let {country, city, address,restaurant, name, surname, phone, email, password, password2, filter, picture}= req.body
     const salt = "corazones429"
 
     if (!email || !password || !password2){
@@ -82,7 +82,7 @@ const registerRestaurant = async (req,res)=>{
         }
         else{
             const hash = await argon2.hash(password,salt);
-            await Restaurant.create({country, city, address,restaurant, name, surname, phone, email, password:hash, filter})
+            await Restaurant.create({country, city, address,restaurant, name, surname, phone, email, password:hash, filter, picture})
             res.send({ok:true, message:"The restaurant was successfully added"})
         }
     }

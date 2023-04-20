@@ -20,7 +20,10 @@ const displayFilterOrder = async (req,res)=>{
     let {email}= req.body
     try{
         const findCustomer = await Customer.findOne({email})
-        const orders = await Orders.find({customer_id:findCustomer.customer_id})
+        const orders = await Orders.find({customer_id:findCustomer._id})
+        console.log(findCustomer)
+        console.log({customer_id:findCustomer._id})
+        console.log(orders)
         res.send({ok:true, message:orders})
            
         }
