@@ -5,18 +5,12 @@ import axios from 'axios';
 import {URL} from '../../config'
 import ChangePass from './ChangePass'
 
-function InfoRest({user}) {
+function InfoCust({user}) {
   const [data,setData]= useState({
-    country:"", 
-    city: "", 
     address: "", 
-    restaurant: "", 
     name:"", 
-    surname:"",
-    phone:"", 
     email:"", 
-    password:"",
-    filter:""})
+    password:""})
 
   const [changeDetails, setChangeDetails]=useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -35,18 +29,14 @@ function InfoRest({user}) {
 
   useEffect(
     () => {
-  const restaurantInfo = async () => {
+  const customerInfo = async () => {
     try {
-      const response = await axios.post(`${URL}/restaurant/restaurant`, {email:user.userEmail});
-      setData({country:response.data.message.country, 
-        city:response.data.message.city, 
+      const response = await axios.post(`${URL}/customer/customer`, {email:user.userEmail});
+      setData({ 
         address:response.data.message.address, 
-        restaurant:response.data.message.restaurant, 
         name:response.data.message.name, 
-        surname:response.data.message.surname,
-        phone:response.data.message.phone, 
         email:response.data.message.email, 
-        filter:response.data.message.filter})
+        })
 
       console.log(response);
       }
@@ -54,7 +44,7 @@ function InfoRest({user}) {
       console.log(error);
     }
   };
-  restaurantInfo()
+  customerInfo()
 },[]);
 
     const changeButton = ()=>{
@@ -67,16 +57,10 @@ function InfoRest({user}) {
     const handleSubmit= async(e)=>{
       e.preventDefault()
       try {
-        const response = await axios.post(`${URL}/restaurant/update`,{
-          newCountry:data.country, 
-          newCity:data.city, 
+        const response = await axios.post(`${URL}/customer/update`,{
           newAddress:data.address, 
-          newRestaurant:data.restaurant, 
-          newName:data.name, 
-          newSurname:data.surname,
-          newPhone:data.phone, 
-          email:data.email, 
-          newFilter:data.filter})
+          newName:data.name,  
+          email:data.email, })
           
         // setMessage(response.data.message)
         console.log(response);
@@ -91,7 +75,7 @@ function InfoRest({user}) {
 
   return (
     <div>
-      <button onClick={openModal}>Restaurant's Information</button>
+      <button onClick={openModal}>Customer's Information</button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -100,15 +84,9 @@ function InfoRest({user}) {
     <button onClick={closeModal}>Close</button>
 
     <form onChange={handleChange} onSubmit={handleSubmit}>
-    <label>Country:</label> <input name="country" value={data.country} disabled={!changeDetails}/> 
-    <label>City:</label> <input name="city" defaultValue={data.city} disabled={!changeDetails}/> 
     <label>Address:</label> <input name="address" defaultValue={data.address} disabled={!changeDetails}/>
-    <label>Restaurant's name:</label> <input name="restaurant" defaultValue= {data.restaurant} disabled={!changeDetails}/>
     <label>Name:</label> <input name="name" defaultValue= {data.name} disabled={!changeDetails}/>
-    <label>Surname:</label> <input name="surname" defaultValue= {data.surname} disabled={!changeDetails}/>
-    <label>Phone:</label><input name="phone" defaultValue= {data.phone} disabled={!changeDetails}/>
     <label>Email:{data.email}</label> 
-    <label>Filter:</label><input name="filter"defaultValue = {data.filter} disabled={!changeDetails}/>
     <button onClick={changeButton}>{changeDetails?"Save Changes": "Edit"}</button>
     {/* <h3>{message}</h3> */}
     </form>
@@ -119,4 +97,4 @@ function InfoRest({user}) {
   );
 }
 
-export default InfoRest
+export default InfoCust

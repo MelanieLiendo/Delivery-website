@@ -25,12 +25,7 @@ const removeCustomer = async (req,res)=>{
 }
 
 const updateCustomer = async (req,res)=>{
-    let {newName, email, newEmail, newPassword, newAddress}= req.body 
-    const salt = "corazones429"
-    
-    if (newEmail && !validator.isEmail(newEmail)){
-        return res.json({ ok: false, message: "Invalid email" });
-      }
+    let {newName, email, newAddress}= req.body 
     
     try{
         const findEmail = await Customer.findOne({email})
@@ -38,8 +33,7 @@ const updateCustomer = async (req,res)=>{
             res.send({ok:true, message:"This email is not registered in Foodies"})
         }
         else{
-            const hash = await argon2.hash(newPassword,salt);
-            await Customer.findOneAndUpdate({email}, {name: newName, email: newEmail, password:hash,address:newAddress})
+            await Customer.findOneAndUpdate({email}, {name: newName,address:newAddress})
             res.send({ok:true, message:"The customer was successfully updated"})   
         }
     }
@@ -47,6 +41,32 @@ const updateCustomer = async (req,res)=>{
         res.send({ok:false,message:{error}})
     }
 }
+
+/*
+
+const updateCustomer = async (req,res)=>{
+  let {newName, email, newEmail, newPassword, newAddress}= req.body 
+  const salt = "corazones429"
+  
+  if (newEmail && !validator.isEmail(newEmail)){
+      return res.json({ ok: false, message: "Invalid email" });
+    }
+  
+  try{
+      const findEmail = await Customer.findOne({email})
+      if (!findEmail){
+          res.send({ok:true, message:"This email is not registered in Foodies"})
+      }
+      else{
+          const hash = await argon2.hash(newPassword,salt);
+          await Customer.findOneAndUpdate({email}, {name: newName, email: newEmail, password:hash,address:newAddress})
+          res.send({ok:true, message:"The customer was successfully updated"})   
+      }
+  }
+  catch(error){
+      res.send({ok:false,message:{error}})
+  }
+} */
 
 const registerCustomer = async (req,res)=>{
     let {name,email,password, password2, address,admin}= req.body
@@ -107,6 +127,9 @@ const loginCustomer = async (req, res) => {
         res.send({ok:false,message:{error}})
     }
 }
+
+
+
 
 module.exports={
     removeCustomer,
