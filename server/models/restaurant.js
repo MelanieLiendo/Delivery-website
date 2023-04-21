@@ -11,7 +11,8 @@ const restaurantSchema = new mongoose.Schema({
     email: {type:String, required: true, unique:true},
     password: {type:String, required: true},
     picture: {type: String, required: true},
-    filter: [{type:String}] /*gluten free, vegan, vegetarian, healthy, fast food*/
+    filter: [{type:String}], /*gluten free, vegan, vegetarian, healthy, fast food*/
+    category: [{type:String, required: true}]
 });
 
 module.exports = mongoose.model("restaurant", restaurantSchema);

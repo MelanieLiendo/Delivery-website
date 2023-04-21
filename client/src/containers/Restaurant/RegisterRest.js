@@ -61,9 +61,7 @@ function ResgisterRest() {
 
     const handleClick = (e) =>{
         setData({...data,  filter:[...data.filter, e.target.value]})
-
     }   
-
 
     const deleteFilter = (filtro) =>{
         let index = data.filter.findIndex(ele => ele === filtro)
@@ -103,7 +101,6 @@ function ResgisterRest() {
             <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Fast Food")}  value= "Fast Food">Fast Food</button>
             <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Hamburger")}  value= "Hamburger">Hamburger</button>
             <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Breakfast")}  value= "Breakfast">Breakfast</button>
-            <input name='filter'/>
             <label>Picture</label>
             <input name='picture'/>
             <button>Register</button>

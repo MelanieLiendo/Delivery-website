@@ -16,7 +16,7 @@ function InfoRest({user}) {
     phone:"", 
     email:"", 
     password:"",
-    filter:"",
+    filter:[],
   picture:""})
 
   const [changeDetails, setChangeDetails]=useState(false);
@@ -95,6 +95,18 @@ function InfoRest({user}) {
       }, 7000);
       },[])
 
+
+
+    const handleClick = (e) =>{
+      setData({...data,  filter:[...data.filter, e.target.value]})
+    }   
+
+    const deleteFilter = (filtro) =>{
+      let index = data.filter.findIndex(ele => ele === filtro)
+      let temporary = ({...data, ...data.filter.splice(index, 1)})
+      setData(temporary)
+    }
+
   return (
     <div>
       <button onClick={openModal}>Restaurant's Information</button>
@@ -114,10 +126,21 @@ function InfoRest({user}) {
     <label>Surname:</label> <input name="surname" defaultValue= {data.surname} disabled={!changeDetails}/>
     <label>Phone:</label><input name="phone" defaultValue= {data.phone} disabled={!changeDetails}/>
     <label>Email:{data.email}</label> 
-    <label>Filter:</label><input name="filter"defaultValue = {data.filter} disabled={!changeDetails}/>
+    <label>Filter:</label>
+    <button onClick={handleClick} disabled={!changeDetails || data.filter.length >= 3 || data.filter.includes("Gluten Free")} value= "Gluten Free">Gluten Free</button>
+    <button onClick={handleClick} disabled={!changeDetails || data.filter.length >= 3 || data.filter.includes("Pizza")}  value= "Pizza">Pizza</button>
+    <button onClick={handleClick} disabled={!changeDetails || data.filter.length >= 3 || data.filter.includes("Sushi")}  value= "Sushi">Sushi</button>
+    <button onClick={handleClick} disabled={!changeDetails || data.filter.length >= 3 || data.filter.includes("Vegetarian")}  value= "Vegetarian">Vegetarian</button>
+    <button onClick={handleClick} disabled={!changeDetails || data.filter.length >= 3 || data.filter.includes("Vegan")}  value= "Vegan">Vegan</button>
+    <button onClick={handleClick} disabled={!changeDetails || data.filter.length >= 3 || data.filter.includes("Healthy")}  value= "Healthy">Healthy</button>
+    <button onClick={handleClick} disabled={!changeDetails || data.filter.length >= 3 || data.filter.includes("Fast Food")}  value= "Fast Food">Fast Food</button>
+    <button onClick={handleClick} disabled={!changeDetails || data.filter.length >= 3 || data.filter.includes("Hamburger")}  value= "Hamburger">Hamburger</button>
+    <button onClick={handleClick} disabled={!changeDetails || data.filter.length >= 3 || data.filter.includes("Breakfast")}  value= "Breakfast">Breakfast</button>
     <label>Picture:</label><input name="picture"defaultValue = {data.picture} disabled={!changeDetails}/>
     <button name={changeDetails? "Save Changes":"Edit"} onClick={changeButton} >{changeDetails?"Save Changes": "Edit"}</button>
     {!changeDetails && <h3>{message}</h3>}
+    
+    {data.filter.map(filtro=><div><p>{filtro}</p><button onClick = {deleteFilter} >x</button></div>)}
     </form>
     <ChangePass user={user}/>
 
