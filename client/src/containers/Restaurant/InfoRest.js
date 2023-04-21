@@ -50,8 +50,6 @@ function InfoRest({user}) {
         filter:response.data.message.filter,
         picture:response.data.message.picture
       })
-
-      console.log(response);
       }
     catch (error) {
       console.log(error);

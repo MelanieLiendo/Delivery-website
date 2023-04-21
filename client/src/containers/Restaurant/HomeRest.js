@@ -4,15 +4,18 @@ import {URL} from '../../config'
 import AddDish from './AddDish';
 import AddCategory from './AddCategory';
 
-function HomeRest(user) {
+function HomeRest({user}) {
   const [menu,setMenu]=useState([])
+  console.log(user.userEmail);
     useEffect(
         () => {
       const restaurantMenu = async () => {
         try {
           const response = await axios.post(`${URL}/menu/restaurant`,{
             email:user.userEmail});
+          debugger
           console.log(response)
+
           setMenu(response.data.message)
           }
         catch (error) {

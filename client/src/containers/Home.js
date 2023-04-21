@@ -2,10 +2,8 @@ import React from 'react'
 import HomeCust from './Customers/HomeCust'
 import HomeRest from './Restaurant/HomeRest'
 import { NavLink } from 'react-router-dom'
-import { useParams } from 'react-router-dom'
 
 function Home({isLoggedIn,user}) {
-  const params = useParams()
     return (
         <div>
         { isLoggedIn ? 

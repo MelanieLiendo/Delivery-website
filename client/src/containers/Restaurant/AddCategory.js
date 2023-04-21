@@ -20,7 +20,7 @@ function AddCategory() {
 
   return (
     <div>
-      <button onClick={openModal}>Add a dish</button>
+      <button onClick={openModal}>Add a category</button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
