@@ -3,9 +3,9 @@ const ObjectId= require ('mongoose').Types.ObjectId
 const Restaurant = require('../models/restaurant')
 
 const addMenu = async (req,res)=>{
-    let {name, description, price, picture, category, restaurant}= req.body
+    let {name, description, price, picture, category, email}= req.body
     try{
-        const findRestaurant = await Restaurant.findOne({restaurant})
+        const findRestaurant = await Restaurant.findOne({email})
         let findSku = []
         let sku = {}
         if(findRestaurant){
@@ -16,9 +16,7 @@ const addMenu = async (req,res)=>{
             res.send({ok:true, message:"The dish was successfully added"})
         } else if (findRestaurant && findSku){
             res.send({ok:true, message:"The dish already exists in this restaurant"})
-        } else {
-            res.send({ok:true, message:"The restaurant doesn´t exist"})
-        }
+        } 
     }
     catch(error){
         res.send({ok:false,message:{error}})

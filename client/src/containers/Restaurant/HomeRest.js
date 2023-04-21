@@ -13,7 +13,7 @@ function HomeRest({user}) {
         try {
           const response = await axios.post(`${URL}/menu/restaurant`,{
             email:user.userEmail});
-          debugger
+          
           console.log(response)
 
           setMenu(response.data.message)
@@ -34,10 +34,10 @@ function HomeRest({user}) {
     <h2>{dish.category}</h2>
     <h3>{dish.name}</h3>
     <h3>{dish.picture}</h3>
-    <AddDish/>
+    <AddDish user= {user}/>
     </article>)}
     </section>
-    <AddCategory/>
+    <AddCategory user= {user}/>
     </div>
   )
 }
