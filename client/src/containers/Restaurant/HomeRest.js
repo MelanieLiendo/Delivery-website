@@ -6,6 +6,7 @@ import AddCategory from './AddCategory';
 
 function HomeRest({user}) {
   const [menu,setMenu]=useState([])
+  const [categories,setCategories]=useState([])
   console.log(user.userEmail);
 
   const restaurantMenu = async () => {
@@ -23,13 +24,11 @@ function HomeRest({user}) {
     }
   };
 
-  let categories = []
   const findingCategories = () =>{
     menu.forEach((ele) => {
       if(!categories.includes(ele.category)) {
-        categories.push(ele.category)
+        setCategories([...categories, ele.category])
       }
-      
     });
     console.log(categories)
   }
