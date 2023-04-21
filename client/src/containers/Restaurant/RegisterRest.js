@@ -16,7 +16,7 @@ function ResgisterRest() {
     email:"", 
     password:"", 
     password2:"", 
-    filter:"",
+    filter:[],
     picture:""})
 
     const navigate = useNavigate()
@@ -58,6 +58,12 @@ function ResgisterRest() {
         setData({...data,[e.target.name]:e.target.value})
         }
 
+
+    const handleClick = (e) =>{
+        setData({...data,  filter:[...data.filter, e.target.value]})
+
+    }
+
   return (
         <form onSubmit={handleSubmit} onChange={handleChange}>
             <label>Country</label>
@@ -81,11 +87,21 @@ function ResgisterRest() {
             <label>Repeat Password</label>
             <input name='password2'/>
             <label>Filter</label>
+            <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Gluten Free")} value= "Gluten Free">Gluten Free</button>
+            <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Pizza")}  value= "Pizza">Pizza</button>
+            <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Sushi")}  value= "Sushi">Sushi</button>
+            <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Vegetarian")}  value= "Vegetarian">Vegetarian</button>
+            <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Vegan")}  value= "Vegan">Vegan</button>
+            <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Healthy")}  value= "Healthy">Healthy</button>
+            <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Fast Food")}  value= "Fast Food">Fast Food</button>
+            <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Hamburger")}  value= "Hamburger">Hamburger</button>
+            <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Breakfast")}  value= "Breakfast">Breakfast</button>
             <input name='filter'/>
             <label>Picture</label>
             <input name='picture'/>
             <button>Register</button>
             <div><h4>{message}</h4></div>
+           {data.filter.map(x=><div><p>{x}</p><button >x</button></div>)}
         </form>
   )
 }
