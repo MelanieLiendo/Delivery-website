@@ -78,9 +78,10 @@ const displayFilterMenu = async (req,res)=>{
 }
 
 const displayAllMenu = async (req,res)=>{
-    let {restaurant_id}= req.params 
+    let {email}= req.body 
     try{
-        const restaurantMenu = await Menu.find({restaurant_id})
+        const restaurant = await Restaurant.find({email})
+        const restaurantMenu = await Menu.find({restaurant_id:restaurant._id})
         res.send({ok:true, message:restaurantMenu}) 
         }
     catch(error){
