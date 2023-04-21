@@ -68,8 +68,10 @@ function InfoCust({user}) {
       }
     }
     useEffect(()=>{
-      setMessage('');
-      },[openClose])
+      setTimeout(() => {
+        setMessage('');
+      }, 7000);
+      },[])
 
   return (
     <div>

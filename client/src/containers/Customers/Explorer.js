@@ -1,21 +1,16 @@
 import React,{useEffect,useState} from 'react'
 import axios from 'axios';
+import {URL} from '../../config'
 
-// nos quedamos en como mostrar todo, yo digo que hay que usar un map pero no se como hacer para que este en un array
-function Explorer(user) {
-    const [restaurant,setRestaurant]=useState({picture:"",filter:"", restaurant:""})
+
+function Explorer() {
+    const [restaurants,setRestaurants]=useState([])
     useEffect(
         () => {
       const customerInfo = async () => {
         try {
-          const response = await axios.post(`${URL}/restaurant/displayAll`);
-          setRestaurant({ 
-            picture:response.data.message[0].picture, 
-            filter:response.data.message[0].filter, 
-            restaurant:response.data.message[0].restaurant, 
-            })
-    
-          console.log(response);
+          const response = await axios.get(`${URL}/restaurant/displayAll`);
+          setRestaurants(response.data.message)
           }
         catch (error) {
           console.log(error);
@@ -25,7 +20,17 @@ function Explorer(user) {
     },[]);
 
   return (
-    <div></div>
+    <div>
+    <h1>Restaurants</h1>
+    <section> {restaurants.map((rest)=>
+    <article>
+    <h2>{rest.restaurant}</h2>
+    <h3>{rest.picture}</h3>
+    <h3>{rest.filter}</h3>
+    </article>
+    )}
+    </section>
+    </div>
   )
 }
 
