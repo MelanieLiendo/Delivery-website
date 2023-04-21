@@ -62,6 +62,13 @@ function ResgisterRest() {
     const handleClick = (e) =>{
         setData({...data,  filter:[...data.filter, e.target.value]})
 
+    }   
+
+
+    const deleteFilter = (filtro) =>{
+        let index = data.filter.findIndex(ele => ele === filtro)
+        let temporary = ({...data, ...data.filter.splice(index, 1)})
+        setData(temporary)
     }
 
   return (
@@ -101,7 +108,7 @@ function ResgisterRest() {
             <input name='picture'/>
             <button>Register</button>
             <div><h4>{message}</h4></div>
-           {data.filter.map(x=><div><p>{x}</p><button >x</button></div>)}
+           {data.filter.map(filtro=><div><p>{filtro}</p><button onClick = {deleteFilter} >x</button></div>)}
         </form>
   )
 }
