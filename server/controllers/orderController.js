@@ -12,18 +12,13 @@ const addOrder = async (req,res)=>{
         res.json({ok:true, message:"The order was successfully created"})        
     }
     catch(error){
-        res.json({ok:false,message:{error}})
-    }
-}
+        res.json({ok:false,message:{error}})}}
 
 const displayFilterOrder = async (req,res)=>{
     let {email}= req.body
     try{
         const findCustomer = await Customer.findOne({email})
         const orders = await Orders.find({customer_id:findCustomer._id})
-        console.log(findCustomer)
-        console.log({customer_id:findCustomer._id})
-        console.log(orders)
         res.send({ok:true, message:orders})
            
         }

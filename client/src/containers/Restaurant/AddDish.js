@@ -22,12 +22,9 @@ function AddDish({user, restaurantMenu}) {
         setData({...data,[e.target.name]:e.target.value})
     
       }
-
-
     const handleSubmit = async (e)=>{
       e.preventDefault()
       try{
-   debugger
           const response = await axios.post(`${URL}/menu/add`, {            
             email: user.userEmail,
             name: data.name,

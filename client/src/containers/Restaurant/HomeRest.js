@@ -24,38 +24,36 @@ function HomeRest({user}) {
   };
 
   let categories = []
-  const findingCategories = ( ) =>{
+  const findingCategories = () =>{
     menu.forEach((ele) => {
       if(!categories.includes(ele.category)) {
         categories.push(ele.category)
       }
       
     });
+    console.log(categories)
   }
     useEffect(
         () => {
-      restaurantMenu()
       findingCategories()
+      restaurantMenu()
     },[]);
 
   return (
     <div>
     <h1>Your menu</h1>
-
-    {categories.map((categ)=> 
-        <section>    
-        {menu.map((dish)=>
-        <article>
-        <h2>{dish.category}</h2>
-        <h3>{dish.name}</h3>
-        <h3>{dish.picture}</h3>
-        </article>)}
-        <AddDish user= {user} restaurantMenu={restaurantMenu} /> 
-        </section>) 
-        
-    
-    
-    }
+    {categories.map((categ)=> <h2>{categ}</h2>
+        // <section>  
+        // <h2>{categ}</h2>  
+        // {menu.map((dish)=>
+        // dish.category == categ &&
+        // <article>
+        // <h3>{dish.name}</h3>
+        // <h3>{dish.picture}</h3>
+        // </article>)}
+        // <AddDish user= {user} restaurantMenu={restaurantMenu}/> 
+        // </section>) 
+    )}
         
     <AddCategory user= {user}/>
     </div>
