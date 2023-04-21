@@ -4,7 +4,7 @@ import Modal from 'react-modal'
 import axios from 'axios';
 import {URL} from '../../config'
 
-function AddDish({user}) {
+function AddDish({user, restaurantMenu}) {
     const [openClose, setOpenClose]= useState('')
     const [message,setMessage]= useState('')
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -27,6 +27,7 @@ function AddDish({user}) {
     const handleSubmit = async (e)=>{
       e.preventDefault()
       try{
+   debugger
           const response = await axios.post(`${URL}/menu/add`, {            
             email: user.userEmail,
             name: data.name,
@@ -35,9 +36,16 @@ function AddDish({user}) {
             picture: data.picture,
             category: data.category
              })
-
+             debugger
+           if(response.data.message = "The dish was successfully added") {
+restaurantMenu()
+           }
 
           setMessage(response.data.message)
+          setData({})
+          setTimeout(() => {
+            setMessage('');
+          }, 3000);
           console.log(response)
       }
      
@@ -47,11 +55,7 @@ function AddDish({user}) {
 
   }
 
-  useEffect(()=>{
-    setTimeout(() => {
-      setMessage('');
-    }, 7000);
-    },[])
+
     
   const openModal = () =>{
     setIsOpen(true);
@@ -82,14 +86,14 @@ function AddDish({user}) {
             <label>Picture</label>
             <input name='picture'/>
             <label>Category</label>
-            <select>
+            <select name="category" defaultValue="starters">
             <option value="starters">Starters</option>
             <option value="main dishes">Main Dishes</option>            
             <option value="desserts">Desserts</option>
             <option value="beverages">Beverages</option>
           </select>
             <button>Add Dish</button>
-           {/* <h4>{message}</h4>*/}
+            <h4>{message}</h4>
         </form>
         
 
