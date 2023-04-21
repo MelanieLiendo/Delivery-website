@@ -77,10 +77,22 @@ const displayFilterMenu = async (req,res)=>{
     }
 }
 
+const displayAllMenu = async (req,res)=>{
+    let {restaurant_id}= req.params 
+    try{
+        const restaurantMenu = await Menu.find({restaurant_id})
+        res.send({ok:true, message:restaurantMenu}) 
+        }
+    catch(error){
+        res.send({ok:false,message:{error}})
+    }
+}
+
 
 module.exports={
    addMenu,
    removeMenu,
    updateMenu,
    displayFilterMenu,
+   displayAllMenu
 }
