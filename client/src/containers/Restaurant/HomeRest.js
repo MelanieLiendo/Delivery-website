@@ -43,7 +43,7 @@ function HomeRest({user}) {
         <article>
         <h3>{dish.name}</h3>
         <h3>{dish.picture}</h3>
-        <button onClick={deleteMenu}>x</button>
+        <button>x</button>
         <EditDish user= {user}/>
         </article>)}
         </section>)}

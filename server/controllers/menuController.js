@@ -94,7 +94,6 @@ const displayAllMenu = async (req,res)=>{
 const displayAll = async (req,res)=>{
     try{
         const menus = await Menu.find()
-        console.log(menus);
         res.send({ok:true, message: menus }) 
         }
     catch(error){

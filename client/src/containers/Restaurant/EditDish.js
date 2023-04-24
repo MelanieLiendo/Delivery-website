@@ -9,13 +9,7 @@ function EditDish({user}) {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [changeDetails, setChangeDetails]=useState(false);
 
-    const [data, setData] = useState({
-      name: "",
-      description:"",
-      price: "",
-      picture: "",
-      category: "",
-      })
+    const [data, setData] = useState()
 
       useEffect(
         () => {
@@ -23,6 +17,7 @@ function EditDish({user}) {
         try {
           const response = await axios.post(`${URL}/menu/restaurant`, {email:user.userEmail});
           setData(response.data.message)
+          console.log(data)
           }
         catch (error) {
           console.log(error);
@@ -51,7 +46,6 @@ function EditDish({user}) {
              })
 
           setMessage(response.data.message)
-          setData({})
           setTimeout(() => {
             setMessage('');
           }, 4000);
