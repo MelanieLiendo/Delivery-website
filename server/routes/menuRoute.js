@@ -6,8 +6,8 @@ router.post('/add', controller.addMenu)
 router.post('/remove', controller.removeMenu)
 router.post('/update', controller.updateMenu)
 router.get('/all', controller.displayAll)
-router.get('/:name', controller.displayFilterMenu)
 router.post('/restaurant', controller.displayAllMenu)
+router.get('/:name', controller.displayFilterMenu)
 
 
 

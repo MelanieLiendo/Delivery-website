@@ -45,12 +45,12 @@ const removeMenu = async (req,res)=>{
 }
 
 const updateMenu = async (req,res)=>{
-    let {name, restaurant, newName, newDescription, newPrice, newPicture, newCategory}= req.body
+    let {email, name, newName, newDescription, newPrice, newPicture, newCategory}= req.body
     let findSku = []
         let sku = {}
     
     try{
-        const findRestaurant = await Restaurant.findOne({restaurant})
+        const findRestaurant = await Restaurant.findOne({email})
         if(findRestaurant){
              sku= `${name + findRestaurant._id.toString()}`
              findSku = await Menu.findOne({sku})}

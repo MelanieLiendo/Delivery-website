@@ -7,6 +7,7 @@ import EditDish from './EditDish';
 function HomeRest({user}) {
   const [menu,setMenu]=useState([])
   const [categories,setCategories]=useState([])
+  const [menuName, setMenuName]= useState([])
 
   const restaurantMenu = async () => {
     try {
@@ -18,7 +19,6 @@ function HomeRest({user}) {
       console.log(error);
     }
   };
-
   const findingCategories = () =>{
     menu.forEach((ele) => {
       if(!categories.includes(ele.category)) {
@@ -44,7 +44,7 @@ function HomeRest({user}) {
         <h3>{dish.name}</h3>
         <h3>{dish.picture}</h3>
         <button>x</button>
-        <EditDish user= {user}/>
+        <EditDish user= {user} dishName={dish.name}/>
         </article>)}
         </section>)}
     </div>
