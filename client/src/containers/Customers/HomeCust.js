@@ -114,11 +114,13 @@ debugger
       <button  onClick = {handleSearch} type="submit"  disabled={ searching }>Restaurants</button>
 
     {(busqueda && searching) && listadoRests.map((rest)=>(
+      <NavLink  to= {`/restaurant/${rest._id}`} >
       <article>
       <h2>{rest.restaurant}</h2>
       <h3>{rest.picture}</h3>
       <h3>{rest.filter}</h3>
       </article>
+      </NavLink>
 
     ))}
 
@@ -127,12 +129,14 @@ debugger
         {restaurants.map((rest)=>
           
           rest._id == menu.restaurant_id && 
+          <NavLink  to= {`/restaurant/${rest._id}`} >
           <article>          
         <h2>{ rest.restaurant}</h2>
         <h3>{menu.name}</h3>
         <h3>{menu.description}</h3>
         <h3>{menu.price}</h3>
         </article>
+        </NavLink>
         )
         }
         
@@ -169,7 +173,7 @@ debugger
     {actualFilter.length < 1 ?  
     
     <section> {restaurants.map((rest)=> 
-      <NavLink>
+      <NavLink  to= {`/restaurant/${rest._id}`} >
       <article>
       <h2>{rest.restaurant}</h2>
       <h3>{rest.picture}</h3>
@@ -178,12 +182,13 @@ debugger
       )}
       </section> :
       <section> {filtered.map((rest) => 
+        <NavLink  to= {`/restaurant/${rest._id}`} >
       <article>
       <h2>{rest.restaurant}</h2>
       <h3>{rest.picture}</h3>
       <h3>{rest.filter}</h3>
       </article>
-      
+      </NavLink>
       )}
       </section>
   }

@@ -9,6 +9,7 @@ import Register from './containers/Register';
 import * as jose from "jose"
 import Home from './containers/Home';
 import Login from './containers/Login';
+import Restaurant from './containers/Customers/Restaurant';
 
 function App() {
 
@@ -64,8 +65,8 @@ function App() {
     <Route
     path="/register/:type"
     element ={ isLoggedIn ? <Navigate to='/' /> : <Register/> } 
-    />
-    
+    /> 
+    <Route path="/restaurant/:id" element={<Restaurant/>} />
     </Routes>
     </Router>
   );
