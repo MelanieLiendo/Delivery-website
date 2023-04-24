@@ -22,16 +22,13 @@ function InfoRest({user}) {
   const [changeDetails, setChangeDetails]=useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
-  const [openClose, setOpenClose]= useState('')
 
   const openModal = () =>{
     setIsOpen(true);
-    setOpenClose("open")
   }
 
   const closeModal=() => {
     setIsOpen(false);
-    setOpenClose("close")
   }
 
   useEffect(

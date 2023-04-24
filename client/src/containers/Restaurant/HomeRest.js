@@ -2,6 +2,7 @@ import React,{useEffect,useState} from 'react'
 import axios from 'axios';
 import {URL} from '../../config'
 import AddDish from './AddDish';
+import EditDish from './EditDish';
 
 function HomeRest({user}) {
   const [menu,setMenu]=useState([])
@@ -42,9 +43,10 @@ function HomeRest({user}) {
         <article>
         <h3>{dish.name}</h3>
         <h3>{dish.picture}</h3>
+        <button onClick={deleteMenu}>x</button>
+        <EditDish user= {user}/>
         </article>)}
-        </section>) 
-    }
+        </section>)}
     </div>
   )
 }
