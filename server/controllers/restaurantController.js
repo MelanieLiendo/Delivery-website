@@ -33,9 +33,17 @@ const updateRestaurant = async (req,res)=>{
     let {newCountry, newCity, newAddress, newRestaurant, newName, newSurname, newPhone, email, newFilter, newPicture}= req.body 
     try{
         const findEmail = await Restaurant.findOne({email})
+        let arrayFilters = findEmail.filter
+        let filterChange = false
+        arrayFilters.forEach((ele)=>{
+            if (newFilter.includes(ele) && arrayFilters.length == newFilter.length){
+                filterChange=true}
+        })
         if (!findEmail){
             res.send({ok:true, message:"This email is not registered in Foodies"})
         }
+        else if (newAddress == findEmail.address && newCountry == findEmail.country && newCity== findEmail.city && newRestaurant == findEmail.restaurant && newName == findEmail.name && newSurname == findEmail.surname && newPhone == findEmail.phone && newPicture == findEmail.picture && filterChange){ 
+            res.send({ok: true, message: "No change was made"});}
         else{
             await Restaurant.findOneAndUpdate({email}, {country: newCountry, city: newCity, address: newAddress, restaurant: newRestaurant, name: newName, surname: newSurname, phone: newPhone, filter: newFilter, picture: newPicture})
             res.send({ok:true, message:"The restaurant was successfully updated"})   
@@ -54,8 +62,11 @@ const updatePassRestaurant = async (req,res)=>{
   try{
         let restaurant = await Restaurant.findOne({email})
         let match = await argon2.verify(restaurant.password, actualPasswordInput);
+        let notChange = await argon2.verify(restaurant.password, newPassword);
         if (!match){ 
             res.json({ok: false, message: "The actual password is not correct. Try it again" });}
+        else if (notChange){ 
+            res.json({ok: false, message: "No change was made"});}
         else{
             const hash = await argon2.hash(newPassword,salt);
             await Restaurant.findOneAndUpdate({email},{password:hash})

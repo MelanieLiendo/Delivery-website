@@ -33,14 +33,19 @@ const handleSubmit = async (e) => {
                 actualPasswordInput:passwords.actualPasswordInput,
                 newPassword:passwords.newPassword,
                 newPassword2:passwords.newPassword2})
-             setMessage(response.data.message)}
+             setMessage(response.data.message)
+             
+             if (message == response.data.message) {
+              setTimeout(() => {
+                setMessage('');
+              }, 4000);
+               }
+            
+            }
          catch(error){
              console.log(error);
          }}
 
-         useEffect(()=>{
-          setMessage('');
-          },[openClose, passwords])
 
   return (
     <div>

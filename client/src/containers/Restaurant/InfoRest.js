@@ -82,16 +82,19 @@ function InfoRest({user}) {
         })
           
         setMessage(response.data.message)
+
+        if (message == response.data.message) {
+          setTimeout(() => {
+            setMessage('');
+          }, 4000);
+           }
+
         }
       catch (error) {
         console.log(error);
       }
     }
-    useEffect(()=>{
-      setTimeout(() => {
-        setMessage('');
-      }, 7000);
-      },[])
+   
 
     const handleClick = (e) =>{
       setData({...data,  filter:[...data.filter, e.target.value]})

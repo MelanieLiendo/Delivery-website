@@ -32,6 +32,8 @@ const updateCustomer = async (req,res)=>{
         if (!findEmail){
             res.send({ok:true, message:"This email is not registered in Foodies"})
         }
+        else if (findEmail.name == newName && newAddress == findEmail.address){ 
+          res.json({ok: true, message: "No change was made"});}
         else{
             await Customer.findOneAndUpdate({email}, {name: newName,address:newAddress})
             res.send({ok:true, message:"The customer was successfully updated"})   
@@ -51,8 +53,11 @@ const updatePassCustomer = async (req,res)=>{
   try{
     let customer = await Customer.findOne({email})
     let match = await argon2.verify(customer.password, actualPasswordInput);
+    let notChange = await argon2.verify(customer.password, newPassword);
     if (!match){ 
       res.json({ok: false, message: "The actual password is not correct. Try it again" });}
+    else if (notChange){ 
+      res.json({ok: false, message: "No change was made"});}
     else{
       const hash = await argon2.hash(newPassword,salt);
       await Customer.findOneAndUpdate({email}, { password:hash})
