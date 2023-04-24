@@ -6,6 +6,9 @@ import {URL} from '../../config'
 function Explorer() {
     const [restaurants,setRestaurants]=useState([])
     const [actualFilter, setActualFilter] = useState([])
+    const [filtered, setFiltered] = useState([])
+
+
     useEffect(
         () => {
       const customerInfo = async () => {
@@ -20,6 +23,14 @@ function Explorer() {
       customerInfo()
     },[]);
 
+    useEffect( () => {         
+   let restando = [...restaurants]    
+    let result = restando.filter(res=>{
+      return actualFilter.every(tag=>res.filter.includes(tag))
+    }) 
+    setFiltered(result)
+    },[actualFilter])  
+  
     
     const handleClick =(e) => {
       setActualFilter([...actualFilter, e.target.value])
@@ -66,12 +77,13 @@ function Explorer() {
       </article>
       )}
       </section> :
-      <section> {restaurants.map((rest)=> (actualFilter.map((ele)=> rest.filter.includes(ele)  )) && /* tengo que hacer que solo se vean los res que cumple con todos los filtros*/
+      <section> {filtered.map((rest) => 
       <article>
       <h2>{rest.restaurant}</h2>
       <h3>{rest.picture}</h3>
       <h3>{rest.filter}</h3>
       </article>
+      
       )}
       </section>
   }
