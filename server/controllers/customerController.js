@@ -43,15 +43,21 @@ const updateCustomer = async (req,res)=>{
 }
 
 const updatePassCustomer = async (req,res)=>{
-  let {email, newPassword, newPassword2}= req.body 
+  let {email, newPassword, newPassword2, actualPasswordInput}= req.body 
   const salt = "corazones429"
     if (newPassword != newPassword2) {
       return res.json({ok: false, message: "Passwords must match"})
     }    
   try{
-    const hash = await argon2.hash(newPassword,salt);
-    await Customer.findOneAndUpdate({email}, { password:hash})
-    res.send({ok:true, message:"The password was successfully updated"})   
+    let customer = await Customer.findOne({email})
+    let match = await argon2.verify(customer.password, actualPasswordInput);
+    if (!match){ 
+      res.json({ok: false, message: "The actual password is not correct. Try it again" });}
+    else{
+      const hash = await argon2.hash(newPassword,salt);
+      await Customer.findOneAndUpdate({email}, { password:hash})
+      res.send({ok:true, message:"The password was successfully updated"}) }
+      
       
   }
   catch(error){

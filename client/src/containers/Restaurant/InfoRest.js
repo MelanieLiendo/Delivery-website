@@ -93,8 +93,6 @@ function InfoRest({user}) {
       }, 7000);
       },[])
 
-
-
     const handleClick = (e) =>{
       setData({...data,  filter:[...data.filter, e.target.value]})
     }   
@@ -110,8 +108,7 @@ function InfoRest({user}) {
       <button onClick={openModal}>Restaurant's Information</button>
       <Modal
         isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Example Modal">
+        onRequestClose={closeModal}>
 
     <button onClick={closeModal}>Close</button>
 

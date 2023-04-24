@@ -47,15 +47,21 @@ const updateRestaurant = async (req,res)=>{
 }
 
 const updatePassRestaurant = async (req,res)=>{
-  let {email,newPassword,newPassword2}= req.body 
-  const salt = "corazones429"
-  if (newPassword !== newPassword2){
-    return res.json({ ok: false, message: "Passwords must match" });}
+    let {email,newPassword,newPassword2, actualPasswordInput}= req.body 
+    const salt = "corazones429"
+    if (newPassword !== newPassword2){
+        return res.json({ ok: false, message: "Passwords must match" });}
   try{
-          const hash = await argon2.hash(newPassword,salt);
-          await Restaurant.findOneAndUpdate({email},{password:hash})
-          res.send({ok:true, message:"The password was successfully updated"})   
+        let restaurant = await Restaurant.findOne({email})
+        let match = await argon2.verify(restaurant.password, actualPasswordInput);
+        if (!match){ 
+            res.json({ok: false, message: "The actual password is not correct. Try it again" });}
+        else{
+            const hash = await argon2.hash(newPassword,salt);
+            await Restaurant.findOneAndUpdate({email},{password:hash})
+            res.send({ok:true, message:"The password was successfully updated"})   }
       }
+
   catch(error){
       res.send({ok:false,message:{error}})
   }
@@ -105,7 +111,7 @@ const loginRestaurant = async (req, res) => {
       const match = await argon2.verify(restaurant.password, password);
       if (match) {
         const token = jwt.sign({userEmail:restaurant.email, userType:"restaurant"}, jwt_secret, { expiresIn: "1h" }); 
-        res.json({ ok: true, message: "welcome back", token, email });
+        res.json({ ok: true, message: "Welcome back!", token, email });
       } else return res.json({ ok: false, message: "Invalid data provided" });
     } catch (error) {
       res.json({ ok: false, error });

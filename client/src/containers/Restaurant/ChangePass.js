@@ -5,7 +5,7 @@ import axios from 'axios';
 import {URL} from '../../config' 
 
 function ChangePass({user}) {
-    const [passwords,setPasswords]= useState({newPassword:'', newPassword2:''})
+    const [passwords,setPasswords]= useState({actualPasswordInput:'', newPassword:'', newPassword2:''})
     const [message,setMessage]= useState('')
     const [openClose, setOpenClose]= useState('')
 
@@ -30,9 +30,12 @@ const handleSubmit = async (e) => {
          try{
              const response = await axios.post(`${URL}/restaurant/updatePassword`, {
                 email:user.userEmail,
+                actualPasswordInput:passwords.actualPasswordInput,
                 newPassword:passwords.newPassword,
                 newPassword2:passwords.newPassword2})
-             setMessage(response.data.message)}
+             setMessage(response.data.message)
+            }
+             
          catch(error){
              console.log(error);
          }}
@@ -52,6 +55,7 @@ const handleSubmit = async (e) => {
         <button onClick={closeModal}>Close</button>
 
         <form onSubmit={handleSubmit} onChange={handleChange}>
+        <label>Actual Password:</label><input name='actualPasswordInput'/>
         <label>New Password:</label><input name='newPassword'/>
         <label>Repeat New Password:</label><input name='newPassword2'/>
        <button>Change</button>

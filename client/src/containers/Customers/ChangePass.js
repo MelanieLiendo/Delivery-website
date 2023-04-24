@@ -5,7 +5,7 @@ import axios from 'axios';
 import {URL} from '../../config' 
 
 function ChangePass({user}) {
-    const [passwords,setPasswords]= useState({newPassword:'', newPassword2:''})
+    const [passwords,setPasswords]= useState({actualPasswordInput:'', newPassword:'', newPassword2:''})
     const [message,setMessage]= useState('')
     const [openClose, setOpenClose]= useState('')
 
@@ -30,6 +30,7 @@ const handleSubmit = async (e) => {
          try{
              const response = await axios.post(`${URL}/customer/updatePassword`, {
                 email:user.userEmail,
+                actualPasswordInput:passwords.actualPasswordInput,
                 newPassword:passwords.newPassword,
                 newPassword2:passwords.newPassword2})
              setMessage(response.data.message)}
