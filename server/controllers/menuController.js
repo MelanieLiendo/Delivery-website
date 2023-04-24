@@ -91,11 +91,23 @@ const displayAllMenu = async (req,res)=>{
     }
 }
 
+const displayAll = async (req,res)=>{
+    try{
+        const menus = await Menu.find()
+        console.log(menus);
+        res.send({ok:true, message: menus }) 
+        }
+    catch(error){
+        res.send({ok:false,message:{error}})
+    }
+}
+
 
 module.exports={
    addMenu,
    removeMenu,
    updateMenu,
    displayFilterMenu,
-   displayAllMenu
+   displayAllMenu,
+   displayAll,
 }
