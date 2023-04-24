@@ -4,8 +4,7 @@ import Modal from 'react-modal'
 import axios from 'axios';
 import {URL} from '../../config'
 
-function AddDish({user, restaurantMenu}) {
-    const [openClose, setOpenClose]= useState('')
+function AddDish({user}) {
     const [message,setMessage]= useState('')
     const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -17,11 +16,9 @@ function AddDish({user, restaurantMenu}) {
       category: "",
       })
 
+    const handleChange = (e) =>{
+      setData({...data,[e.target.name]:e.target.value})}
 
-      const handleChange = (e) =>{
-        setData({...data,[e.target.name]:e.target.value})
-    
-      }
     const handleSubmit = async (e)=>{
       e.preventDefault()
       try{
@@ -33,10 +30,6 @@ function AddDish({user, restaurantMenu}) {
             picture: data.picture,
             category: data.category
              })
-             debugger
-           if(response.data.message = "The dish was successfully added") {
-restaurantMenu()
-           }
 
           setMessage(response.data.message)
           setData({})
@@ -48,31 +41,22 @@ restaurantMenu()
      
       catch(error){
           console.log(error);
-      }
+      }}
 
-  }
-
-
-    
   const openModal = () =>{
     setIsOpen(true);
-    setOpenClose("open")
   }
 
   const closeModal=() => {
     setIsOpen(false);
-    setOpenClose("close")
   }
-
-  
-
+// me faltaria solucionar que cuando no seleccionas una category te tire que falta un dato
   return (
     <div>
       <button onClick={openModal}>Add a dish</button>
       <Modal
         isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Example Modal">
+        onRequestClose={closeModal}>
           <form onChange={handleChange} onSubmit={handleSubmit} >
             <label>Dish</label>
             <input name='name'/>
@@ -83,7 +67,8 @@ restaurantMenu()
             <label>Picture</label>
             <input name='picture'/>
             <label>Category</label>
-            <select name="category" defaultValue="starters">
+            <select name="category">
+            <option disabled selected value> -- select an option -- </option>
             <option value="starters">Starters</option>
             <option value="main dishes">Main Dishes</option>            
             <option value="desserts">Desserts</option>
