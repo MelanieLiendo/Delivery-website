@@ -65,6 +65,7 @@ function InfoRest({user}) {
     const handleSubmit= async(e)=>{
       e.preventDefault()
       try {
+    
         const response = await axios.post(`${URL}/restaurant/update`,{
           newCountry:data.country, 
           newCity:data.city, 
@@ -77,8 +78,9 @@ function InfoRest({user}) {
           newFilter:data.filter,
         picture:data.picture
         })
-          
+          debugger
         setMessage(response.data.message)
+        changeButton()
 
         if (message == response.data.message) {
           setTimeout(() => {
@@ -133,10 +135,9 @@ function InfoRest({user}) {
     <button onClick={handleClick} disabled={!changeDetails || data.filter.length >= 3 || data.filter.includes("Breakfast")}  value= "Breakfast">Breakfast</button>
     <label>Picture:</label><input name="picture"defaultValue = {data.picture} disabled={!changeDetails}/> 
     {data.filter.map(filtro=><div><p>{filtro}</p><button onClick = {deleteFilter} >x</button></div>)}
-    <button  type="submit" name="Save Changes" onClick={changeButton} disabled={!changeDetails}>Save Changes</button>
+    <button  type="submit" name="Save Changes" disabled={!changeDetails}>Save Changes</button>
     {!changeDetails && <h3>{message}</h3>}  
     </form>
-    {/* no me toma como boton de submit el save changes */}
     <button name="Edit" onClick={changeButton} disabled={changeDetails}>Edit</button> 
     <ChangePass user={user} changeDetails={changeDetails}/>
 

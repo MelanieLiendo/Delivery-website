@@ -4,7 +4,7 @@ import Modal from 'react-modal'
 import axios from 'axios';
 import {URL} from '../../config'
 
-function EditDish({user,dishName}) {
+function EditDish({user,dishName,restaurantMenu,findingCategories}) {
     const [message,setMessage]= useState('')
     const [modalIsOpen, setIsOpen] = useState(false);
     const [changeDetails, setChangeDetails]=useState(false);
@@ -55,7 +55,6 @@ function EditDish({user,dishName}) {
       const handleSubmit = async (e)=>{
         e.preventDefault()
         try{
-          debugger
             const response = await axios.post(`${URL}/menu/update`, {            
               email: user.userEmail,
               name: dishName,
@@ -67,6 +66,10 @@ function EditDish({user,dishName}) {
                })
   
             setMessage(response.data.message)
+            changeButton()
+            restaurantMenu()
+            findingCategories()
+
             setTimeout(() => {
               setMessage('');
             }, 4000);
@@ -104,7 +107,7 @@ function EditDish({user,dishName}) {
             <option value="desserts">Desserts</option>
             <option value="beverages">Beverages</option>
             </select>
-          <button type="submit" name="Save Changes" onClick={changeButton} disabled={!changeDetails}>Save Changes</button>
+          <button type="submit" name="Save Changes" disabled={!changeDetails}>Save Changes</button>
             {!changeDetails && <h3>{message}</h3>}   
         </form>
         <button name="Edit" onClick={changeButton} disabled={changeDetails}>Edit</button>

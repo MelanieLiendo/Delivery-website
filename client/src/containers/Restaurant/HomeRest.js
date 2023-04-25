@@ -3,16 +3,19 @@ import axios from 'axios';
 import {URL} from '../../config'
 import AddDish from './AddDish';
 import EditDish from './EditDish';
+import {useNavigate} from 'react-router-dom'
 
 function HomeRest({user}) {
   const [menu,setMenu]=useState([])
   const [categories,setCategories]=useState([])
   const [message,setMessage]=useState("")
-
+  const navigate = useNavigate()
   const restaurantMenu = async () => {
     try {
+      
       const response = await axios.post(`${URL}/menu/restaurant`,{
         email:user.userEmail});
+
       setMenu(response.data.message)
     }
     catch (error) {
@@ -27,14 +30,25 @@ function HomeRest({user}) {
   }
     useEffect(
         () => {
-      findingCategories()
-      restaurantMenu()
-    },[menu,categories]);
+          restaurantMenu()   
+    },[]);
 
-    const deleteDish = async(dishName) =>{
+    useEffect(
+      () => {
+        findingCategories()
+  },[menu]);
+
+    const deleteDish = async(dishName,index) =>{
       try{
         const response = await axios.post(`${URL}/menu/remove`,{email:user.userEmail, name:dishName});
           setMessage(response.data.message)
+          if(response.data.message == "The dish was successfully removed") {
+            let temp = [...menu]
+            temp.splice(index,1)
+            setMenu(temp)
+            findingCategories()
+          }
+          
           setTimeout(() => {
             setMessage('');
           }, 4000);
@@ -49,17 +63,17 @@ function HomeRest({user}) {
     <div>
     <h1>Your menu</h1>
     {message !=="" && <h3>{message}</h3>}
-    <AddDish user= {user}/>
+    <AddDish user= {user} restaurantMenu={restaurantMenu} findingCategories={findingCategories}/>
     {categories.map((categ)=>
         <section>  
         <h2>{categ}</h2>  
-        {menu.map((dish)=>
+        {menu.map((dish,i)=>
         dish.category == categ &&
         <article>
         <h3>{dish.name}</h3>
         <h3>{dish.picture}</h3>
-        <button onClick={()=>deleteDish(dish.name)}>x</button>
-        <EditDish user= {user} dishName={dish.name}/>
+        <button onClick={()=>deleteDish(dish.name,i)}>x</button>
+        <EditDish user= {user} dishName={dish.name} restaurantMenu={restaurantMenu} findingCategories={findingCategories}/>
         </article>)}
         </section>)}
     </div>

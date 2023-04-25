@@ -4,7 +4,7 @@ import Modal from 'react-modal'
 import axios from 'axios';
 import {URL} from '../../config'
 
-function AddDish({user}) {
+function AddDish({user, restaurantMenu, findingCategories}) {
     const [message,setMessage]= useState('')
     const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -33,6 +33,8 @@ function AddDish({user}) {
 
           setMessage(response.data.message)
           setData({})
+          restaurantMenu()
+          findingCategories()
           setTimeout(() => {
             setMessage('');
           }, 3000);
