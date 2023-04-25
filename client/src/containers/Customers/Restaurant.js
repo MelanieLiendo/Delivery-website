@@ -15,7 +15,7 @@ function Restaurant() {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [dish, setDish] = useState(null)
     const [quantity, setQuantity] = useState(1)
-    const [orders, setOrders]  = useState(localStorage.getItem('orderKey')|| [])
+    const [orders, setOrders]  = useState( [])
 
   
   useEffect( () => {
@@ -67,11 +67,6 @@ useEffect(()=>{
 useEffect(()=>{
   localStorage.setItem('orderKey', JSON.stringify(orders))
 },[orders])
-
-
-
-
-
 
   const openModal = () =>{
     setIsOpen(true);
@@ -175,14 +170,15 @@ setDish(null)
             ))} 
             <button onClick= {deleteCart} >Delete cart</button>
             <button>Order {orders.reduce((total,acc)=>(total + acc.quantity),0)} for ${orders.reduce((total,acc)=>(total +(acc.price * acc.quantity)),0)}</button>
-
+                
           </>
         }
       </section>
 
     </div>
     
-  )
+  )//agregar la funcion al boton del total
+
 }
 
 export default Restaurant
