@@ -80,7 +80,6 @@ function InfoRest({user, logout}) {
           newFilter:data.filter,
         picture:data.picture
         })
-          debugger
         setMessage(response.data.message)
         changeButton()
 

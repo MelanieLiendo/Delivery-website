@@ -16,14 +16,7 @@ function EditDish({user,dishName,restaurantMenu,findingCategories}) {
             picture: "",
             category: ""
     })
-    const [data, setData] = useState({
-      name: "",
-      description:"",
-      price: "",
-      picture: "",
-      category: "",
-      })
-
+    
       useEffect(
         () => {
       const menuInfo = async () => {
@@ -50,7 +43,7 @@ function EditDish({user,dishName,restaurantMenu,findingCategories}) {
       }
 
     const handleChange = (e) =>{
-      setData({...data,[e.target.name]:e.target.value})}
+      setInfoMenu({...infoMenu,[e.target.name]:e.target.value})}
 
       const handleSubmit = async (e)=>{
         e.preventDefault()
@@ -58,11 +51,11 @@ function EditDish({user,dishName,restaurantMenu,findingCategories}) {
             const response = await axios.post(`${URL}/menu/update`, {            
               email: user.userEmail,
               name: dishName,
-              newName:data.name,
-              newDescription: data.description,
-              newPrice: data.price,
-              newPicture: data.picture,
-              newCategory: data.category
+              newName:infoMenu.name,
+              newDescription: infoMenu.description,
+              newPrice: infoMenu.price,
+              newPicture: infoMenu.picture,
+              newCategory: infoMenu.category
                })
   
             setMessage(response.data.message)
@@ -73,7 +66,6 @@ function EditDish({user,dishName,restaurantMenu,findingCategories}) {
             setTimeout(() => {
               setMessage('');
             }, 4000);
-            console.log(data)
         }
 
         catch(error){
