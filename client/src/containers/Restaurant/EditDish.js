@@ -16,19 +16,19 @@ function EditDish({user,dishName}) {
             picture: "",
             category: ""
     })
-    const [newInfo, setNewInfo] = useState({
-            name:"",
-            description: "",
-            price:"",
-            picture: "",
-            category: ""
-    })
-// el data me da error, y el console log me esta dando undefined. Chequear los nombres y compararlo con el del info rest
+    const [data, setData] = useState({
+      name: "",
+      description:"",
+      price: "",
+      picture: "",
+      category: "",
+      })
+
       useEffect(
         () => {
       const menuInfo = async () => {
         try {
-          const response = await axios.get(`${URL}/menu/${dishName}`);
+          const response = await axios.post(`${URL}/menu/dish`, {name:dishName});
           setInfoMenu({
             email: user.userEmail,
             name:dishName,
@@ -37,7 +37,6 @@ function EditDish({user,dishName}) {
             picture: response.data.message.picture,
             category: response.data.message.category
           })
-          console.log(response.message);
           }
         catch (error) {
           console.log(error);
@@ -51,25 +50,27 @@ function EditDish({user,dishName}) {
       }
 
     const handleChange = (e) =>{
-      setNewInfo({...newInfo,[e.target.name]:e.target.value})}
+      setData({...data,[e.target.name]:e.target.value})}
 
-    const handleSubmit = async (e)=>{
-      e.preventDefault()
+      const handleSubmit = async (e)=>{
+        e.preventDefault()
         try{
-          const response = await axios.post(`${URL}/menu/update`, {            
-            email: user.userEmail,
-            name:dishName,
-            newName:newInfo.name,
-            newDescription: newInfo.description,
-            newPrice:newInfo.price,
-            newPicture: newInfo.picture,
-            newCategory: newInfo.category
-             })
-            
-          setMessage(response.data.message)
-          setTimeout(() => {
-            setMessage('');
-          }, 4000);}
+            const response = await axios.post(`${URL}/menu/update`, {            
+              email: user.userEmail,
+              name: dishName,
+              newName:data.name,
+              newDescription: data.description,
+              newPrice: data.price,
+              newPicture: data.picture,
+              newCategory: data.category
+               })
+  
+            setMessage(response.data.message)
+            setTimeout(() => {
+              setMessage('');
+            }, 4000);
+            console.log(data)
+        }
 
         catch(error){
           console.log(error);

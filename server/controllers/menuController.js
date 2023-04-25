@@ -48,30 +48,31 @@ const updateMenu = async (req,res)=>{
     let {email, name, newName, newDescription, newPrice, newPicture, newCategory}= req.body
     let findSku = []
         let sku = {}
-    
+
+    if (newName==="" || newDescription==="" || newPrice==="" || newPicture==="" || newCategory===""){
+        return res.send({ ok: false, message: "All fields are required" });}
     try{
         const findRestaurant = await Restaurant.findOne({email})
         if(findRestaurant){
              sku= `${name + findRestaurant._id.toString()}`
              findSku = await Menu.findOne({sku})}
+
+        if (name == newName && newDescription == findSku.description && newPrice == findSku.price && newPicture == findSku.picture && newCategory == findSku.category){ 
+            res.send({ok: true, message: "No change was made"});}
+
         if (findRestaurant && findSku){
             await Menu.findOneAndUpdate({sku}, {name: newName, description: newDescription, price: newPrice, picture: newPicture, category: newCategory});
             res.send({ok:true, message:"The dish was successfully updated"})
-        } else if (!findRestaurant){
-            res.send({ok:true, message:"The restaurant doesn´t exist"})
-        } else if (!findSku) {
-            res.send({ok:true, message:"The dish doesn´t exist"})
-        }
-    }
+        }}
     catch(error){
         res.send({ok:false,message:{error}})
     }
 }
 
 const displayFilterMenu = async (req,res)=>{
-    let {name}= req.params 
+    let {name}= req.body
     try{
-        const search = await Menu.find({name:name})
+        const search = await Menu.findOne({name:name})
         res.send({ok:true, message:search}) 
         }
     catch(error){

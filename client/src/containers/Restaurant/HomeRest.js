@@ -7,7 +7,6 @@ import EditDish from './EditDish';
 function HomeRest({user}) {
   const [menu,setMenu]=useState([])
   const [categories,setCategories]=useState([])
-  const [menuName, setMenuName]= useState([])
 
   const restaurantMenu = async () => {
     try {

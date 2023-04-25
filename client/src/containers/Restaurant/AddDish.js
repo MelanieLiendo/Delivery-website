@@ -50,7 +50,7 @@ function AddDish({user}) {
   const closeModal=() => {
     setIsOpen(false);
   }
-// me faltaria solucionar que cuando no seleccionas una category te tire que falta un dato
+
   return (
     <div>
       <button onClick={openModal}>Add a dish</button>
