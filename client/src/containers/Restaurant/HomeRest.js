@@ -44,8 +44,21 @@ function HomeRest({user}) {
           setMessage(response.data.message)
           if(response.data.message == "The dish was successfully removed") {
             let temp = [...menu]
+            let categoryErrased = menu[index].category
             temp.splice(index,1)
             setMenu(temp)
+            let unico = true
+            menu.forEach(ele=>{
+              if(ele.category == categoryErrased){
+                unico = false
+              }
+            })
+            if (unico=true){
+              let idx = categories.findIndex(c=>c==categoryErrased)
+              let tempCat = [...categories]
+              tempCat.splice(idx,1)
+              setCategories(tempCat)
+            }
             findingCategories()
           }
           
