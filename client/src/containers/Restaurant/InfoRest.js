@@ -131,13 +131,14 @@ function InfoRest({user}) {
     <button onClick={handleClick} disabled={!changeDetails || data.filter.length >= 3 || data.filter.includes("Fast Food")}  value= "Fast Food">Fast Food</button>
     <button onClick={handleClick} disabled={!changeDetails || data.filter.length >= 3 || data.filter.includes("Hamburger")}  value= "Hamburger">Hamburger</button>
     <button onClick={handleClick} disabled={!changeDetails || data.filter.length >= 3 || data.filter.includes("Breakfast")}  value= "Breakfast">Breakfast</button>
-    <label>Picture:</label><input name="picture"defaultValue = {data.picture} disabled={!changeDetails}/>
-    <button name={changeDetails? "Save Changes":"Edit"} onClick={changeButton} >{changeDetails?"Save Changes": "Edit"}</button>
-    {!changeDetails && <h3>{message}</h3>}
-    
+    <label>Picture:</label><input name="picture"defaultValue = {data.picture} disabled={!changeDetails}/> 
     {data.filter.map(filtro=><div><p>{filtro}</p><button onClick = {deleteFilter} >x</button></div>)}
+    <button  type="submit" name="Save Changes" onClick={changeButton} disabled={!changeDetails}>Save Changes</button>
+    {!changeDetails && <h3>{message}</h3>}  
     </form>
-    <ChangePass user={user}/>
+    {/* no me toma como boton de submit el save changes */}
+    <button name="Edit" onClick={changeButton} disabled={changeDetails}>Edit</button> 
+    <ChangePass user={user} changeDetails={changeDetails}/>
 
       </Modal>
     </div>

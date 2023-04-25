@@ -33,11 +33,12 @@ function HomeRest({user}) {
 
     const deleteDish = async(dishName) =>{
       try{
-        const response = await axios.post(`${URL}/menu/delete`,{email:user.userEmail, name:dishName});
+        const response = await axios.post(`${URL}/menu/remove`,{email:user.userEmail, name:dishName});
           setMessage(response.data.message)
           setTimeout(() => {
             setMessage('');
           }, 4000);
+      
       }
       catch(error){
         console.log(error);
@@ -47,6 +48,7 @@ function HomeRest({user}) {
   return (
     <div>
     <h1>Your menu</h1>
+    {message !=="" && <h3>{message}</h3>}
     <AddDish user= {user}/>
     {categories.map((categ)=>
         <section>  
@@ -56,8 +58,7 @@ function HomeRest({user}) {
         <article>
         <h3>{dish.name}</h3>
         <h3>{dish.picture}</h3>
-        <button onClick={deleteDish}>x</button>
-        {message !=="" && <h3>{message}</h3>}
+        <button onClick={()=>deleteDish(dish.name)}>x</button>
         <EditDish user= {user} dishName={dish.name}/>
         </article>)}
         </section>)}

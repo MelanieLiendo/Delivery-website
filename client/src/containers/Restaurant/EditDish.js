@@ -55,6 +55,7 @@ function EditDish({user,dishName}) {
       const handleSubmit = async (e)=>{
         e.preventDefault()
         try{
+          debugger
             const response = await axios.post(`${URL}/menu/update`, {            
               email: user.userEmail,
               name: dishName,
@@ -103,9 +104,10 @@ function EditDish({user,dishName}) {
             <option value="desserts">Desserts</option>
             <option value="beverages">Beverages</option>
             </select>
-            <button name={changeDetails? "Save Changes":"Edit"} onClick={changeButton} >{changeDetails?"Save Changes": "Edit"}</button>
-            {!changeDetails && <h3>{message}</h3>}
+          <button type="submit" name="Save Changes" onClick={changeButton} disabled={!changeDetails}>Save Changes</button>
+            {!changeDetails && <h3>{message}</h3>}   
         </form>
+        <button name="Edit" onClick={changeButton} disabled={changeDetails}>Edit</button>
         
 
     <button onClick={closeModal}>Close</button>

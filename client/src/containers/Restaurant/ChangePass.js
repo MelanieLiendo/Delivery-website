@@ -4,7 +4,7 @@ import Modal from 'react-modal'
 import axios from 'axios';
 import {URL} from '../../config' 
 
-function ChangePass({user}) {
+function ChangePass({user, changeDetails}) {
     const [passwords,setPasswords]= useState({actualPasswordInput:'', newPassword:'', newPassword2:''})
     const [message,setMessage]= useState('')
     const [openClose, setOpenClose]= useState('')
@@ -47,7 +47,7 @@ const handleSubmit = async (e) => {
 
   return (
     <div>
-      <button onClick={openModal}>Change your Password</button>
+      <button onClick={openModal} disabled={changeDetails}>Change your Password</button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

@@ -29,16 +29,20 @@ const addMenu = async (req,res)=>{
 
 const removeMenu = async (req,res)=>{
     let {email,name}= req.body
-    
+    var findSku
+    var sku
     try{
         const findRestaurant = await Restaurant.findOne({email})
-        let findSku = []
-        let sku = {}
         if(findRestaurant){
-            sku= `${name + findRestaurant._id.toString()}`
+            sku =`${name + findRestaurant._id.toString()}`
             findSku = await Menu.findOne({sku})
-            await Menu.deleteOne({sku});
-            res.send({ok:true, message:"The dish was successfully removed"})}
+            if (findSku){
+                await Menu.deleteOne({sku});
+                res.send({ok:true, message:"The dish was successfully removed"})}
+            else{
+                res.send({ok:true, message:"The dish doesn't exist"})
+            }
+            }
     }
     catch(error){
         res.send({ok:false,message:{error}})
@@ -47,8 +51,9 @@ const removeMenu = async (req,res)=>{
 
 const updateMenu = async (req,res)=>{
     let {email, name, newName, newDescription, newPrice, newPicture, newCategory}= req.body
-    let findSku = []
-        let sku = {}
+    let findSku
+        let sku
+        let newSku 
 
     if (newName==="" || newDescription==="" || newPrice==="" || newPicture==="" || newCategory===""){
         return res.send({ ok: false, message: "All fields are required" });}
@@ -62,7 +67,8 @@ const updateMenu = async (req,res)=>{
             res.send({ok: true, message: "No change was made"});}
 
         if (findRestaurant && findSku){
-            await Menu.findOneAndUpdate({sku}, {name: newName, description: newDescription, price: newPrice, picture: newPicture, category: newCategory});
+            newSku = `${newName + findRestaurant._id.toString()}`
+            await Menu.findOneAndUpdate({sku}, {sku:newSku, name: newName, description: newDescription, price: newPrice, picture: newPicture, category: newCategory});
             res.send({ok:true, message:"The dish was successfully updated"})
         }}
     catch(error){
