@@ -14,7 +14,7 @@ function Navbar({isLoggedIn, logout, user}) {
    }
 
   return (
-    <div>
+    <div className='navbar'>
       <NavLink to = {'/'}><h1>Foodies</h1></NavLink>
 
       {isLoggedIn===true && user.userType=== 'customer'?
@@ -29,10 +29,10 @@ function Navbar({isLoggedIn, logout, user}) {
         <InfoRest user={user} logout={logout}/>
         <button onClick={handleLogOut}>Log Out</button> 
         </>:
-        <>
-        <NavLink to="/login/customer" >Login</NavLink>
-        <NavLink to="/register/customer" >Register</NavLink>
-        </>
+        <ul className='navbarLogRegCust'>
+        <li><NavLink to="/login/customer" >Login</NavLink></li>
+        <li><NavLink to="/register/customer" >Register</NavLink></li>
+        </ul>
         }
     </div>
   )

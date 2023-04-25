@@ -1,1 +1,18 @@
+/* navbar */
 
+.navbar{
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbarLogRegCust{
+    display: flex;
+    list-style: none;
+    margin-right: 10em;
+}
+
+.navbarLogRegCust li{
+    padding-left: 1em;
+}
+
+/* nos quedamos en como hacer text decoration none de navlinks */
