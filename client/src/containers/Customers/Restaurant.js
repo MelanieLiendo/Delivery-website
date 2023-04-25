@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useEffect } from 'react';
 import axios from 'axios';
+import {URL} from '../../config'
 
 function Restaurant() {
     let params = useParams()
@@ -13,7 +14,7 @@ function Restaurant() {
 
     const restaurant = async () => {
         try {
-        const response = await axios.get(`${URL}/restaurant/${params.id}`); // ver si me trae el resto que estoy tocando
+        const response = await axios.get(`${URL}/restaurant/${params.id}`); 
         setRest(response.data.message)
         }
         catch (error) {
@@ -24,8 +25,8 @@ function Restaurant() {
   const menu = async () => {
     try {
       const response = await axios.post(`${URL}/menu/restaurant`,{email: rest.email}) // ver si me traes los menus del resto wue le estoy pidiendo
-      console.log(response);
       setMenu(response.data.message)
+      console.log(response);
  
     }
     catch (error) {
@@ -34,15 +35,15 @@ function Restaurant() {
   };
 
 
- // si me dan las ods infos anteriores hacer el generico de lo que me devuelve
-
   menu()
   restaurant()
 },[]);
     
   return (
-    <div>Restaurant
+    <div>
+        <h2>{rest.restaurant}</h2>
         <h2>{params.id}</h2>
+
         </div>
     
   )

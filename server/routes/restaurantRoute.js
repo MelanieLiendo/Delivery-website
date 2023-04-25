@@ -8,8 +8,9 @@ router.post('/updatePassword', controller.updatePassRestaurant)
 router.post('/register', controller.registerRestaurant)
 router.post('/login', controller.loginRestaurant)
 router.get('/displayAll', controller.displayAllRestaurant)
-router.get('/:restaurant', controller.displayFilterRestaurant)
 router.post('/restaurant', controller.displayRestaurantInfo)
+
+router.get('/:id', controller.displayFilterRestaurant)
 
 
 

@@ -152,11 +152,11 @@ const displayRestaurantInfo = async (req,res)=>{
 }
 
 const displayFilterRestaurant = async (req,res)=>{
-    let {restaurant}= req.params 
+    let {id}= req.params 
     try{
-        const restaurants = await Restaurant.find({restaurant})
+        const restaurants = await Restaurant.findOne({_id: id})
         res.send({ok:true, message:restaurants})
-        console.log(restMenu)   
+        console.log(restaurants)   
         }
     catch(error){
         res.send({ok:false,message:{error}})
