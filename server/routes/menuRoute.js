@@ -8,6 +8,7 @@ router.post('/update', controller.updateMenu)
 router.get('/all', controller.displayAll)
 router.post('/restaurant', controller.displayAllMenu)
 router.post('/dish', controller.displayFilterMenu)
+router.get('/:id', controller.displayOneRestMenu)
 
 
 

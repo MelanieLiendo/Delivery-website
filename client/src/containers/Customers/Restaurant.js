@@ -24,7 +24,7 @@ function Restaurant() {
 
   const menu = async () => {
     try {
-      const response = await axios.post(`${URL}/menu/restaurant`,{email: rest.email}) // ver si me traes los menus del resto wue le estoy pidiendo
+      const response = await axios.get(`${URL}/menu/${params.id}`) 
       setMenu(response.data.message)
       console.log(response);
  
@@ -43,6 +43,9 @@ function Restaurant() {
     <div>
         <h2>{rest.restaurant}</h2>
         <h2>{params.id}</h2>
+        <h2>{menu.map((eachMenu)=>(
+          <h2>{eachMenu.name}</h2>
+        ))}</h2>
 
         </div>
     
