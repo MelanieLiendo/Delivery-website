@@ -7,6 +7,7 @@ import EditDish from './EditDish';
 function HomeRest({user}) {
   const [menu,setMenu]=useState([])
   const [categories,setCategories]=useState([])
+  const [message,setMessage]=useState("")
 
   const restaurantMenu = async () => {
     try {
@@ -30,6 +31,19 @@ function HomeRest({user}) {
       restaurantMenu()
     },[menu,categories]);
 
+    const deleteDish = async(dishName) =>{
+      try{
+        const response = await axios.post(`${URL}/menu/delete`,{email:user.userEmail, name:dishName});
+          setMessage(response.data.message)
+          setTimeout(() => {
+            setMessage('');
+          }, 4000);
+      }
+      catch(error){
+        console.log(error);
+      }
+
+    }
   return (
     <div>
     <h1>Your menu</h1>
@@ -42,7 +56,8 @@ function HomeRest({user}) {
         <article>
         <h3>{dish.name}</h3>
         <h3>{dish.picture}</h3>
-        <button>x</button>
+        <button onClick={deleteDish}>x</button>
+        {message !=="" && <h3>{message}</h3>}
         <EditDish user= {user} dishName={dish.name}/>
         </article>)}
         </section>)}

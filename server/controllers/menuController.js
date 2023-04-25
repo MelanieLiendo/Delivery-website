@@ -28,16 +28,17 @@ const addMenu = async (req,res)=>{
 }
 
 const removeMenu = async (req,res)=>{
-    let {_id}= req.body
+    let {email,name}= req.body
     
     try{
-        if (_id){
-            await Menu.deleteOne({_id});
+        const findRestaurant = await Restaurant.findOne({email})
+        let findSku = []
+        let sku = {}
+        if(findRestaurant){
+            sku= `${name + findRestaurant._id.toString()}`
+            findSku = await Menu.findOne({sku})
+            await Menu.deleteOne({sku});
             res.send({ok:true, message:"The dish was successfully removed"})}
-        
-        else if (!_id) {
-            res.send({ok:true, message:"The dish doesn´t exist"})
-        }
     }
     catch(error){
         res.send({ok:false,message:{error}})
