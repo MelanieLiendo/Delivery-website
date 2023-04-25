@@ -4,8 +4,10 @@ import Modal from 'react-modal'
 import axios from 'axios';
 import {URL} from '../../config'
 import ChangePass from './ChangePass'
+import { useNavigate } from 'react-router-dom';
 
-function InfoRest({user}) {
+function InfoRest({user, logout}) {
+  const navigate = useNavigate()
   const [data,setData]= useState({
     country:"", 
     city: "", 
@@ -105,6 +107,21 @@ function InfoRest({user}) {
       setData(temporary)
     }
 
+    const deleteAccount = async ()=>{
+      try{
+        const response = await axios.post(`${URL}/restaurant/remove`,{email:data.email})
+        if (response.data.ok) {
+          logout()
+          setTimeout(() => {
+            navigate('/');
+            alert(response.data.message)
+          }, 1000);
+           }}
+      catch(error){
+        console.log(error);
+      }
+    }
+
   return (
     <div>
       <button onClick={openModal}>Restaurant's Information</button>
@@ -140,6 +157,7 @@ function InfoRest({user}) {
     </form>
     <button name="Edit" onClick={changeButton} disabled={changeDetails}>Edit</button> 
     <ChangePass user={user} changeDetails={changeDetails}/>
+    <button onClick={deleteAccount}>Delete account</button>
 
       </Modal>
     </div>

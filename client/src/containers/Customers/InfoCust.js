@@ -4,14 +4,16 @@ import Modal from 'react-modal'
 import axios from 'axios';
 import {URL} from '../../config'
 import ChangePass from './ChangePass'
+import { useNavigate } from 'react-router-dom';
 
-function InfoCust({user}) {
+function InfoCust({user, logout}) {
   const [data,setData]= useState({
     address: "", 
     name:"", 
     email:"", 
     password:""})
 
+  const navigate = useNavigate()
   const [changeDetails, setChangeDetails]=useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
@@ -75,6 +77,21 @@ function InfoCust({user}) {
         console.log(error);
       }
     }
+
+    const deleteAccount = async ()=>{
+      try{
+        const response = await axios.post(`${URL}/customer/remove`,{email:data.email})
+        if (response.data.ok) {
+          logout()
+          setTimeout(() => {
+            navigate('/');
+            alert(response.data.message)
+          }, 1000);
+           }}
+      catch(error){
+        console.log(error);
+      }
+    }
     
 
   return (
@@ -94,6 +111,7 @@ function InfoCust({user}) {
     {!changeDetails && <h3>{message}</h3>}
     </form>
     <ChangePass user={user}/>
+    <button onClick={deleteAccount}>Delete your account</button>
 
       </Modal>
     </div>
