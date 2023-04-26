@@ -11,6 +11,9 @@ import Home from './containers/Home';
 import Login from './containers/Login';
 import Restaurant from './containers/Customers/Restaurant';
 import Checkout from './containers/Customers/Checkout';
+import Stripe from "./components/stripe";
+import PaymentSuccess from "./containers/Customers/payment_success";
+import PaymentError from "./containers/Customers/payment_error";
 
 
 function App() {
@@ -70,6 +73,9 @@ function App() {
     /> 
     <Route path="/restaurant/:id" element={<Restaurant/>} />
     <Route path="/checkout" element={<Checkout user={user}/>} />
+    <Route path="/payment" element={<Stripe />} />
+    <Route path="/payment/success" element={<PaymentSuccess />}/>
+    <Route path="/payment/error" element={<PaymentError />}/>
 
     </Routes>
     </Router>

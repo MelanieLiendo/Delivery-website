@@ -3,11 +3,12 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { URL } from '../../config'
 import axios from 'axios'
+import { NavLink } from 'react-router-dom'
+
 
 
 function Checkout({user}) {
 
-    
     const navigate = useNavigate()
     const [orders, setOrders]  = useState(JSON.parse(localStorage.getItem('orders')))
     const [address, setAddress] = useState("")
@@ -67,7 +68,6 @@ const goBack = ( ) => {
     navigate(`/restaurant/${rest.id}`)
 }
 
-
 const quantMore = (order ) =>{
     let temporary = [...orders]
     let index = temporary.findIndex(c=> c.name == order.name)
@@ -85,8 +85,6 @@ const quantLess = (order) =>{
     setOrders(temporary)
     } 
 }
-  
-   
   return (
     <div>
         <button onClick={goBack}>{rest.restaurant}</button>
@@ -107,11 +105,11 @@ const quantLess = (order) =>{
               <h2>$ {order.total}</h2>
               <button onClick= {()=>quantMore(order)} >+</button>
               <button onClick= {()=>quantLess(order)} >-</button>
-              <button onClick= {deleteItem} >Delete item</button>
+              <button onClick= {()=>deleteItem(order)} >Delete item</button>
               </>
             ))} 
         
-           <button >Pay ${orders.reduce((total,acc)=>(total +(acc.price * acc.quantity)),0)}</button>
+           <NavLink to={{pathname:'/payment', props:{orders}}} ><button>Pay ${orders.reduce((total,acc)=>(total +(acc.price * acc.quantity)),0)}</button></NavLink>
                 
           </>
         }
