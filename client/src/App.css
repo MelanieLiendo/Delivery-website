@@ -3,6 +3,7 @@
 .navbar{
     display: flex;
     justify-content: space-between;
+    background-color: #abdfea;
 }
 
 .navbarLogRegCust{
@@ -15,4 +16,18 @@
     padding-left: 1em;
 }
 
-/* nos quedamos en como hacer text decoration none de navlinks */
+
+/* Home (not logged in) */
+
+.home{
+    height: 100vh;
+    background-color: #abdfea;
+
+}
+
+.home img{
+    height: 100%;
+}
+
+
+
