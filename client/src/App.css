@@ -101,6 +101,15 @@ a {
     align-items: center;
 }
 
+.form_container img{
+    height: 20px;
+}
+
+.imgLoginCust{
+    display: flex;
+    align-items: center;
+}
+
 .form_container label {
     margin: 1em;
 }

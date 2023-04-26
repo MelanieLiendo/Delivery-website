@@ -4,6 +4,8 @@ import { URL } from "../../config";
 import {useNavigate} from 'react-router-dom'
 import * as jose from 'jose'
 import torta from '../../images/torta.png'
+import candado from '../../images/candado.png'
+import email from '../../images/email.png'
 
 function LoginCust(props) {
     const [data, setData] = useState({
@@ -48,11 +50,17 @@ function LoginCust(props) {
         onChange={handleChange}
         className="form_container"
         >
+        <section className='imgLoginCust'>
+        <img src={email} alt='email logo'/>
         <label>Email</label>
+        </section>
         <input name="email" />
+        <section className='imgLoginCust'>
+        <img src={candado} alt='password logo'/>
         <label>Password</label>
+        </section>
         <input name="password" />
-        <button>login</button>
+        <button>Login</button>
         <div className="message">
         <h4>{message}</h4>
         </div>

@@ -109,7 +109,7 @@ const quantLess = (order) =>{
               </>
             ))} 
         
-           <NavLink to={{pathname:'/payment', props:{orders}}} ><button>Pay ${orders.reduce((total,acc)=>(total +(acc.price * acc.quantity)),0)}</button></NavLink>
+           {/* <NavLink to={{pathname:'/payment', props:{orders}}} >*/<button>Pay ${orders.reduce((total,acc)=>(total +(acc.price * acc.quantity)),0)}</button>/*</NavLink> */}
                 
           </>
         }

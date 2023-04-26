@@ -24,7 +24,7 @@ app.use('/restaurant', require('./routes/restaurantRoute'))
 app.use('/menu', require('./routes/menuRoute'))
 app.use('/verify_token', require('./routes/verify_token'))
 app.use('/order', require('./routes/orderRoute'))
-app.use('/payment', require('./routes/paymentRoute'));
+// app.use('/payment', require('./routes/paymentRoute'));
 
 
 app.listen(4000, () => console.log(`listening on port 4000`))
