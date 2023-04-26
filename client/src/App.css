@@ -1,9 +1,20 @@
 /* navbar */
+@import url('https://fonts.googleapis.com/css2?family=Rozha+One&display=swap');
 
 .navbar{
     display: flex;
     justify-content: space-between;
     background-color: #abdfea;
+    font-family: 'Rozha One';
+    font-size: 1.3em;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+.navbar img {
+    padding-left: 3em;
+    height: 110%;
 }
 
 .navbarLogRegCust{
@@ -22,12 +33,52 @@
 .home{
     height: 100vh;
     background-color: #abdfea;
+    font-family: 'Rozha One';
+}
 
+.home h1{
+    font-size: 2em;
+    font-style: bold;
+}
+
+.home h2{
+    font-size: 1.5em;
 }
 
 .home img{
     height: 100%;
 }
+
+#splashscreen{
+    display: flex;
+    align-items: center;
+    background-color: #abdfea;
+}
+
+#restaurantLogReg ul {
+    display: flex;
+    list-style: none;
+}
+
+#restaurantLogReg  {
+    background-color: #abdfea;
+}
+
+#restaurantLogReg img{
+    height: 100px;
+}
+
+
+.picRestaurantLogReg{
+    display: flex;
+    align-items: center;
+}
+
+#restaurantLogReg  li{
+    padding-left: 1em;
+    padding-bottom: 2em;
+}
+
 
 
 
