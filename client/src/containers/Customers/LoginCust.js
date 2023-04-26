@@ -3,6 +3,7 @@ import axios from "axios";
 import { URL } from "../../config";
 import {useNavigate} from 'react-router-dom'
 import * as jose from 'jose'
+import torta from '../../images/torta.png'
 
 function LoginCust(props) {
     const [data, setData] = useState({
@@ -40,6 +41,8 @@ function LoginCust(props) {
         }
       };
       return (
+        <section className='loginCust'>
+          <img src={torta} alt="imagen de una torta"></img>
         <form
         onSubmit={handleSubmit}
         onChange={handleChange}
@@ -54,6 +57,7 @@ function LoginCust(props) {
         <h4>{message}</h4>
         </div>
         </form>
+        </section>
   )
 }
 
