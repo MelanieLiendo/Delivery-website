@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useParams } from 'react-router-dom'
 import { URL } from '../../config'
 import axios from 'axios'
 
 
 function Checkout({user}) {
 
-    let params = useParams()
+    
     const navigate = useNavigate()
     const [orders, setOrders]  = useState(JSON.parse(localStorage.getItem('orders')))
     const [address, setAddress] = useState("")
     const [rest, setRest] = useState({
         restaurant : "",
-        address : ""
+        address : "",
+        id : ""
     })
 
     
@@ -37,7 +37,9 @@ function Checkout({user}) {
     const response = await axios.get(`${URL}/restaurant/${orders[0].id_rest}`); 
     setRest({
         restaurant:response.data.message.restaurant,
-        address:response.data.message.address})
+        address:response.data.message.address,
+        id:response.data.message._id,
+    })
     }
     catch (error) {
     console.log(error);
@@ -48,18 +50,51 @@ function Checkout({user}) {
 restaurant()
 customerAddress()
 },[]);
+
+
+const deleteItem = (order) => {
+    const index = orders.findIndex(c => c.name === order.name)
+    let temporary = [...orders]
+    temporary.splice( index, 1)
+    setOrders(temporary)
+}
+
+useEffect(()=>{
+    localStorage.setItem('orders', JSON.stringify(orders))
+  },[orders])
+
+const goBack = ( ) => {
+    navigate(`/restaurant/${rest.id}`)
+}
+
+
+const quantMore = (order ) =>{
+    let temporary = [...orders]
+    let index = temporary.findIndex(c=> c.name == order.name)
+    temporary[index].quantity = order.quantity + 1
+    temporary[index].total = order.price * temporary[index].quantity
+    setOrders(temporary)
+
+}
+const quantLess = (order) =>{
+    let temporary = [...orders]
+    let index = temporary.findIndex(c=> c.name == order.name)
+    if ( temporary[index].quantity > 1){
+    temporary[index].quantity = order.quantity - 1
+    temporary[index].total = order.price * temporary[index].quantity
+    setOrders(temporary)
+    } 
+}
   
    
   return (
     <div>
-        <button>Back</button>
+        <button onClick={goBack}>{rest.restaurant}</button>
         <h2>{rest.restaurant}</h2>
         <h2>Delivery details</h2>
         
         <h2>Mapa</h2>
         <h2>{address}</h2>
-        <h2>Payment method</h2>
-        <input placeholder='num de tarjeta'/>
 
         <section className= "carrito">
         <h2>Cart</h2>
@@ -70,10 +105,13 @@ customerAddress()
               <h2>{order.quantity}x</h2>
               <h2>{order.name}</h2>
               <h2>$ {order.total}</h2>
+              <button onClick= {()=>quantMore(order)} >+</button>
+              <button onClick= {()=>quantLess(order)} >-</button>
+              <button onClick= {deleteItem} >Delete item</button>
               </>
             ))} 
         
-           <button>Pay</button>
+           <button >Pay ${orders.reduce((total,acc)=>(total +(acc.price * acc.quantity)),0)}</button>
                 
           </>
         }

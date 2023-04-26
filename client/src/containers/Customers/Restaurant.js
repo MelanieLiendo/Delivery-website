@@ -125,6 +125,13 @@ setDish(null)
     navigate('/checkout')
   }
 
+  const deleteItem = (order) => {
+    const index = orders.findIndex(c => c.name === order.name)
+    let temporary = [...orders]
+    temporary.splice( index, 1)
+    setOrders(temporary)
+}
+
 
 
 
@@ -173,7 +180,9 @@ setDish(null)
               <>
               <h2>{order.quantity}x</h2>
               <h2>{order.name}</h2>
-              <h2>$ {order.total}</h2>
+              <h2>price per unit: {order.price}</h2>
+              <h2>total price : $ {order.total}</h2>
+              <button onClick= {()=>deleteItem(order)} >Delete item</button>
               </>
             ))} 
             <button onClick= {deleteCart} >Delete cart</button>
