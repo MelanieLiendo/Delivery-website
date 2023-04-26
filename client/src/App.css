@@ -124,11 +124,9 @@ a {
 }
 
 .form_container input:focus{
-    border-top-style: hidden;
-    border-left-style: hidden;
-    border-right-style: hidden ;
+    background-color: #abdfea;
     border-bottom-color: black ;
-    
+    border-style: none;
 }
 
 .loginCust {
@@ -152,6 +150,56 @@ a {
     border-color: #258599;
     margin-top: 2em;
     
+}
+
+/* Register customer */
+
+.inputLabelRegCust{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.formRegCust{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-family: 'Rozha One';
+    font-size: 1.3em;
+    height: 100vh;
+    padding-right: 10em;
+}
+
+.formRegCust input{
+    width: 150%;
+    background-color: #abdfea;
+    border-top-style: hidden;
+    border-left-style: hidden;
+    border-right-style: hidden ;
+    border-bottom-color: black ;
+}
+
+.formRegCust input:focus{
+    background-color: #abdfea;
+    border-bottom-color: black ;
+    border-style: none;
+}
+
+.formRegCust button {
+    border-radius:  0.5em;
+    width: 100px;
+    height: 40px;
+    font-family: 'Rozha One';
+    background-color: #abdfea;
+    border-color: #258599;
+    margin-top: 2em;
+    
+}
+
+.formRegCust label {
+    margin: 0.6em;
 }
 
 

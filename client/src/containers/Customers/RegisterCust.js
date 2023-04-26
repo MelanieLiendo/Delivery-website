@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import axios from 'axios';
 import { URL } from '../../config';
 import {useNavigate} from 'react-router-dom'
+import spagetti from '../../images/spagetti.png'
 
 function RegisterCust(props) {
 
@@ -41,7 +42,9 @@ console.log(response)
         }
 
   return (
-        <form onSubmit={handleSubmit} onChange={handleChange}>
+        <form className='formRegCust' onSubmit={handleSubmit} onChange={handleChange}>
+            <img src={spagetti} alt='spagetti'/>
+            <section className='inputLabelRegCust'>
             <label>Email</label>
             <input name='email'/>
             <label>Name</label>
@@ -54,6 +57,7 @@ console.log(response)
             <input name='password2'/>
             <button>Register</button>
             <h4>{message}</h4>
+            </section>
         </form>
   )
 }
