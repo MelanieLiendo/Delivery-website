@@ -4,7 +4,8 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import {URL} from '../../config'
 import Modal from 'react-modal'
-import Orders from './Orders';
+import Checkout from './Checkout';
+import { useNavigate } from 'react-router-dom';
 
 
 function Restaurant() {
@@ -15,7 +16,8 @@ function Restaurant() {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [dish, setDish] = useState(null)
     const [quantity, setQuantity] = useState(1)
-    const [orders, setOrders]  = useState( [])
+    const [orders, setOrders]  = useState(JSON.parse(localStorage.getItem('orders')) || [])
+    const navigate= useNavigate()
 
   
   useEffect( () => {
@@ -65,7 +67,7 @@ useEffect(()=>{
 },[menu])
 
 useEffect(()=>{
-  localStorage.setItem('orderKey', JSON.stringify(orders))
+  localStorage.setItem('orders', JSON.stringify(orders))
 },[orders])
 
   const openModal = () =>{
@@ -109,7 +111,7 @@ temp[idx].quantity += quantity
 temp[idx].total += dish.price*quantity
 setOrders(temp)
 } else {
-  setOrders([...orders, {picture: dish.picture, name: dish.name, description: dish.description, price: dish.price, quantity: quantity, total: dish.price*quantity}])
+  setOrders([...orders, { id_rest: dish.restaurant_id, picture: dish.picture, name: dish.name, description: dish.description, price: dish.price, quantity: quantity, total: dish.price*quantity}])
 }
 setDish(null)
 
@@ -118,6 +120,12 @@ setDish(null)
   const deleteCart = (order) =>{
     setOrders([])
   } 
+
+  const checkout = ( ) => {
+    navigate('/checkout')
+  }
+
+
 
 
   return (
@@ -169,7 +177,7 @@ setDish(null)
               </>
             ))} 
             <button onClick= {deleteCart} >Delete cart</button>
-            <button>Order {orders.reduce((total,acc)=>(total + acc.quantity),0)} for ${orders.reduce((total,acc)=>(total +(acc.price * acc.quantity)),0)}</button>
+           <button onClick={checkout}>Order {orders.reduce((total,acc)=>(total + acc.quantity),0)} for ${orders.reduce((total,acc)=>(total +(acc.price * acc.quantity)),0)}</button>
                 
           </>
         }
