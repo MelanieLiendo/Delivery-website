@@ -125,8 +125,8 @@ a {
 
 .form_container input:focus{
     background-color: #abdfea;
-    border-bottom-color: black ;
-    border-style: none;
+    outline: none;
+    border-bottom:  2px solid black ;
 }
 
 .loginCust {
@@ -181,10 +181,12 @@ a {
     border-bottom-color: black ;
 }
 
+
+
 .formRegCust input:focus{
     background-color: #abdfea;
-    border-bottom-color: black ;
-    border-style: none;
+    border-bottom:  2px solid black ;
+    outline: none;
 }
 
 .formRegCust button {
