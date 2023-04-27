@@ -5,10 +5,11 @@ const Restaurant = require('../models/restaurant')
 const Customer = require('../models/customer')
 
 const addOrder = async (req,res)=>{
-    let {email, restaurant, quantity, menu, totalPrice}= req.body    
+    let {email, restaurant_id, menu, totalPrice}= req.body    
+    const findRestaurant = await Restaurant.findOne({_id:restaurant_id})
     try{
         const findCustomer = await Customer.findOne({email})
-        await Orders.create({restaurant, quantity, menu, totalPrice, customer_id: new ObjectId(findCustomer._id)})
+        await Orders.create({restaurant:findRestaurant.restaurant, quantity, menu, totalPrice, customer_id: new ObjectId(findCustomer._id)})
         res.json({ok:true, message:"The order was successfully created"})        
     }
     catch(error){
