@@ -127,9 +127,10 @@ a {
     background-color: #abdfea;
     outline: none;
     border-bottom:  2px solid black ;
+    text-align: center;
 }
 
-.loginCust {
+.loginCust, .loginRest {
     display: flex;
     align-items: center;
     height: 100vh;
@@ -141,7 +142,7 @@ a {
     
 }
 
-.loginCust button {
+.loginCust button{
     border-radius:  0.5em;
     width: 100px;
     height: 40px;
@@ -162,7 +163,7 @@ a {
     align-items: center;
 }
 
-.formRegCust{
+.formRegCust {
     display: flex;
     align-items: center;
     justify-content: space-around ;
@@ -187,6 +188,7 @@ a {
     background-color: #abdfea;
     border-bottom:  2px solid black ;
     outline: none;
+    text-align: center;
 }
 
 .formRegCust button {
@@ -203,6 +205,142 @@ a {
 .formRegCust label {
     margin: 0.6em;
 }
+
+/* Home customer*/
+
+.deliveringAddress{
+    text-align: center;
+
+}
+
+.searchRestaurant{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.searchRestaurant input {
+    height: 3em;
+    width: 30%;
+    border-radius: 5em;
+    text-align: center;
+    margin-bottom: 1em;
+
+}
+
+.filters{
+    display: flex;
+    flex-direction: column;
+}
+
+.filters button{
+    width: 50%;
+    margin-bottom: 1em;
+}
+
+.filteredBy{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-bottom: 1em;
+}
+
+.gridHomeCust1{
+    display: grid;
+    grid-template-columns: 200px 1fr;
+}
+
+.gridHomeCust2{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) ;
+}
+
+.gridHomeCust3{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+
+/* Rest Login */
+
+
+.loginRest button{
+    border-radius:  0.5em;
+    width: 100px;
+    height: 40px;
+    font-family: 'Rozha One';
+    background-color: #abdfea;
+    border-color: #258599;
+    margin-top: 2em;
+    
+}
+
+/*Register restaurant*/
+
+.inputLabelRegRest{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1em;
+    width: 100%;
+}
+
+.inputLabelRegRest input{
+    width: 4px;
+
+}
+
+.formRegRest{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: space-around ;
+    font-family: 'Rozha One';
+    font-size: 1em;
+    height: 100vh;
+    
+}
+
+.formRegRest input{
+    width: 150%;
+    background-color: #abdfea;
+    border-top-style: hidden;
+    border-left-style: hidden;
+    border-right-style: hidden ;
+    border-bottom-color: black ;
+}
+
+
+
+.formRegRest input:focus{
+    background-color: #abdfea;
+    border-bottom:  2px solid black ;
+    outline: none;
+    text-align: center;
+}
+
+.formRegRest button {
+    border-radius:  0.5em;
+    width: 100px;
+    height: 40px;
+    font-family: 'Rozha One';
+    background-color: #abdfea;
+    border-color: #258599;
+    margin-top: 2em;
+    
+}
+
+.formRegRest label {
+    margin: 0.6em;
+}
+
+
+.filterRegRest{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+}
+
 
 
 

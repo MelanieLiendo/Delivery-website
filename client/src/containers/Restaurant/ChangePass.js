@@ -56,9 +56,9 @@ const handleSubmit = async (e) => {
         <button onClick={closeModal}>Close</button>
 
         <form onSubmit={handleSubmit} onChange={handleChange}>
-        <label>Actual Password:</label><input name='actualPasswordInput'/>
-        <label>New Password:</label><input name='newPassword'/>
-        <label>Repeat New Password:</label><input name='newPassword2'/>
+        <label>Actual Password:</label><input type='password' name='actualPasswordInput'/>
+        <label>New Password:</label><input type='password' name='newPassword'/>
+        <label>Repeat New Password:</label><input type='password' name='newPassword2'/>
        <button>Change</button>
        </form>
        <h3>{message}</h3>

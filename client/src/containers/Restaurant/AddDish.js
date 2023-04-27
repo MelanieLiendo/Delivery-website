@@ -21,12 +21,13 @@ function AddDish({user, restaurantMenu, findingCategories}) {
 
     const handleSubmit = async (e)=>{
       e.preventDefault()
+      e.target.reset()
       try{
           const response = await axios.post(`${URL}/menu/add`, {            
             email: user.userEmail,
             name: data.name,
             description: data.description,
-            price: data.price,
+            price: Number(data.price),
             picture: data.picture,
             category: data.category
              })

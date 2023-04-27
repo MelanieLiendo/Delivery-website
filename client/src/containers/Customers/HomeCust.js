@@ -108,92 +108,101 @@ debugger
 
   return (
     <div>
-      <h2>Delivering to {address.address}</h2>
-      <input onChange= {inputSearch} type="text" placeholder="Search.."/>
-      <button onClick = {handleSearch} type="submit"  disabled={ !searching }>Dishes</button>
-      <button  onClick = {handleSearch} type="submit"  disabled={ searching }>Restaurants</button>
+      <h2 className='deliveringAddress'>Delivering to {address.address}</h2>
+      <section className='searchRestaurant'>
+        <input onChange= {inputSearch} type="text" placeholder="Search.."/>
+        <div className='selectorRestFood'>
+          <button onClick = {handleSearch} type="submit"  disabled={ !searching }>Dishes</button>
+          <button  onClick = {handleSearch} type="submit"  disabled={ searching }>Restaurants</button>
+        </div>
+      </section>
 
-    {(busqueda && searching) && listadoRests.map((rest)=>(
-      <NavLink  to= {`/restaurant/${rest._id}`} >
-      <article>
-      <h2>{rest.restaurant}</h2>
-      <h3>{rest.picture}</h3>
-      <h3>{rest.filter}</h3>
-      </article>
-      </NavLink>
-
-    ))}
-
-    {(busqueda && !searching) && listadoMenus.map((menu)=>
-      <section>
-        {restaurants.map((rest)=>
-          
-          rest._id == menu.restaurant_id && 
+      <section className='gridHomeCust3'>
+        {(busqueda && searching) && listadoRests.map((rest)=>(
           <NavLink  to= {`/restaurant/${rest._id}`} >
-          <article>          
-        <h2>{ rest.restaurant}</h2>
-        <h3>{menu.name}</h3>
-        <h3>{menu.description}</h3>
-        <h3>{menu.price}</h3>
-        </article>
-        </NavLink>
-        )
-        }
+          <article>
+            <h2>{rest.restaurant}</h2>
+            <h3>{rest.picture}</h3>
+            <h3>{rest.filter}</h3>
+          </article>
+          </NavLink>
+        ))}
+      </section>
+      <section className='gridHomeCust3'>
+        {(busqueda && !searching) && listadoMenus.map((menu)=>
+            {restaurants.map((rest)=>            
+              rest._id == menu.restaurant_id && 
+              <NavLink  to= {`/restaurant/${rest._id}`} >
+              <article>          
+                <h2>{ rest.restaurant}</h2>
+                <h3>{menu.name}</h3>
+                <h3>{menu.description}</h3>
+                <h3>{menu.price}</h3>
+              </article>
+              </NavLink>
+            )}
         
+        )}
       </section>
-
-)}
-    
    
-    {!busqueda &&
+      {!busqueda &&
 
-      <div>
-    <h1>Filters</h1>
-    <button onClick={handleClick} disabled={actualFilter.includes("Gluten Free")}  value= "Gluten Free">Gluten Free</button>
-    <button onClick={handleClick} disabled={actualFilter.includes("Pizza")}  value= "Pizza">Pizza</button>
-    <button onClick={handleClick} disabled={actualFilter.includes("Sushi")}  value= "Sushi">Sushi</button>
-    <button onClick={handleClick} disabled={actualFilter.includes("Vegetarian")}  value= "Vegetarian">Vegetarian</button>
-    <button onClick={handleClick} disabled={actualFilter.includes("Vegan")}  value= "Vegan">Vegan</button>
-    <button onClick={handleClick} disabled={actualFilter.includes("Healthy")}  value= "Healthy">Healthy</button>
-    <button onClick={handleClick} disabled={actualFilter.includes("Fast Food")}  value= "Fast Food">Fast Food</button>
-    <button onClick={handleClick} disabled={actualFilter.includes("Hamburger")}  value= "Hamburger">Hamburger</button>
-    <button onClick={handleClick} disabled={actualFilter.includes("Breakfast")}  value= "Breakfast">Breakfast</button>
+        <div className='gridHomeCust1'>
+          <section className='filtersSection'>
+            <h1>Filters</h1>
 
-    {actualFilter.length > 0 && 
-    <>
-    <p> Filtered by: </p>
-    {actualFilter.map((filtro)=>
-      <button onClick={handleDelete}> {filtro} X</button>)}
-    </>
-    }
-  
-
-    <h1>Restaurants</h1>
-
-    {actualFilter.length < 1 ?  
-    
-    <section> {restaurants.map((rest)=> 
-      <NavLink  to= {`/restaurant/${rest._id}`} >
-      <article>
-      <h2>{rest.restaurant}</h2>
-      <h3>{rest.picture}</h3>
-      <h3>{rest.filter}</h3>
-      </article></NavLink>
-      )}
-      </section> :
-      <section> {filtered.map((rest) => 
-        <NavLink  to= {`/restaurant/${rest._id}`} >
-      <article>
-      <h2>{rest.restaurant}</h2>
-      <h3>{rest.picture}</h3>
-      <h3>{rest.filter}</h3>
-      </article>
-      </NavLink>
-      )}
-      </section>
-  }
-    </div>
-}
+            <div className='filteredBy'>
+              {actualFilter.length > 0 && 
+                <>
+                  <p> Filtered by: </p>
+                  {actualFilter.map((filtro)=>
+                    <button onClick={handleDelete}> {filtro} X</button>)
+                  }
+                </>
+              }
+            </div>
+            <section className='filters'>
+              <button onClick={handleClick} disabled={actualFilter.includes("Gluten Free")}  value= "Gluten Free">Gluten Free</button>
+              <button onClick={handleClick} disabled={actualFilter.includes("Pizza")}  value= "Pizza">Pizza</button>
+              <button onClick={handleClick} disabled={actualFilter.includes("Sushi")}  value= "Sushi">Sushi</button>
+              <button onClick={handleClick} disabled={actualFilter.includes("Vegetarian")}  value= "Vegetarian">Vegetarian</button>
+              <button onClick={handleClick} disabled={actualFilter.includes("Vegan")}  value= "Vegan">Vegan</button>
+              <button onClick={handleClick} disabled={actualFilter.includes("Healthy")}  value= "Healthy">Healthy</button>
+              <button onClick={handleClick} disabled={actualFilter.includes("Fast Food")}  value= "Fast Food">Fast Food</button>
+              <button onClick={handleClick} disabled={actualFilter.includes("Hamburger")}  value= "Hamburger">Hamburger</button>
+              <button onClick={handleClick} disabled={actualFilter.includes("Breakfast")}  value= "Breakfast">Breakfast</button>
+            </section>
+            
+          </section>
+          <section className='restaurantsSection'>
+            <h1>Restaurants</h1>
+            {actualFilter.length < 1 ?  
+            
+              <section className='gridHomeCust2'> 
+                {restaurants.map((rest)=> 
+                  <NavLink  to= {`/restaurant/${rest._id}`} >
+                  <article>
+                  <h2>{rest.restaurant}</h2>
+                  <h3>{rest.picture}</h3>
+                  <h3>{rest.filter}</h3>
+                  </article></NavLink>
+                )}
+              </section> :
+              <section className='gridHomeCust2'> 
+                {filtered.map((rest) => 
+                <NavLink  to= {`/restaurant/${rest._id}`} >
+                <article>
+                  <h2>{rest.restaurant}</h2>
+                  <h3>{rest.picture}</h3>
+                  <h3>{rest.filter}</h3>
+                </article>
+                </NavLink>
+                )}
+              </section>
+            }
+          </section>
+        </div>
+      }
     </div>
   )
 }

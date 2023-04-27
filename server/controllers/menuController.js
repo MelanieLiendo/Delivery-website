@@ -4,7 +4,8 @@ const Restaurant = require('../models/restaurant')
 
 const addMenu = async (req,res)=>{
     let {name, description, price, picture, category, email}= req.body
-    
+   
+
     if (!name || !description || !price || !picture || !category){
         return res.json({ ok: false, message: "All fields are required" });
       }

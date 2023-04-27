@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import axios from 'axios';
 import { URL } from '../../config';
 import {useNavigate} from 'react-router-dom'
+import spagetti from '../../images/spagetti.png'
 
 function ResgisterRest() {
   const [message,setMessage]= useState('')
@@ -23,6 +24,7 @@ function ResgisterRest() {
 
      const handleSubmit = async (e)=>{
          e.preventDefault()
+         e.target.reset()        
          try{
              const response = await axios.post(`${URL}/restaurant/register`, {
                  country:data.country, 
@@ -31,7 +33,7 @@ function ResgisterRest() {
                  restaurant:data.restaurant, 
                  name:data.name, 
                  surname:data.surname,
-                 phone:data.phone, 
+                 phone:Number(data.phone), 
                  email:data.email.toLowerCase(), 
                  password:data.password, 
                  password2:data.password2, 
@@ -46,7 +48,9 @@ function ResgisterRest() {
 				setTimeout(() => {
 					navigate('/login/restaurant');
 				}, 2000);
-         }}
+         }} 
+         
+        
         
          catch(error){
              console.log(error);
@@ -70,42 +74,53 @@ function ResgisterRest() {
     }
 
   return (
-        <form onSubmit={handleSubmit} onChange={handleChange}>
-            <label>Country</label>
-            <input name='country'/>
-            <label>City</label>
-            <input name='city'/>
-            <label>Address</label>
-            <input name='address'/>
-            <label>Restaurant Name</label>
-            <input name='restaurant'/>
-            <label>Name</label>
-            <input name='name'/>
-            <label>Surname</label>
-            <input name='surname'/>
-            <label>Phone</label>
-            <input name='phone'/>
-            <label>Email</label>
-            <input name='email'/>
-            <label>Password</label>
-            <input name='password'/>
-            <label>Repeat Password</label>
-            <input name='password2'/>
-            <label>Filter</label>
-            <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Gluten Free")} value= "Gluten Free">Gluten Free</button>
-            <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Pizza")}  value= "Pizza">Pizza</button>
-            <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Sushi")}  value= "Sushi">Sushi</button>
-            <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Vegetarian")}  value= "Vegetarian">Vegetarian</button>
-            <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Vegan")}  value= "Vegan">Vegan</button>
-            <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Healthy")}  value= "Healthy">Healthy</button>
-            <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Fast Food")}  value= "Fast Food">Fast Food</button>
-            <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Hamburger")}  value= "Hamburger">Hamburger</button>
-            <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Breakfast")}  value= "Breakfast">Breakfast</button>
-            <label>Picture</label>
-            <input name='picture'/>
-            <button>Register</button>
-            <div><h4>{message}</h4></div>
-           {data.filter.map(filtro=><div><p>{filtro}</p><button onClick = {deleteFilter} >x</button></div>)}
+        <form  className='formRegRest' onSubmit={handleSubmit} onChange={handleChange}>
+            <section className='inputLabelRegRest'>
+                <div>
+                    <label>Country</label>
+                    <input name='country'/>
+                    <label>City</label>
+                    <input name='city'/>
+                    <label>Address</label>
+                    <input name='address'/>
+                    <label>Restaurant Name</label>
+                    <input name='restaurant'/>
+                    <label>Name</label>
+                    <input name='name'/>
+                    <label>Surname</label>
+                    <input name='surname'/>
+                </div>
+                <div>
+                    <label>Phone</label>
+                    <input name='phone'/>
+                    <label>Email</label>
+                    <input name='email'/>
+                    <label>Password</label>
+                    <input type='password' name='password'/>
+                    <label>Repeat Password</label>
+                    <input type='password' name='password2'/>
+                    <label>Picture</label>
+                    <input name='picture'/>
+                 </div>   
+            </section>   
+            <section>
+                <label>Filter</label>
+                <div className='filterRegRest'>
+                    <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Gluten Free")} value= "Gluten Free">Gluten Free</button>
+                    <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Pizza")}  value= "Pizza">Pizza</button>
+                    <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Sushi")}  value= "Sushi">Sushi</button>
+                    <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Vegetarian")}  value= "Vegetarian">Vegetarian</button>
+                    <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Vegan")}  value= "Vegan">Vegan</button>
+                    <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Healthy")}  value= "Healthy">Healthy</button>
+                    <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Fast Food")}  value= "Fast Food">Fast Food</button>
+                    <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Hamburger")}  value= "Hamburger">Hamburger</button>
+                    <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Breakfast")}  value= "Breakfast">Breakfast</button>
+                 </div>
+                <div><h4>{message}</h4></div>
+                {data.filter.map(filtro=><div><p>{filtro}</p><button onClick = {deleteFilter} >x</button></div>)}
+                <button>Register</button>
+               
+            </section>
         </form>
   )
 }

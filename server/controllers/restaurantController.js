@@ -82,6 +82,10 @@ const registerRestaurant = async (req,res)=>{
     let {country, city, address,restaurant, name, surname, phone, email, password, password2, filter, picture}= req.body
     const salt = "corazones429"
 
+    if (typeof(phone)!= "number"){
+        return res.json({ ok: false, message: "Invalid phone number" });
+      }
+
     if (!email || !password || !password2){
         return res.json({ ok: false, message: "All fields required" });
       }
