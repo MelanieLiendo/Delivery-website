@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import InfoCust from '../containers/Customers/InfoCust';
 import InfoRest from '../containers/Restaurant/InfoRest';
 import Orders from '../containers/Customers/Orders';
@@ -10,8 +10,10 @@ Modal.setAppElement("#root");
 
 
 function Navbar({isLoggedIn, logout, user}) {
+  const navigate=useNavigate()
   const handleLogOut =()=>{
       logout()
+      navigate('/')
    }
 
   return (

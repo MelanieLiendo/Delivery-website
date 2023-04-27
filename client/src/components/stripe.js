@@ -1,14 +1,14 @@
 import React from 'react';
 import {loadStripe} from '@stripe/stripe-js'
 import {Elements} from '@stripe/react-stripe-js';
-import Payment from '../containers/Customers/Payment'
+import Checkout from '../containers/Customers/Checkout';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
-const Stripe = (props) => {
+const Stripe = ({user}) => {
 	return (
 			<Elements stripe={stripePromise}>
-				<Payment {...props} />
+				<Checkout {...user} />
 			</Elements>
 
 	);

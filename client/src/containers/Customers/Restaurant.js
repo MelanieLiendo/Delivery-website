@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import {URL} from '../../config'
 import Modal from 'react-modal'
-import Checkout from './Checkout';
 import { useNavigate } from 'react-router-dom';
 
 

@@ -16,12 +16,12 @@ import PaymentSuccess from "./containers/Customers/payment_success";
 import PaymentError from "./containers/Customers/payment_error";
 
 
+
 function App() {
 
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')));
-
   useEffect(
     () => {
       const verify_token = async () => {
@@ -72,8 +72,7 @@ function App() {
     element ={ isLoggedIn ? <Navigate to='/' /> : <Register/> } 
     /> 
     <Route path="/restaurant/:id" element={<Restaurant/>} />
-    <Route path="/checkout" element={<Checkout user={user}/>} />
-    <Route path="/payment" element={<Stripe />} />
+    <Route path="/checkout" element={<Stripe user={user}/>} />
     <Route path="/payment/success" element={<PaymentSuccess />}/>
     <Route path="/payment/error" element={<PaymentError />}/>
 
