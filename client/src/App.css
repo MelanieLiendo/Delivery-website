@@ -13,6 +13,16 @@ body{
     font-family: 'Rozha One';
     font-size: 1.3em;
 }
+
+.navbarUserLogged{
+    display: flex;
+    list-style: none;
+    margin-right: 1em;
+}
+
+.navbarUserLogged li {
+    margin-left: 0.5em;
+}
 a {
     text-decoration: none;
     color: black;

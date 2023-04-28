@@ -22,13 +22,12 @@ function Navbar({isLoggedIn, logout, user}) {
       <NavLink to = {'/'}><img src={logoFoodies}/></NavLink>
 
       {isLoggedIn===true && user.userType=== 'customer'?
-        <>
-       
-        <InfoCust user={user} logout={logout}/>
-        <Orders user={user}/>
-        <Cart/>
-        <button onClick={handleLogOut}>Log Out</button>
-        </>
+        <ul className='navbarUserLogged'>
+         <li><InfoCust user={user} logout={logout}/></li>
+         <li><Orders user={user}/></li>
+         <li><Cart/></li>
+         <li><button onClick={handleLogOut}>Log Out</button></li>
+        </ul>
         :isLoggedIn===true && user.userType=== 'restaurant' ? 
         <>
         <InfoRest user={user} logout={logout}/>

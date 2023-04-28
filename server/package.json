@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@cloudinary/url-gen": "^1.10.0",
     "@stripe/stripe-js": "^1.52.1",
     "argon2": "^0.30.3",
     "cors": "^2.8.5",
