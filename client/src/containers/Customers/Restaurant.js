@@ -4,8 +4,6 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import {URL} from '../../config'
 import Modal from 'react-modal'
-import { useNavigate } from 'react-router-dom';
-
 
 function Restaurant() {
     let params = useParams()
@@ -16,40 +14,32 @@ function Restaurant() {
     const [dish, setDish] = useState(null)
     const [quantity, setQuantity] = useState(1)
     const [orders, setOrders]  = useState(JSON.parse(localStorage.getItem('orders')) || [])
-    const navigate= useNavigate()
-
-  
-  useEffect( () => {
-
-    const restaurant = async () => {
-        try {
-        const response = await axios.get(`${URL}/restaurant/${params.id}`); 
-        setRest(response.data.message)
-        }
-        catch (error) {
-        console.log(error);
-        }
-    };
-
-
-  restaurant()
-},[]);
+    const [difRestaurant, setDifRestaurant]= useState(false)
 
 useEffect(() => {
  
+  const restaurant = async () => {
+    try {
+    const response = await axios.get(`${URL}/restaurant/${params.id}`); 
+    setRest(response.data.message)
+    }
+    catch (error) {
+    console.log(error);
+    }
+};
+
   const menu = async () => {
     try {
       const response = await axios.get(`${URL}/menu/${params.id}`) 
       setMenu(response.data.message)
       console.log(response);
- 
     }
     catch (error) {
       console.log(error);
     }
-  };
+  };    
+  restaurant()
   menu()
-
 }, [])
 
 useEffect(()=>{
@@ -67,26 +57,24 @@ useEffect(()=>{
 
 useEffect(()=>{
   localStorage.setItem('orders', JSON.stringify(orders))
+
 },[orders])
 
   const openModal = () =>{
     setIsOpen(true);
-
   }
 
   const closeModal=() => {
     setIsOpen(false);
-setDish(null)
+    setDish(null)
     setQuantity(1)
    
   }
   
-
 useEffect(()=>{
-if(dish){
-  setQuantity(1)
-  openModal(true)
-}
+  if(dish){
+    setQuantity(1)
+    openModal(true)}
 },[dish])
   
 
@@ -96,7 +84,6 @@ const handleSum = () => {
 
 const handleRes = () => {
   {quantity > 1 && setQuantity(quantity-1)}
-  
 }
 
 const handleOrder = () =>{
@@ -113,37 +100,29 @@ setOrders(temp)
   setOrders([...orders, { id_rest: dish.restaurant_id, picture: dish.picture, name: dish.name, description: dish.description, price: dish.price, quantity: quantity, total: dish.price*quantity}])
 }
 setDish(null)
-
 }
 
-  const deleteCart = (order) =>{
-    setOrders([])
-  } 
-
-  const checkout = ( ) => {
-    navigate('/checkout')
-  }
-
-  const deleteItem = (order) => {
-    const index = orders.findIndex(c => c.name === order.name)
-    let temporary = [...orders]
-    temporary.splice( index, 1)
-    setOrders(temporary)
-}
-
-
-
+useEffect(()=>{
+  const cartVerification = ()=>{
+    if(orders.length > 0){
+      if (params.id != orders[0].id_rest)
+      {setDifRestaurant(true)}
+    }else{
+      setDifRestaurant(false)
+    }}
+      cartVerification()
+    },[orders])
 
   return (
     <div>
       <h2>{rest.restaurant}</h2>
-
+      {difRestaurant && <h2>You have dishes from another restaurant in your cart.</h2>}
       {categories.map((categ)=>
       <section>  
       <h2>{categ}</h2>  
       {menu.map((meal)=>
       meal.category == categ &&
-      <button onClick= {()=>setDish(meal)}>
+      <button onClick= {()=>setDish(meal)} disabled={orders.length>0 && difRestaurant}>
       <article>
       <h3>{meal.name}</h3>
       <h3>{meal.picture}</h3>
@@ -169,31 +148,10 @@ setDish(null)
         
         <button  onClick={handleOrder} >Add {quantity} for ${dish.price*quantity}</button>
       </Modal>}
- 
-
-      <section className= "carrito">
-        <h2>Cart</h2>
-        {orders.length > 0 &&
-          <>
-            {orders.map((order)=>(
-              <>
-              <h2>{order.quantity}x</h2>
-              <h2>{order.name}</h2>
-              <h2>price per unit: {order.price}</h2>
-              <h2>total price : $ {order.total}</h2>
-              <button onClick= {()=>deleteItem(order)} >Delete item</button>
-              </>
-            ))} 
-            <button onClick= {deleteCart} >Delete cart</button>
-           <button onClick={checkout}>Order {orders.reduce((total,acc)=>(total + acc.quantity),0)} for ${orders.reduce((total,acc)=>(total +(acc.price * acc.quantity)),0)}</button>
-                
-          </>
-        }
-      </section>
 
     </div>
     
-  )//agregar la funcion al boton del total
+  )
 
 }
 
