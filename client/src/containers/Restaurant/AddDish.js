@@ -21,7 +21,6 @@ function AddDish({user, restaurantMenu, findingCategories}) {
 
     const handleSubmit = async (e)=>{
       e.preventDefault()
-      e.target.reset()
       try{
           const response = await axios.post(`${URL}/menu/add`, {            
             email: user.userEmail,
@@ -33,7 +32,6 @@ function AddDish({user, restaurantMenu, findingCategories}) {
              })
 
           setMessage(response.data.message)
-          setData({})
           restaurantMenu()
           findingCategories()
           setTimeout(() => {

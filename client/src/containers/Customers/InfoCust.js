@@ -5,6 +5,7 @@ import axios from 'axios';
 import {URL} from '../../config'
 import ChangePass from './ChangePass'
 import { useNavigate } from 'react-router-dom';
+import iconoPersona from '../../images/iconoPersona.png'
 
 function InfoCust({user, logout}) {
   const [data,setData]= useState({
@@ -96,7 +97,9 @@ function InfoCust({user, logout}) {
 
   return (
     <div>
-      <button onClick={openModal}>Customer's Information</button>
+      <div className='iconosNavBar'>
+      <button onClick={openModal}>Customer's Info</button>
+      </div>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}>

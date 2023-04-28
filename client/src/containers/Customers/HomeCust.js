@@ -13,6 +13,7 @@ function HomeCust({user}) {
   const [listadoRests, setListadoRests] =useState([])
   const [listadoMenus, setListadoMenus] = useState([])
   const [menu, setMenu] = useState([])
+  const [noResult,setNoResult]=useState(false)
 
 
   useEffect(
@@ -70,18 +71,20 @@ function HomeCust({user}) {
     const inputSearch = (e) => {
       setBusqueda(e.target.value)
     }
-  
-
+    
     useEffect(()=>{
       
       if(busqueda){   
-        let result = restaurants.filter(res=>res.restaurant.includes(busqueda))
-
-debugger
-        let menus = menu.filter(menu=> menu.name.includes(busqueda) )
+        let result = restaurants.filter(res=>res.restaurant.toLowerCase().includes(busqueda.toLowerCase()))
+        let menus = menu.filter(menu=> menu.name.toLowerCase().includes(busqueda.toLowerCase()) )
         setListadoRests(result)  
-        setListadoMenus(menus)    
-           
+        setListadoMenus(menus)     
+      if (listadoMenus.length < 1 || listadoRests.length < 1){
+        setNoResult(true);
+      }
+      else{
+        setNoResult(false);
+      }
     } 
 
   
@@ -103,8 +106,7 @@ debugger
     const handleSearch = () => {
       setSearching(!searching)
     }
-
-
+    
 
   return (
     <div>
@@ -162,15 +164,15 @@ debugger
               }
             </div>
             <section className='filters'>
-              <button onClick={handleClick} disabled={actualFilter.includes("Gluten Free")}  value= "Gluten Free">Gluten Free</button>
-              <button onClick={handleClick} disabled={actualFilter.includes("Pizza")}  value= "Pizza">Pizza</button>
-              <button onClick={handleClick} disabled={actualFilter.includes("Sushi")}  value= "Sushi">Sushi</button>
-              <button onClick={handleClick} disabled={actualFilter.includes("Vegetarian")}  value= "Vegetarian">Vegetarian</button>
-              <button onClick={handleClick} disabled={actualFilter.includes("Vegan")}  value= "Vegan">Vegan</button>
-              <button onClick={handleClick} disabled={actualFilter.includes("Healthy")}  value= "Healthy">Healthy</button>
-              <button onClick={handleClick} disabled={actualFilter.includes("Fast Food")}  value= "Fast Food">Fast Food</button>
-              <button onClick={handleClick} disabled={actualFilter.includes("Hamburger")}  value= "Hamburger">Hamburger</button>
-              <button onClick={handleClick} disabled={actualFilter.includes("Breakfast")}  value= "Breakfast">Breakfast</button>
+              <button onClick={handleClick} disabled={actualFilter.includes("Gluten Free") || (filtered.length<1 && actualFilter.length>0)}  value= "Gluten Free">Gluten Free</button>
+              <button onClick={handleClick} disabled={actualFilter.includes("Pizza")|| (filtered.length<1 && actualFilter.length>0)}  value= "Pizza">Pizza</button>
+              <button onClick={handleClick} disabled={actualFilter.includes("Sushi")|| (filtered.length<1 && actualFilter.length>0)}  value= "Sushi">Sushi</button>
+              <button onClick={handleClick} disabled={actualFilter.includes("Vegetarian")|| (filtered.length<1 && actualFilter.length>0)}  value= "Vegetarian">Vegetarian</button>
+              <button onClick={handleClick} disabled={actualFilter.includes("Vegan")|| (filtered.length<1 && actualFilter.length>0)}  value= "Vegan">Vegan</button>
+              <button onClick={handleClick} disabled={actualFilter.includes("Healthy")|| (filtered.length<1 && actualFilter.length>0)}  value= "Healthy">Healthy</button>
+              <button onClick={handleClick} disabled={actualFilter.includes("Fast Food")|| (filtered.length<1 && actualFilter.length>0)}  value= "Fast Food">Fast Food</button>
+              <button onClick={handleClick} disabled={actualFilter.includes("Hamburger")|| (filtered.length<1 && actualFilter.length>0)}  value= "Hamburger">Hamburger</button>
+              <button onClick={handleClick} disabled={actualFilter.includes("Breakfast")|| (filtered.length<1 && actualFilter.length>0)}  value= "Breakfast">Breakfast</button>
             </section>
             
           </section>

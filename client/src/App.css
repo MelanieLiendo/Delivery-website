@@ -138,8 +138,6 @@ a {
     padding-right: 10em;
     font-family: 'Rozha One';
     font-size: 1.3em;
-    
-    
 }
 
 .loginCust button{
@@ -150,7 +148,6 @@ a {
     background-color: #abdfea;
     border-color: #258599;
     margin-top: 2em;
-    
 }
 
 /* Register customer */
@@ -183,7 +180,6 @@ a {
 }
 
 
-
 .formRegCust input:focus{
     background-color: #abdfea;
     border-bottom:  2px solid black ;
@@ -199,7 +195,6 @@ a {
     background-color: #abdfea;
     border-color: #258599;
     margin-top: 2em;
-    
 }
 
 .formRegCust label {
@@ -210,7 +205,6 @@ a {
 
 .deliveringAddress{
     text-align: center;
-
 }
 
 .searchRestaurant{
@@ -226,7 +220,6 @@ a {
     border-radius: 5em;
     text-align: center;
     margin-bottom: 1em;
-
 }
 
 .filters{
@@ -273,44 +266,42 @@ a {
     background-color: #abdfea;
     border-color: #258599;
     margin-top: 2em;
-    
 }
 
 /*Register restaurant*/
 
 .inputLabelRegRest{
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 1em;
-    width: 100%;
+    grid-template-columns: 0.5fr 1.25fr 1.25fr;
+    column-gap: 3em;
+    width: 80%;
+    align-items: center;
+    margin: 50px ;
+}
+
+.inputLabelRegRest img{
+    height: 250px;
 }
 
 .inputLabelRegRest input{
     width: 4px;
-
 }
 
 .formRegRest{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    justify-content: space-around ;
     font-family: 'Rozha One';
     font-size: 1em;
     height: 100vh;
-    
+    text-align: center;
 }
 
 .formRegRest input{
-    width: 150%;
+    width: 100%;
     background-color: #abdfea;
     border-top-style: hidden;
     border-left-style: hidden;
     border-right-style: hidden ;
     border-bottom-color: black ;
 }
-
-
 
 .formRegRest input:focus{
     background-color: #abdfea;
@@ -327,18 +318,40 @@ a {
     background-color: #abdfea;
     border-color: #258599;
     margin-top: 2em;
-    
 }
 
 .formRegRest label {
-    margin: 0.6em;
+    margin: 1em;
 }
 
+.secondInputRegRest input{
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+}
 
-.filterRegRest{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-items: center;
+.firstInputRegRest input{
+    padding-bottom: 0.7em;
+    margin-bottom: 0.7em;
+}
+
+#selectedFilters{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#crossFilter{
+    color: red;
+    font-style: bold;
+}
+
+.filterRegRest button{
+    padding-right: 1em;
+}
+
+/* Home Cust */
+
+.iconosNavbar button img{
+    height: 2px;
 }
 
 

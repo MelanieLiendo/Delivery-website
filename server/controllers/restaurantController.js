@@ -86,7 +86,7 @@ const registerRestaurant = async (req,res)=>{
         return res.json({ ok: false, message: "Invalid phone number" });
       }
 
-    if (!email || !password || !password2){
+    if (!email || !password || !password2 || !country || !city || !address || !restaurant || !name || !surname || !phone || !filter || !picture){
         return res.json({ ok: false, message: "All fields required" });
       }
       if (password !== password2){

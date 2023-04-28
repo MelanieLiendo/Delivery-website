@@ -4,11 +4,12 @@ const Restaurant = require('../models/restaurant')
 
 const addMenu = async (req,res)=>{
     let {name, description, price, picture, category, email}= req.body
-   
+
+    if (typeof(price)!= "number"){
+        return res.json({ ok: false, message: "Invalid price" });}
 
     if (!name || !description || !price || !picture || !category){
-        return res.json({ ok: false, message: "All fields are required" });
-      }
+        return res.json({ ok: false, message: "All fields are required" });}
     try{
         const findRestaurant = await Restaurant.findOne({email})
         let findSku = []

@@ -23,8 +23,7 @@ function ResgisterRest() {
     const navigate = useNavigate()
 
      const handleSubmit = async (e)=>{
-         e.preventDefault()
-         e.target.reset()        
+         e.preventDefault()     
          try{
              const response = await axios.post(`${URL}/restaurant/register`, {
                  country:data.country, 
@@ -76,35 +75,36 @@ function ResgisterRest() {
   return (
         <form  className='formRegRest' onSubmit={handleSubmit} onChange={handleChange}>
             <section className='inputLabelRegRest'>
-                <div>
-                    <label>Country</label>
+            <img src={spagetti} alt='spagetti'/>
+            <div className='firstInputRegRest'>
+                    <label>Country *</label>
                     <input name='country'/>
-                    <label>City</label>
+                    <label>City *</label>
                     <input name='city'/>
-                    <label>Address</label>
+                    <label>Address *</label>
                     <input name='address'/>
-                    <label>Restaurant Name</label>
+                    <label>Restaurant Name *</label>
                     <input name='restaurant'/>
-                    <label>Name</label>
+                    <label>Name *</label>
                     <input name='name'/>
-                    <label>Surname</label>
+                    <label>Surname *</label>
                     <input name='surname'/>
                 </div>
-                <div>
-                    <label>Phone</label>
+                <div className='secondInputRegRest'>
+                    <label>Phone *</label>
                     <input name='phone'/>
-                    <label>Email</label>
+                    <label>Email *</label>
                     <input name='email'/>
-                    <label>Password</label>
+                    <label>Password *</label>
                     <input type='password' name='password'/>
-                    <label>Repeat Password</label>
+                    <label>Repeat Password *</label>
                     <input type='password' name='password2'/>
-                    <label>Picture</label>
+                    <label>Picture *</label>
                     <input name='picture'/>
                  </div>   
             </section>   
             <section>
-                <label>Filter</label>
+                <label>Filter *</label>
                 <div className='filterRegRest'>
                     <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Gluten Free")} value= "Gluten Free">Gluten Free</button>
                     <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Pizza")}  value= "Pizza">Pizza</button>
@@ -116,8 +116,11 @@ function ResgisterRest() {
                     <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Hamburger")}  value= "Hamburger">Hamburger</button>
                     <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Breakfast")}  value= "Breakfast">Breakfast</button>
                  </div>
+                <h4>* Required fields</h4>
                 <div><h4>{message}</h4></div>
-                {data.filter.map(filtro=><div><p>{filtro}</p><button onClick = {deleteFilter} >x</button></div>)}
+                <div id='selectedFilters'>
+                {data.filter.map(filtro=><div><button onClick = {deleteFilter}>{filtro} X </button></div>)}
+                </div>
                 <button>Register</button>
                
             </section>

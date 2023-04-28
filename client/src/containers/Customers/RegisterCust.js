@@ -27,7 +27,7 @@ console.log(response)
 
              if (response.data.ok) {
 				setTimeout(() => {
-					navigate('/login');
+					navigate('/login/customer');
 				}, 2000);
          }}
         
@@ -45,16 +45,17 @@ console.log(response)
         <form className='formRegCust' onSubmit={handleSubmit} onChange={handleChange}>
             <img src={spagetti} alt='spagetti'/>
             <section className='inputLabelRegCust'>
-            <label>Email</label>
+            <label>Email *</label>
             <input name='email'/>
-            <label>Name</label>
+            <label>Name *</label>
             <input name='name'/>
-            <label>Address</label>
+            <label>Address *</label>
             <input name='address'/>
-            <label>Password</label>
-            <input name='password'/>
-            <label>Repeat Password</label>
-            <input name='password2'/>
+            <label>Password *</label>
+            <input name='password' type='password'/>
+            <label>Repeat Password *</label>
+            <input name='password2' type='password'/>
+            <h4>* Required fields</h4>
             <button>Register</button>
             <h4>{message}</h4>
             </section>

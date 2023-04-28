@@ -59,7 +59,7 @@ function LoginCust(props) {
         <img src={candado} alt='password logo'/>
         <label>Password</label>
         </section>
-        <input name="password" />
+        <input name="password" type='password'/>
         <button>Login</button>
         <div className="message">
         <h4>{message}</h4>
