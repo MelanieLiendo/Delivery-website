@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import InfoCust from '../containers/Customers/InfoCust';
 import InfoRest from '../containers/Restaurant/InfoRest';
+import Cart from '../containers/Customers/Cart'
 import Orders from '../containers/Customers/Orders';
 import Modal from 'react-modal'
 import logoFoodies from '../images/logoFoodies.jpg'
