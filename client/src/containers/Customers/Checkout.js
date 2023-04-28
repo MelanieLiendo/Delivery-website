@@ -102,7 +102,7 @@ const createCheckoutSession = async () => {
 };
 
 const redirect = (sessionId) => {
-  debugger
+  
   
   // 10. This redirects to checkout.stripe.com and if charge/payment was successful send user to success url defined in create_checkout_session in the controller (which in our case renders payment_success.js)
   stripe

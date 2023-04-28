@@ -5,9 +5,10 @@ import {URL} from '../../config'
 const PaymentSuccess = ({user}) => {
   const [recentOrder, setRecentOrder]=useState([])
   const [orders, setOrders]  = useState(JSON.parse(localStorage.getItem('orders')))
+  const [custEmail, setCustEmail]=useState("")
   
   const getSessionData = async () => {
-    debugger
+    
     // 11. Now when payment was successful we need to get back to Stripe to know what was paid for and who is the customer
     try {
       // 12. we get the session id from the localStorage
@@ -17,9 +18,11 @@ const PaymentSuccess = ({user}) => {
       // Then removing session id from localStorage
       localStorage.removeItem("sessionId");
       // 18. response from the server will contain data for the customer and the session with the order's info
-      console.log("== response ==>", response);
+      //console.log("== response ==>", response.data.session.line_items.data);
       // 19. So from here we continue with whatever action is needed to be done after successful payment
       setRecentOrder(response.data.session.line_items.data)
+      setCustEmail(response.data.customer.email)
+      console.log(response.data.session.line_items.data);
       //if you need the products list in this page, you can find them in : response.data.session.display_items or in response.data.session.line_items depends on the version of API you are using
     } catch (error) {
       //handle the error here, in case of network error
@@ -29,7 +32,7 @@ const PaymentSuccess = ({user}) => {
   const totalPriceCalc = orders.reduce((total,acc)=>(total +(acc.price * acc.quantity)),0)
 
   const addOrderToHistory = async () => {
-    debugger
+    
     try{
       const response = await axios.post(`${URL}/order/add`,{
         email:user.userEmail, 
@@ -58,9 +61,13 @@ const PaymentSuccess = ({user}) => {
       <div  className="message_box">
         <div className="message_box_right">
           <h2>Payment Successfull</h2>
-          <h2>We sent you an email with your order confirmation.</h2>
-          {/* {recentOrder.map((item)=>
-          <h2>{item.quantity} x {item.product_data.name}({item.amount_data.price})={item.quantity*item.amount_data.price}</h2>)} */}
+          <h2>We sent you an email to {custEmail} with your order confirmation</h2>
+          <h2>Your order:</h2>
+          {recentOrder.map((item)=>
+          <div>
+          <h2>{item.quantity} x {item.description}(${item.price.unit_amount/100})=${item.quantity*item.price.unit_amount/100}</h2>
+          </div>)}
+          <h2>Total: ${recentOrder.reduce((total,acc)=>(total +(acc.amount_total/100)),0)}</h2>
         </div>
       </div>
     </div>
