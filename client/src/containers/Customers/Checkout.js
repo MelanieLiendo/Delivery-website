@@ -3,7 +3,6 @@ import React from 'react'
 import axios from "axios";
 import { URL } from "../../config"
 import { useNavigate } from "react-router-dom";
-
 import { useStripe } from "@stripe/react-stripe-js";
 
 
@@ -27,7 +26,6 @@ function Checkout({user}) {
     try {
       const response = await axios.post(`${URL}/customer/customer`, {email:user.userEmail});
       setAddress(response.data.message[0].address);
-      console.log(response)
       }
     catch (error) {
       console.log(error);
@@ -89,9 +87,9 @@ const quantLess = (order) =>{
 }
 const createCheckoutSession = async () => {
   try {
-    debugger
     // 2. Sending request to the create_checkout_session controller and passing products to be paid for
     const response = await axios.post(`${URL}/payment/create-checkout-session`,{ orders });
+    console.log(response.data)
     return response.data.ok
       ? // we save session id in localStorage to get it later
         (localStorage.setItem("sessionId",JSON.stringify(response.data.sessionId)),
@@ -104,6 +102,7 @@ const createCheckoutSession = async () => {
 };
 
 const redirect = (sessionId) => {
+  debugger
   
   // 10. This redirects to checkout.stripe.com and if charge/payment was successful send user to success url defined in create_checkout_session in the controller (which in our case renders payment_success.js)
   stripe

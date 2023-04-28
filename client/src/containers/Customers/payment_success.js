@@ -7,6 +7,7 @@ const PaymentSuccess = ({user}) => {
   const [orders, setOrders]  = useState(JSON.parse(localStorage.getItem('orders')))
   
   const getSessionData = async () => {
+    debugger
     // 11. Now when payment was successful we need to get back to Stripe to know what was paid for and who is the customer
     try {
       // 12. we get the session id from the localStorage
@@ -18,7 +19,7 @@ const PaymentSuccess = ({user}) => {
       // 18. response from the server will contain data for the customer and the session with the order's info
       console.log("== response ==>", response);
       // 19. So from here we continue with whatever action is needed to be done after successful payment
-      setRecentOrder(response.data.session.line_items)
+      setRecentOrder(response.data.session.line_items.data)
       //if you need the products list in this page, you can find them in : response.data.session.display_items or in response.data.session.line_items depends on the version of API you are using
     } catch (error) {
       //handle the error here, in case of network error
@@ -28,6 +29,7 @@ const PaymentSuccess = ({user}) => {
   const totalPriceCalc = orders.reduce((total,acc)=>(total +(acc.price * acc.quantity)),0)
 
   const addOrderToHistory = async () => {
+    debugger
     try{
       const response = await axios.post(`${URL}/order/add`,{
         email:user.userEmail, 

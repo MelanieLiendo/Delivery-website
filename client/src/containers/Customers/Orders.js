@@ -20,7 +20,6 @@ function Orders({user}) {
   const customerInfo = async () => {
     try {
       const response = await axios.post(`${URL}/order/displayOrders`, {email:user.userEmail});
-      console.log(response);
       setOrders(response.data.message)
 
 

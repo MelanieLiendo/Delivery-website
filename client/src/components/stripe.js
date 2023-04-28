@@ -8,7 +8,7 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 const Stripe = ({user}) => {
 	return (
 			<Elements stripe={stripePromise}>
-				<Checkout {...user} />
+				<Checkout user={user} />
 			</Elements>
 
 	);

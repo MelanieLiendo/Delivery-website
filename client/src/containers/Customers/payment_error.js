@@ -1,7 +1,6 @@
 import React from "react";
 
 const PaymentError = (props) => {
-  debugger
   return (
     <div className="message_container">
       <div style={{ border: "2px solid  #FF395B" }} className="message_box">

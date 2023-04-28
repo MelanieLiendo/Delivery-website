@@ -39,7 +39,7 @@ function InfoCust({user, logout}) {
         email:response.data.message[0].email, 
         })
 
-      console.log(response);
+      
       }
     catch (error) {
       console.log(error);
