@@ -9,24 +9,14 @@ const PaymentSuccess = ({user}) => {
   
   const getSessionData = async () => {
     
-    // 11. Now when payment was successful we need to get back to Stripe to know what was paid for and who is the customer
     try {
-      // 12. we get the session id from the localStorage
       const sessionId = JSON.parse(localStorage.getItem("sessionId"));
-      // 13. And send request to checkout_session controller to get info from Stripe by session ID
       const response = await axios.get(`${URL}/payment/checkout-session?sessionId=${sessionId}`);
-      // Then removing session id from localStorage
       localStorage.removeItem("sessionId");
-      // 18. response from the server will contain data for the customer and the session with the order's info
-      //console.log("== response ==>", response.data.session.line_items.data);
-      // 19. So from here we continue with whatever action is needed to be done after successful payment
       setRecentOrder(response.data.session.line_items.data)
       setCustEmail(response.data.customer.email)
       console.log(response.data.session.line_items.data);
-      //if you need the products list in this page, you can find them in : response.data.session.display_items or in response.data.session.line_items depends on the version of API you are using
-    } catch (error) {
-      //handle the error here, in case of network error
-    }
+    } catch (error) {}
   };
   
   const totalPriceCalc = orders.reduce((total,acc)=>(total +(acc.price * acc.quantity)),0)

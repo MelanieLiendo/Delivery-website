@@ -21,7 +21,7 @@ function Orders({user}) {
     try {
       const response = await axios.post(`${URL}/order/displayOrders`, {email:user.userEmail});
       setOrders(response.data.message)
-
+      console.log(response.data.message);
 
       }
     catch (error) {
@@ -42,8 +42,8 @@ function Orders({user}) {
         <div className='order'>
         <h2>{or.restaurant}</h2>
         <h2>{or.picture}</h2>
-        <h2>{or.quantity} x</h2>
-        <h2>{or.menu}</h2>
+        <h2>{or.menu.dish} x</h2> 
+        <h2>{or.menu.quantity}</h2>
         <h2>${or.totalPrice}</h2>
         </div>
         )}
