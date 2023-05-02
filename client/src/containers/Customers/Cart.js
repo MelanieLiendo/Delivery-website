@@ -74,7 +74,7 @@ const quantLess = (order) =>{
         isOpen={modalIsOpen}
         onRequestClose={closeModal}>
         <h2>Cart</h2>
-        {orders.length > 0 &&
+        {(orders && orders.length > 0) &&
           <>
           <h2>{rest.restaurant}</h2>
             {orders.map((order)=>(

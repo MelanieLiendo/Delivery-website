@@ -5,7 +5,7 @@ import axios from 'axios';
 import {URL} from '../../config'
 import Modal from 'react-modal'
 
-function Restaurant() {
+function Restaurant({cart}) {
     let params = useParams()
     const [rest, setRest] = useState({})
     const [menu, setMenu] = useState([])   
@@ -15,6 +15,7 @@ function Restaurant() {
     const [quantity, setQuantity] = useState(1)
     const [orders, setOrders]  = useState(JSON.parse(localStorage.getItem('orders')) || [])
     const [difRestaurant, setDifRestaurant]= useState(false)
+    const [message, setMessage]=useState("")
 
 useEffect(() => {
  
@@ -87,7 +88,7 @@ const handleRes = () => {
 }
 
 const handleOrder = () =>{
-  setIsOpen(false);
+setIsOpen(false);
 
 let idx = orders.findIndex((order)=>order.name == dish.name)
 
@@ -96,8 +97,16 @@ let temp = [...orders]
 temp[idx].quantity += quantity
 temp[idx].total += dish.price*quantity
 setOrders(temp)
+setMessage("The product was added to the cart successfully")
+  setTimeout(() => {
+    setMessage('');
+  }, 3000);
 } else {
   setOrders([...orders, { id_rest: dish.restaurant_id, picture: dish.picture, name: dish.name, description: dish.description, price: dish.price, quantity: quantity, total: dish.price*quantity}])
+  setMessage("The product was added to the cart successfully")
+  setTimeout(() => {
+    setMessage('');
+  }, 3000);
 }
 setDish(null)
 }
@@ -132,6 +141,7 @@ useEffect(()=>{
       </button>)}
       </section>
       )}
+      <h2>{message}</h2>
     {dish &&     <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}>            
