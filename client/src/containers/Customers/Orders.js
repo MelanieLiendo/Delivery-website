@@ -42,8 +42,12 @@ function Orders({user}) {
         <div className='order'>
         <h2>{or.restaurant}</h2>
         <h2>{or.picture}</h2>
-        <h2>{or.menu.dish} x</h2> 
-        <h2>{or.menu.quantity}</h2>
+        {or.menu.map((dish)=>
+          <div>
+        <h2>{dish.quantity} x</h2>
+        <h2>{dish.dish}</h2> 
+        </div>
+        )}
         <h2>${or.totalPrice}</h2>
         </div>
         )}

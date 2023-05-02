@@ -21,13 +21,18 @@ const PaymentSuccess = ({user}) => {
   
   const totalPriceCalc = orders.reduce((total,acc)=>(total +(acc.price * acc.quantity)),0)
 
+useEffect(()=>{
+console.log(user);
+},[])
+
   const addOrderToHistory = async () => {
     
     try{
+      
       const response = await axios.post(`${URL}/order/add`,{
         email:user.userEmail, 
         restaurant_id: orders[0].id_rest,
-        menu: [{dish:orders.name, quantity:orders.quantity}], 
+        menu: orders.map((or)=> {return {dish:or.name, quantity:or.quantity}}), 
         totalPrice:totalPriceCalc});
 
         console.log(response.message);
@@ -42,9 +47,11 @@ const PaymentSuccess = ({user}) => {
 
   }
   useEffect(() => {
-    getSessionData();
-    addOrderToHistory();
-  }, []);
+    if(user){
+     getSessionData();
+    addOrderToHistory();  
+    }
+  }, [user]);
 
   return (
     <div className="message_container">

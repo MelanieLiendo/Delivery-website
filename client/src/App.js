@@ -58,6 +58,9 @@ function App() {
     setIsLoggedIn(false);
   };
 
+  useEffect(()=>{
+    console.log(user);
+    },[])
   return (
     <Router>
     <Navbar  isLoggedIn={isLoggedIn} logout={logout} user= {user}/>
