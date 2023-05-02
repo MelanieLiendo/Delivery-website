@@ -103,19 +103,20 @@ function InfoCust({user, logout}) {
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}>
-
-    <button onClick={closeModal}>Close</button>
-
-    <form onChange={handleChange} onSubmit={handleSubmit}>
+    <div className='infoCust'>
+    <button onClick={closeModal}>x</button>
+    <h2>Your personal Information</h2>
+    <form className="formInfoCust" onChange={handleChange} onSubmit={handleSubmit}>
     <label>Address:</label> <input name="address" defaultValue={data.address} disabled={!changeDetails}/>
     <label>Name:</label> <input name="name" defaultValue= {data.name} disabled={!changeDetails}/>
     <label>Email:{data.email}</label> 
     <button name={changeDetails? "Save Changes":"Edit"} onClick={changeButton} >{changeDetails?"Save Changes": "Edit"}</button>
     {!changeDetails && <h3>{message}</h3>}
     </form>
+    
     <ChangePass user={user}/>
     <button onClick={deleteAccount}>Delete your account</button>
-
+    </div>
       </Modal>
     </div>
   );

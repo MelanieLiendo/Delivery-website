@@ -42,6 +42,10 @@ a {
     padding-left: 1em;
 }
 
+.navbar button{
+    font-family: 'Rozha One'
+}
+
 
 /* Home (not logged in) */
 
@@ -230,7 +234,13 @@ a {
     border-radius: 5em;
     text-align: center;
     margin-bottom: 1em;
+    background-color: white;
+    border: none;
+    outline: white;
+    color: black;
+    font-family: 'Rozha One' ;
 }
+
 
 .filters{
     display: flex;
@@ -240,6 +250,14 @@ a {
 .filters button{
     width: 50%;
     margin-bottom: 1em;
+    border: none;
+    border-radius: 1em;
+    background-color: antiquewhite;
+    font-family: 'Rozha One'
+}
+
+.filters button:disabled{
+    background-color: rgb(214, 61, 61);
 }
 
 .filteredBy{
@@ -247,6 +265,25 @@ a {
     flex-direction: column;
     width: 50%;
     margin-bottom: 1em;
+}
+.filteredBy button{
+    margin-bottom: 1em;
+    border: none;
+    border-radius: 1em;
+    background-color: rgb(145, 192, 74);
+    font-family: 'Rozha One'
+}
+
+.selectorRestFood button{
+    margin-bottom: 1em;
+    border: none;
+    border-radius: 1em;
+    background-color: antiquewhite;
+    font-family: 'Rozha One'
+}
+
+.selectorRestFood button:disabled{
+    background-color: rgb(153, 188, 100);
 }
 
 .gridHomeCust1{
@@ -257,11 +294,33 @@ a {
 .gridHomeCust2{
     display: grid;
     grid-template-columns: repeat(3, 1fr) ;
+    column-gap: 3em;
+    row-gap: 3em;
 }
 
 .gridHomeCust3{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+}
+
+.iconosNavbar button img{
+    height: 2px;
+}
+
+.restDisplay{
+    text-align: center;
+    border: solid thin gray;
+    border-radius: 1em;
+    background-color: antiquewhite;
+}
+
+.restDisplay h2{
+    font-size: 2em;
+}
+
+.restDisplay h3{
+    font-size: 1em;
+    color: rgb(88, 86, 86);
 }
 
 
@@ -358,11 +417,73 @@ a {
     padding-right: 1em;
 }
 
-/* Home Cust */
+/* Modal info Cust */
 
-.iconosNavbar button img{
-    height: 2px;
+.formInfoCust{
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+    gap: 1em;
+    font-family: 'Rozha One';
 }
+
+.infoCust, .infoCust button, .infoCust input{
+    font-family: 'Rozha One';
+}
+
+/* order Modal */
+
+.order{
+    display: flex;
+    justify-content: space-around;
+    font-family: 'Rozha One';
+    font-size: 0.7em;
+    border: thin gray solid;
+    border-radius: 1em;
+    margin-bottom: 2em;
+    width: 40%;
+}
+
+/* cart Modal */
+
+.itemInCart{
+    font-size: 0.7em;
+    margin-right: 1em;
+}
+
+.cart{
+    font-family: 'Rozha One';
+}
+
+.cart button{
+    margin-right: 2em;
+    font-family: 'Rozha One';
+    border-radius: 1em;
+    border: none;
+    background-color: rgb(72, 195, 195);
+    color: white;
+}
+
+.itemFlex{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.buttonOrder{
+    margin-top: 5em;
+    width: 30%;
+    background-color: rgb(36, 124, 124);
+    color: white;
+    border-radius: 1em;
+    border:none;
+    font-size: 1.5em;
+}
+
+
+
+
+
 
 
 

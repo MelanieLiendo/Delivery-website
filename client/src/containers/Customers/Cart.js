@@ -73,29 +73,33 @@ const quantLess = (order) =>{
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}>
+        <section className='cart'>
+        <button onClick={closeModal}>X</button>
         <h2>Cart</h2>
         {(orders && orders.length > 0) &&
           <>
           <h2>{rest.restaurant}</h2>
+          <button onClick= {deleteCart} >Delete cart</button>
             {orders.map((order)=>(
               <>
-              <h2>{order.quantity}x</h2>
-              <h2>{order.name}</h2>
-              <h2>price per unit: {order.price}</h2>
-              <h2>total price : $ {order.total}</h2>
+              <article className='itemFlex'>
+              <div className='itemInCart'>
+              <h2>{order.quantity} x {order.name} ${order.total}</h2> 
+              </div>
+              <div className='buttonsCartItem' >
               <button onClick= {()=>quantMore(order)} >+</button>
               <button onClick= {()=>quantLess(order)} >-</button>
               <button onClick= {()=>deleteItem(order)} >Delete item</button>
+              </div>
+              </article>
               </>
             ))} 
-            <button onClick= {deleteCart} >Delete cart</button>
-           <button onClick={checkout}>Order {orders.reduce((total,acc)=>(total + acc.quantity),0)} for ${orders.reduce((total,acc)=>(total +(acc.price * acc.quantity)),0)}</button>
-                
+           <button className='buttonOrder' onClick={checkout}>Order {orders.reduce((total,acc)=>(total + acc.quantity),0)} for ${orders.reduce((total,acc)=>(total +(acc.price * acc.quantity)),0)}</button> 
           </>
         }
 
-
-    <button onClick={closeModal}>Close</button>
+          </section>
+    
       </Modal>
     </div>
   )

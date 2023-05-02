@@ -184,7 +184,7 @@ function HomeCust({user}) {
               <section className='gridHomeCust2'> 
                 {restaurants.map((rest)=> 
                   <NavLink  to= {`/restaurant/${rest._id}`} >
-                  <article>
+                  <article className='restDisplay'>
                   <h2>{rest.restaurant}</h2>
                   <h3>{rest.picture}</h3>
                   <h3>{rest.filter}</h3>
@@ -194,7 +194,7 @@ function HomeCust({user}) {
               <section className='gridHomeCust2'> 
                 {filtered.map((rest) => 
                 <NavLink  to= {`/restaurant/${rest._id}`} >
-                <article>
+                <article className='restDisplay'>
                   <h2>{rest.restaurant}</h2>
                   <h3>{rest.picture}</h3>
                   <h3>{rest.filter}</h3>
