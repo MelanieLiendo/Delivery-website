@@ -120,7 +120,7 @@ const redirect = (sessionId) => {
 };
   return (
     <div>
-        <button onClick={goBack}>{rest.restaurant}</button>
+        <button onClick={goBack}>&#11013;</button>
         <h2>{rest.restaurant}</h2>
         <h2>Delivery details</h2>
         
@@ -142,7 +142,7 @@ const redirect = (sessionId) => {
               </>
             ))} 
         
-          <button onClick={() => createCheckoutSession()}>Pay ${orders.reduce((total,acc)=>(total +(acc.price * acc.quantity)),0)}</button>
+          <button onClick={() => createCheckoutSession()}>&#128179; Pay ${orders.reduce((total,acc)=>(total +(acc.price * acc.quantity)),0)}</button>
                 
           </>
         }

@@ -127,7 +127,8 @@ useEffect(()=>{
     <section className='restaurantPage'>
       <article className='infoRestDishes'>
       <h2>{rest.restaurant}</h2>
-      <h3>{rest.address}</h3>
+      <h3>&#128205;{rest.address}</h3>
+      <h2 className='messageAddToCart'>{message}</h2>
       </article>
       {difRestaurant && <h2>You have dishes from another restaurant in your cart.</h2>}
       <div className='categoryDishRestaurant'>
@@ -138,7 +139,7 @@ useEffect(()=>{
       meal.category == categ &&
       <button onClick= {()=>setDish(meal)} disabled={orders.length>0 && difRestaurant}>
       <article className='dishInRestaurant'>
-      <h3>{meal.picture}</h3>
+      <img src={meal.picture}/>
       <div className='dishDetails'>
       <h3>{meal.name}</h3>
       <h3>{meal.description}</h3>
@@ -149,7 +150,6 @@ useEffect(()=>{
       </article>
       )}
       </div>
-      <h2>{message}</h2>
     {dish &&     <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}>            

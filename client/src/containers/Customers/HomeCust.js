@@ -185,8 +185,8 @@ function HomeCust({user}) {
                 {restaurants.map((rest)=> 
                   <NavLink  to= {`/restaurant/${rest._id}`} >
                   <article className='restDisplay'>
-                  <h2>{rest.restaurant}</h2>
                   <h3>{rest.picture}</h3>
+                  <h2>{rest.restaurant}</h2>
                   <h3>{rest.filter}</h3>
                   </article></NavLink>
                 )}
@@ -195,8 +195,8 @@ function HomeCust({user}) {
                 {filtered.map((rest) => 
                 <NavLink  to= {`/restaurant/${rest._id}`} >
                 <article className='restDisplay'>
-                  <h2>{rest.restaurant}</h2>
                   <h3>{rest.picture}</h3>
+                  <h2>{rest.restaurant}</h2>
                   <h3>{rest.filter}</h3>
                 </article>
                 </NavLink>

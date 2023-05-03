@@ -83,7 +83,7 @@ function HomeRest({user}) {
         <h2>{categ}</h2>  
         {menu.map((dish,i)=>
         dish.category == categ &&
-        <article>
+        <article className='dishesInCategoryRest'>
         <h3>{dish.name}</h3>
         <img src={dish.picture}/>
         <button onClick={()=>deleteDish(dish.name,i)}>x</button>
