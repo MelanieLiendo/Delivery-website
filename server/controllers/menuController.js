@@ -64,10 +64,14 @@ const updateMenu = async (req,res)=>{
         if (findRestaurant && findSku){
             if (name == newName && newDescription == findSku.description && newPrice == findSku.price && newPicture == findSku.picture && newCategory == findSku.category){ 
                 res.send({ok: true, message: "No change was made"});}
-            else{
+            else if(newName != undefined){
                 newSku = `${newName + findRestaurant._id.toString()}`
                 await Menu.findOneAndUpdate({sku}, {sku:newSku, name: newName, description: newDescription, price: newPrice, picture: newPicture, category: newCategory});
-                res.send({ok:true, message:"The dish was successfully updated"})}
+                res.send({ok:true, message:"The dish was successfully updated"})
+            }else{
+                await Menu.findOneAndUpdate({sku}, {name: newName, description: newDescription, price: newPrice, picture: newPicture, category: newCategory});
+                res.send({ok:true, message:"The dish was successfully updated"})
+            }
         }}
     catch(error){
         res.send({ok:false,message:{error}})

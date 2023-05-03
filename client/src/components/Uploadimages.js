@@ -5,7 +5,7 @@ import { URL } from "../config";
 
 
 
-const UploadImages = ({rest, infoMenu, setImageLink}) => {
+const UploadImages = ({rest, infoMenu, setImageLink, changeDetails, picReference}) => {
 
 
   const uploadWidget = () => {
@@ -28,19 +28,10 @@ const UploadImages = ({rest, infoMenu, setImageLink}) => {
       }
     );
   };
-/*
-  const fetch_pictures = async () => {
-    try {
-      const response = await axios.get(`${URL}/pictures/getMenusOfRestaurant`,{restaurant_id:rest._id}) 
-      setPictures([ ...response.data.pictures ]);
-      console.log(response.data.pictures);
-    } catch (error) {
-      debugger;
-    }
-  };*/
+
 
   const upload_picture = async (result) => {
-    
+    debugger
     try {
       const response = await axios.post(`${URL}/pictures/upload`, {
         files: result.info.files,
@@ -51,7 +42,7 @@ const UploadImages = ({rest, infoMenu, setImageLink}) => {
       if (response.data.ok){
         setImageLink(result.info.files[0].name) 
         try { 
-          
+          debugger
           const resp = await axios.post(`${URL}/menu/update`, {   
            email: rest.email, 
            name: infoMenu.name,        
@@ -68,25 +59,11 @@ const UploadImages = ({rest, infoMenu, setImageLink}) => {
       console.log(error);
     }
   };
-/*
-  const updatePictureOnMenu = async (props) => {
-    debugger
-    try {
-     const response = await axios.post(`${URL}/menu/update`, {   
-      email: user.userEmail,         
-      newPicture: props.data.created[0].photo_url,
-        })
-    }catch (error) {
-      console.log(error);
-    }
-  };*/
-  
-  // function to send data to server to create a new post
+
   return (
     <div className="flex_upload">
-      {/* form to add title, description, author, date -- onchange goes to state */}
       <div className="upload">
-        <button className="button" onClick={uploadWidget}>
+        <button className="button" onClick={uploadWidget} disabled={!changeDetails}>
           Open widget
         </button>
       </div>
