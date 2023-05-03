@@ -28,16 +28,16 @@ console.log(user);
   const addOrderToHistory = async () => {
     
     try{
-      
+      debugger
       const response = await axios.post(`${URL}/order/add`,{
         email:user.userEmail, 
         restaurant_id: orders[0].id_rest,
         menu: orders.map((or)=> {return {dish:or.name, quantity:or.quantity}}), 
         totalPrice:totalPriceCalc});
 
-        console.log(response.message);
+        console.log(response.data);
 
-      if (response.ok){
+      if (response.data.ok){
         localStorage.removeItem("orders")
       }
     }
@@ -48,10 +48,11 @@ console.log(user);
   }
   useEffect(() => {
     if(user){
-     getSessionData();
-    addOrderToHistory();  
+     getSessionData(); 
+     addOrderToHistory(); 
     }
   }, [user]);
+
 
   return (
     <div className="message_container">
