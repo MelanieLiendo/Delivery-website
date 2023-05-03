@@ -26,7 +26,6 @@ async function connecting(){
         console.log('ERROR: Seems like your DB is not running, please start it up !!!');
     }
 }
-connecting()
 
 app.use('/customer', require('./routes/customerRoute'))
 app.use('/restaurant', require('./routes/restaurantRoute'))
@@ -36,5 +35,10 @@ app.use('/order', require('./routes/orderRoute'))
 app.use('/payment', require('./routes/paymentRoute'));
 app.use("/pictures", require("./routes/picturesRoute"))
 
+connecting().then(() => {
+    app.listen(PORT, () => {
+        console.log("listening for requests");
+    })
+})
 
 app.listen(4000, () => console.log(`listening on port 4000`))
