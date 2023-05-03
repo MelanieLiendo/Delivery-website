@@ -54,16 +54,28 @@ const handleSubmit = async (e) => {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Example Modal">
-
-        <button onClick={closeModal}>Close</button>
-
+        <section className='changePassword'>
+        <button onClick={closeModal}>x</button>
         <form onSubmit={handleSubmit} onChange={handleChange}>
-        <label>Actual Password:</label><input name='actualPasswordInput' type='password'/>
-        <label>New Password:</label><input name='newPassword' type='password'/>
-        <label>Repeat New Password:</label><input name='newPassword2' type='password'/>
+
+        <article className='gridChangePass'>
+        <div className='changePassComponent'>
+        <label>Actual Password</label>
+        <input name='actualPasswordInput' type='password'/>
+        </div>
+        <div className='changePassComponent'>
+        <label>New Password</label>
+        <input name='newPassword' type='password'/>
+        </div>
+        <div className='changePassComponent'>
+        <label>Repeat New Password</label>
+        <input name='newPassword2' type='password'/>
+        </div>
+       </article>
        <button>Change</button>
        </form>
        <h3>{message}</h3>
+       </section>
       </Modal>
     </div>
   );

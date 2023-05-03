@@ -102,7 +102,7 @@ function ResgisterRest() {
                     <input type='password' name='password2'/>
                 </div>   
             </section>   
-            <section>
+            <section className='sectionFiltersRegRest'>
                 <label>Filter *</label>
                 <div className='filterRegRest'>
                     <button onClick={handleClick} disabled={data.filter.length >= 3 || data.filter.includes("Gluten Free")} value= "Gluten Free">Gluten Free</button>

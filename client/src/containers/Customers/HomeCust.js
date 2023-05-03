@@ -4,7 +4,7 @@ import {URL} from '../../config'
 import { NavLink } from 'react-router-dom';
 
 function HomeCust({user}) {
-  const [address,setAddress]= useState({address:''})
+  const [address,setAddress]= useState('')
   const [restaurants,setRestaurants]=useState([])
   const [actualFilter, setActualFilter] = useState([])
   const [filtered, setFiltered] = useState([])
@@ -18,17 +18,17 @@ function HomeCust({user}) {
 
   useEffect(
     () => {
-  const customerAddress = async () => {
-    try {
-      const response = await axios.post(`${URL}/customer/customer`, {email:user.userEmail});
-      setAddress({address:response.data.message[0].address});
-      console.log(response);}
-    catch (error) {
-      console.log(error);
-    }
-  };
-
-
+      
+        const customerAddress = async () => {
+          try {
+            const response = await axios.post(`${URL}/customer/customer`, {email:user.userEmail});
+            setAddress({address:response.data.message[0].address});
+            console.log(response);}
+          catch (error) {
+            console.log(error);
+          }
+        };
+  
   const menu = async () => {
     try {
       const response = await axios.get(`${URL}/menu/all`)
@@ -41,7 +41,6 @@ function HomeCust({user}) {
     }
   };
 
-
   const customerInfo = async () => {
     try {
       const response = await axios.get(`${URL}/restaurant/displayAll`);
@@ -52,9 +51,11 @@ function HomeCust({user}) {
     }
   };
 
+  if(!address){
   menu()
   customerAddress()
   customerInfo()
+  }
 },[]);
   
 
@@ -109,7 +110,7 @@ function HomeCust({user}) {
     
 
   return (
-    <div>
+    <div id='homeCustAll'>
       <h2 className='deliveringAddress'>Delivering to {address.address}</h2>
       <section className='searchRestaurant'>
         <input onChange= {inputSearch} type="text" placeholder="Search.."/>
@@ -122,7 +123,7 @@ function HomeCust({user}) {
       <section className='gridHomeCust3'>
         {(busqueda && searching) && listadoRests.map((rest)=>(
           <NavLink  to= {`/restaurant/${rest._id}`} >
-          <article>
+          <article className='displayDishesSearch'>
             <h2>{rest.restaurant}</h2>
             <h3>{rest.picture}</h3>
             <h3>{rest.filter}</h3>
@@ -132,18 +133,18 @@ function HomeCust({user}) {
       </section>
       <section className='gridHomeCust3'>
         {(busqueda && !searching) && listadoMenus.map((menu)=>
-            {restaurants.map((rest)=>            
-              rest._id == menu.restaurant_id && 
-              <NavLink  to= {`/restaurant/${rest._id}`} >
-              <article>          
-                <h2>{ rest.restaurant}</h2>
+            {let resName = restaurants.find(
+              (res) => res._id == menu.restaurant_id).restaurant;
+              return(
+              <NavLink to= {`/restaurant/${resName._id}`} >
+              <article className='displayDishesSearch'>          
+                <h2>{resName}</h2>
                 <h3>{menu.name}</h3>
                 <h3>{menu.description}</h3>
                 <h3>{menu.price}</h3>
               </article>
-              </NavLink>
-            )}
-        
+              </NavLink>)
+            }
         )}
       </section>
    
@@ -158,7 +159,7 @@ function HomeCust({user}) {
                 <>
                   <p> Filtered by: </p>
                   {actualFilter.map((filtro)=>
-                    <button onClick={handleDelete}> {filtro} X</button>)
+                    <button onClick={()=>{handleDelete(filtro)}}> {filtro} X</button>)
                   }
                 </>
               }
@@ -183,7 +184,7 @@ function HomeCust({user}) {
               <section className='gridHomeCust2'> 
                 {restaurants.map((rest)=> 
                   <NavLink  to= {`/restaurant/${rest._id}`} >
-                  <article>
+                  <article className='restDisplay'>
                   <h2>{rest.restaurant}</h2>
                   <h3>{rest.picture}</h3>
                   <h3>{rest.filter}</h3>
@@ -193,7 +194,7 @@ function HomeCust({user}) {
               <section className='gridHomeCust2'> 
                 {filtered.map((rest) => 
                 <NavLink  to= {`/restaurant/${rest._id}`} >
-                <article>
+                <article className='restDisplay'>
                   <h2>{rest.restaurant}</h2>
                   <h3>{rest.picture}</h3>
                   <h3>{rest.filter}</h3>

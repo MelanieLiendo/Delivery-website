@@ -5,7 +5,7 @@ import axios from 'axios';
 import {URL} from '../../config'
 import Modal from 'react-modal'
 
-function Restaurant() {
+function Restaurant({cart}) {
     let params = useParams()
     const [rest, setRest] = useState({})
     const [menu, setMenu] = useState([])   
@@ -88,7 +88,7 @@ const handleRes = () => {
 }
 
 const handleOrder = () =>{
-  setIsOpen(false);
+setIsOpen(false);
 
 let idx = orders.findIndex((order)=>order.name == dish.name)
 
@@ -97,8 +97,16 @@ let temp = [...orders]
 temp[idx].quantity += quantity
 temp[idx].total += dish.price*quantity
 setOrders(temp)
+setMessage("The product was added to the cart successfully")
+  setTimeout(() => {
+    setMessage('');
+  }, 3000);
 } else {
   setOrders([...orders, { id_rest: dish.restaurant_id, picture: dish.picture, name: dish.name, description: dish.description, price: dish.price, quantity: quantity, total: dish.price*quantity}])
+  setMessage("The product was added to the cart successfully")
+  setTimeout(() => {
+    setMessage('');
+  }, 3000);
 }
 setDish(null)
 }
@@ -130,24 +138,32 @@ useEffect(()=>{
   };
 
   return (
-    <div>
+    <section className='restaurantPage'>
+      <article className='infoRestDishes'>
       <h2>{rest.restaurant}</h2>
+      <h3>{rest.address}</h3>
+      </article>
       {difRestaurant && <h2>You have dishes from another restaurant in your cart.</h2>}
+      <div className='categoryDishRestaurant'>
       {categories.map((categ)=>
-      <section>  
+      <article className='restaurantDishes'>  
       <h2>{categ}</h2>  
       {menu.map((meal)=>
       meal.category == categ &&
       <button onClick= {()=>setDish(meal)} disabled={orders.length>0 && difRestaurant}>
-      <article>
-      <h3>{meal.name}</h3>
+      <article className='dishInRestaurant'>
       <h3>{meal.picture}</h3>
+      <div className='dishDetails'>
+      <h3>{meal.name}</h3>
       <h3>{meal.description}</h3>
+      </div>
       <h3>${meal.price}</h3>
       </article>
       </button>)}
-      </section>
+      </article>
       )}
+      </div>
+      <h2>{message}</h2>
     {dish &&     <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}>            
@@ -165,7 +181,7 @@ useEffect(()=>{
         <button  onClick={handleOrder} >Add {quantity} for ${dish.price*quantity}</button>
       </Modal>}
 
-    </div>
+    </section>
     
   )
 

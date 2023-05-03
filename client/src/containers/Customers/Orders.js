@@ -37,21 +37,23 @@ function Orders({user}) {
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}>
-        <h1>Orders</h1>
+        <section className='historicalOrders'>
+        <button onClick={closeModal}>x</button>
+        <h1 className='titleHistoricalOrders'>Historical Orders</h1>
         {orders.map((or)=> 
         <div className='order'>
         <h2>{or.restaurant}</h2>
         <h2>{or.picture}</h2>
         {or.menu.map((dish)=>
           <div>
-        <h2>{dish.quantity} x</h2>
-        <h2>{dish.dish}</h2> 
+        <h2>{dish.quantity} x {dish.dish}</h2>
         </div>
         )}
         <h2>${or.totalPrice}</h2>
         </div>
+      
         )}
-        <button onClick={closeModal}>close</button>
+        </section>
       </Modal>
     </div>
   );

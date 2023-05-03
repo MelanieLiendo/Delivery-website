@@ -5,7 +5,7 @@ import InfoRest from '../containers/Restaurant/InfoRest';
 import Cart from '../containers/Customers/Cart'
 import Orders from '../containers/Customers/Orders';
 import Modal from 'react-modal'
-import logoFoodies from '../images/logoFoodies.jpg'
+import logoFoodies from '../images/logoFoodies.png'
 Modal.setAppElement("#root");
 
 
@@ -18,7 +18,7 @@ function Navbar({isLoggedIn, logout, user}) {
    }
 
   return (
-    <div className='navbar'>
+    <div className= {isLoggedIn?'navbarLoggedIn':'navbar'}>
       <NavLink to = {'/'}><img src={logoFoodies}/></NavLink>
 
       {isLoggedIn===true && user.userType=== 'customer'?
