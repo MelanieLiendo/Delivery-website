@@ -37,8 +37,9 @@ function Orders({user}) {
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}>
+        <section className='historicalOrders'>
         <button onClick={closeModal}>x</button>
-        <h1>Historical Orders</h1>
+        <h1 className='titleHistoricalOrders'>Historical Orders</h1>
         {orders.map((or)=> 
         <div className='order'>
         <h2>{or.restaurant}</h2>
@@ -52,6 +53,7 @@ function Orders({user}) {
         </div>
       
         )}
+        </section>
       </Modal>
     </div>
   );

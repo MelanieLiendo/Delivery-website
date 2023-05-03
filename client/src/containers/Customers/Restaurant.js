@@ -123,24 +123,31 @@ useEffect(()=>{
     },[orders])
 
   return (
-    <div>
+    <section className='restaurantPage'>
+      <article className='infoRestDishes'>
       <h2>{rest.restaurant}</h2>
+      <h3>{rest.address}</h3>
+      </article>
       {difRestaurant && <h2>You have dishes from another restaurant in your cart.</h2>}
+      <div className='categoryDishRestaurant'>
       {categories.map((categ)=>
-      <section>  
+      <article className='restaurantDishes'>  
       <h2>{categ}</h2>  
       {menu.map((meal)=>
       meal.category == categ &&
       <button onClick= {()=>setDish(meal)} disabled={orders.length>0 && difRestaurant}>
-      <article>
-      <h3>{meal.name}</h3>
+      <article className='dishInRestaurant'>
       <h3>{meal.picture}</h3>
+      <div className='dishDetails'>
+      <h3>{meal.name}</h3>
       <h3>{meal.description}</h3>
+      </div>
       <h3>${meal.price}</h3>
       </article>
       </button>)}
-      </section>
+      </article>
       )}
+      </div>
       <h2>{message}</h2>
     {dish &&     <Modal
         isOpen={modalIsOpen}
@@ -159,7 +166,7 @@ useEffect(()=>{
         <button  onClick={handleOrder} >Add {quantity} for ${dish.price*quantity}</button>
       </Modal>}
 
-    </div>
+    </section>
     
   )
 

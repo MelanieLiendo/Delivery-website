@@ -84,9 +84,10 @@ function InfoCust({user, logout}) {
         const response = await axios.post(`${URL}/customer/remove`,{email:data.email})
         if (response.data.ok) {
           logout()
+          localStorage.removeItem("orders")
           setTimeout(() => {
             navigate('/');
-            alert(response.data.message)
+            alert("Your account was successfully deleted")
           }, 1000);
            }}
       catch(error){
@@ -105,11 +106,12 @@ function InfoCust({user, logout}) {
         onRequestClose={closeModal}>
     <div className='infoCust'>
     <button onClick={closeModal}>x</button>
-    <h2>Your personal Information</h2>
+    <h2>Hi {data.name}!</h2>
     <form className="formInfoCust" onChange={handleChange} onSubmit={handleSubmit}>
-    <label>Address:</label> <input name="address" defaultValue={data.address} disabled={!changeDetails}/>
-    <label>Name:</label> <input name="name" defaultValue= {data.name} disabled={!changeDetails}/>
-    <label>Email:{data.email}</label> 
+    <label>Address</label> <input name="address" defaultValue={data.address} disabled={!changeDetails}/>
+    <label>Name</label> <input name="name" defaultValue= {data.name} disabled={!changeDetails}/>
+    <label>Email</label>
+    <p>{data.email}</p> 
     <button name={changeDetails? "Save Changes":"Edit"} onClick={changeButton} >{changeDetails?"Save Changes": "Edit"}</button>
     {!changeDetails && <h3>{message}</h3>}
     </form>

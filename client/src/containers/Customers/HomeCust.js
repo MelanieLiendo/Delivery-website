@@ -110,7 +110,7 @@ function HomeCust({user}) {
     
 
   return (
-    <div>
+    <div id='homeCustAll'>
       <h2 className='deliveringAddress'>Delivering to {address.address}</h2>
       <section className='searchRestaurant'>
         <input onChange= {inputSearch} type="text" placeholder="Search.."/>
@@ -123,7 +123,7 @@ function HomeCust({user}) {
       <section className='gridHomeCust3'>
         {(busqueda && searching) && listadoRests.map((rest)=>(
           <NavLink  to= {`/restaurant/${rest._id}`} >
-          <article>
+          <article className='displayDishesSearch'>
             <h2>{rest.restaurant}</h2>
             <h3>{rest.picture}</h3>
             <h3>{rest.filter}</h3>
@@ -136,8 +136,8 @@ function HomeCust({user}) {
             {let resName = restaurants.find(
               (res) => res._id == menu.restaurant_id).restaurant;
               return(
-              <NavLink  to= {`/restaurant/${resName._id}`} >
-              <article>          
+              <NavLink to= {`/restaurant/${resName._id}`} >
+              <article className='displayDishesSearch'>          
                 <h2>{resName}</h2>
                 <h3>{menu.name}</h3>
                 <h3>{menu.description}</h3>

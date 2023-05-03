@@ -2,15 +2,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Rozha+One&display=swap');
 
 
-body{
+/* body{
     background-color: #abdfea;
-}
+} */
 
 .navbar{
     display: flex;
     justify-content: space-between;
     background-color: #abdfea;
     font-family: 'Rozha One';
+    font-size: 1.3em;
+}
+.navbarLoggedIn{
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
     font-size: 1.3em;
 }
 
@@ -29,7 +35,7 @@ a {
 }
 .navbar img {
     padding-left: 3em;
-    height: 110%;
+    height: 100%;
 }
 
 .navbarLogRegCust{
@@ -42,8 +48,19 @@ a {
     padding-left: 1em;
 }
 
-.navbar button{
-    font-family: 'Rozha One'
+.navbar button, .navbarLoggedIn button{
+    font-family: 'Rozha One';
+    font-family: 'Rozha One';
+    border-radius: 1em;
+    border: none;
+    background-color: #83d9ea;
+    color: white;
+
+}
+
+.navbar button:hover, .navbarLoggedIn button:hover{
+    background-color: white;
+    color: black;
 }
 
 
@@ -51,7 +68,6 @@ a {
 
 .home{
     height: 100vh;
-    background-color: #abdfea;
     font-family: 'Rozha One';
 }
 
@@ -152,6 +168,7 @@ a {
     padding-right: 10em;
     font-family: 'Rozha One';
     font-size: 1.3em;
+    background-color: #abdfea ;
 }
 
 .loginCust button{
@@ -182,6 +199,7 @@ a {
     font-size: 1.3em;
     height: 100vh;
     padding-right: 10em;
+    background-color: #abdfea;
 }
 
 .formRegCust input{
@@ -217,6 +235,10 @@ a {
 
 /* Home customer*/
 
+
+#homeCustAll{
+    background-color: white;
+}
 .deliveringAddress{
     text-align: center;
 }
@@ -230,17 +252,21 @@ a {
 
 .searchRestaurant input {
     height: 3em;
-    width: 30%;
+    width: 50%;
     border-radius: 5em;
     text-align: center;
     margin-bottom: 1em;
     background-color: white;
-    border: none;
+    border: solid gray thin;
     outline: white;
     color: black;
     font-family: 'Rozha One' ;
 }
 
+.searchRestaurant input:hover{
+    background-color:#abdfea ;
+    border:none;
+}
 
 .filters{
     display: flex;
@@ -252,8 +278,14 @@ a {
     margin-bottom: 1em;
     border: none;
     border-radius: 1em;
-    background-color: antiquewhite;
+    background-color: white;
+    border: solid gray thin;
     font-family: 'Rozha One'
+}
+
+.filters button:hover{
+    background-color:#abdfea ;
+    border: none;
 }
 
 .filters button:disabled{
@@ -278,8 +310,13 @@ a {
     margin-bottom: 1em;
     border: none;
     border-radius: 1em;
-    background-color: antiquewhite;
+    background-color: white;
     font-family: 'Rozha One'
+}
+.selectorRestFood button:hover{
+    background-color:#abdfea ;
+    border: none;
+
 }
 
 .selectorRestFood button:disabled{
@@ -301,6 +338,7 @@ a {
 .gridHomeCust3{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    gap:2em;
 }
 
 .iconosNavbar button img{
@@ -311,7 +349,12 @@ a {
     text-align: center;
     border: solid thin gray;
     border-radius: 1em;
-    background-color: antiquewhite;
+    background-color: white
+}
+
+.restDisplay:hover{
+    background-color:#abdfea ;
+    border: none;
 }
 
 .restDisplay h2{
@@ -321,6 +364,18 @@ a {
 .restDisplay h3{
     font-size: 1em;
     color: rgb(88, 86, 86);
+}
+
+.displayDishesSearch{
+    text-align: center;
+    border: solid thin gray;
+    border-radius: 1em;
+    background-color: white
+}
+
+.displayDishesSearch:hover{
+    background-color:#abdfea ;
+    border: none;
 }
 
 
@@ -345,7 +400,9 @@ a {
     column-gap: 3em;
     width: 80%;
     align-items: center;
-    margin: 50px ;
+    margin: 0px 50px 50px 50px ;
+    background-color: #abdfea;
+    padding-top: 4em;
 }
 
 .inputLabelRegRest img{
@@ -361,6 +418,10 @@ a {
     font-size: 1em;
     height: 100vh;
     text-align: center;
+    background-color: #abdfea;
+}
+.sectionFiltersRegRest{
+    background-color: #abdfea; 
 }
 
 .formRegRest input{
@@ -430,6 +491,25 @@ a {
 .infoCust, .infoCust button, .infoCust input{
     font-family: 'Rozha One';
 }
+.infoCust button{
+    text-align: center;
+    border: solid thin gray;
+    border-radius: 1em;
+    background-color: white;
+}
+
+.infoCust button:hover{
+    background-color:#abdfea ;
+    border: none;
+}
+
+.infoCust label{
+    color: rgb(169, 167, 167);
+}
+
+.infoCust input,p{
+    color:gray;
+}
 
 /* order Modal */
 
@@ -442,6 +522,62 @@ a {
     border-radius: 1em;
     margin-bottom: 2em;
     width: 40%;
+}
+
+.titleHistoricalOrders{
+    font-family: 'Rozha One';
+}
+
+.order:hover{
+    border: rgb(89, 190, 223) solid;
+}
+
+.historicalOrders button{
+    text-align: center;
+    border: solid thin gray;
+    border-radius: 1em;
+    background-color: white
+}
+
+.historicalOrders button:hover{
+    background-color:#abdfea ;
+    border: none;
+}
+
+/* change password */
+
+.changePassword{
+    font-family: 'Rozha One';
+}
+
+.changePassword input{
+    width: 20%;
+    border: rgb(192, 187, 187) thin solid;
+    border-radius: 0.5em;
+    margin-left: 1em;
+}
+.changePassword button{
+    text-align: center;
+    border: solid thin gray;
+    border-radius: 1em;
+    background-color: white;
+    font-family: 'Rozha One';
+}
+
+.changePassword button:hover{
+    background-color:#abdfea ;
+    border: none;
+}
+
+.changePassword label{
+    color: gray;
+}
+
+.gridChangePass{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3em;
+    padding: 3em 0;
 }
 
 /* cart Modal */
@@ -458,10 +594,15 @@ a {
 .cart button{
     margin-right: 2em;
     font-family: 'Rozha One';
+    text-align: center;
+    border: solid thin gray;
     border-radius: 1em;
+    background-color: white
+}
+
+.cart button:hover{
+    background-color:#abdfea ;
     border: none;
-    background-color: rgb(72, 195, 195);
-    color: white;
 }
 
 .itemFlex{
@@ -473,13 +614,71 @@ a {
 .buttonOrder{
     margin-top: 5em;
     width: 30%;
-    background-color: rgb(36, 124, 124);
-    color: white;
+    font-family: 'Rozha One';
+    text-align: center;
+    border: solid thin gray;
     border-radius: 1em;
-    border:none;
-    font-size: 1.5em;
+    background-color: white
 }
 
+.buttonOrder:hover{
+    background-color:#abdfea ;
+    border: none; 
+}
+
+/* restaurant page */
+
+.restaurantDishes{
+    display: grid;
+    gap: 1em;
+    grid-template-columns: 1fr;
+    margin-left: 5em;
+    margin-right: 5em;
+    padding-bottom: 3em;
+}
+
+.restaurantDishes button{
+    border: solid thin rgb(46, 159, 181);
+    font-family: 'Rozha One';
+    background-color: rgb(95, 191, 210);;
+}
+
+.restaurantDishes button:focus{
+    background-color: white;
+    border: solid thin rgb(46, 159, 181);
+    font-family: 'Rozha One';
+    color:rgb(95, 191, 223);
+}
+
+
+.restaurantPage{
+    font-family: 'Rozha One';
+    text-align: center;
+}
+
+.categoryDishRestaurant{
+    border: solid thin rgb(46, 159, 181);
+}
+
+.dishInRestaurant{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.infoRestDishes{
+   text-align: left;
+}
+
+.infoRestDishes h2{
+    font-size: 2em;
+ }
+
+ .infoRestDishes h3{
+    font-size: 1em;
+ }
+
+ /* modal add a dish to cart */
 
 
 
