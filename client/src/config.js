@@ -1,3 +1,3 @@
-const URL = `http://localhost:4000`
+const URL = `https://fair-teal-scarab-ring.cyclic.app`
 
 export {URL };
