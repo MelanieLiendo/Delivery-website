@@ -15,7 +15,8 @@ function Restaurant({cart}) {
     const [quantity, setQuantity] = useState(1)
     const [orders, setOrders]  = useState(JSON.parse(localStorage.getItem('orders')) || [])
     const [difRestaurant, setDifRestaurant]= useState(false)
-    const [pictures, setPictures] = useState([])
+    const [pictures, setPictures]=useState([])
+    const [message, setMessage]=useState("")
 
 useEffect(() => {
  
@@ -121,21 +122,6 @@ useEffect(()=>{
     }}
       cartVerification()
     },[orders])
-
-
-  useEffect(() => {
-    fetch_pictures();
-  }, []);
-
-  const fetch_pictures = async () => {
-    try {
-      const response = await axios.post(`${URL}/pictures/getMenusOfRestaurant`,{restaurant_id:rest._id}) 
-      setPictures([ ...response.data.pictures ]);
-      console.log(response.data.pictures);
-    } catch (error) {
-      debugger;
-    }
-  };
 
   return (
     <section className='restaurantPage'>
