@@ -10,17 +10,13 @@ function EditDish({user,dishName,restaurantMenu,findingCategories}) {
   const [message,setMessage]= useState('')
   const [modalIsOpen, setIsOpen] = useState(false);
   const [changeDetails, setChangeDetails]=useState(false);
-  const [restId, setRestId] = useState("")
-  const [imageLink, setImageLink] =useState("")
-  const [infoMenu, setInfoMenu] = useState({
+  const [rest, setRest] = useState({
+          id: "",
           email: "",
-          name:"",
-          description: "",
-          price:"",
-          picture: "",
-          category: "",
-          id:"",
+          name: "",
   })
+  const [imageLink, setImageLink] =useState("")
+  const [infoMenu, setInfoMenu] = useState(null)
     
   useEffect(() => {
     const menuInfo = async () => {
@@ -42,20 +38,30 @@ function EditDish({user,dishName,restaurantMenu,findingCategories}) {
       }
     };
 
-    const restaurantId = async () => {
+    const restaurant = async () => {
       debugger
       try {        
         const response = await axios.post(`${URL}/restaurant/restaurant`,{
           email:user.userEmail});
-        setRestId(response.data.message._id)
+        setRest({
+          email: response.data.message.email,
+          id: response.data.message._id,
+
+        })
+        console.log(rest)
       }
       catch (error) {
         console.log(error);
       }
     };
-  
-    restaurantId();     
+    if(!rest.id || !rest.email) {
+      restaurant();   
+    }
+    
+   if(!infoMenu){
     menuInfo()
+
+   }
   },[]);
 
     const changeButton = ()=>{
@@ -108,11 +114,11 @@ function EditDish({user,dishName,restaurantMenu,findingCategories}) {
         onRequestClose={closeModal}>
           <form onChange={handleChange} onSubmit={handleSubmit} >
             <label>Dish</label> <input name="name" defaultValue={dishName} disabled={!changeDetails}/> 
-            <label>Description</label> <input name="description" defaultValue={infoMenu.description} disabled={!changeDetails}/>
-            <label>Price</label> <input name="price" defaultValue={infoMenu.price} disabled={!changeDetails}/>
-            <label>Picture</label> <UploadImages infoMenu={infoMenu} restId={restId} setImageLink={setImageLink}/> <button >{imageLink}X</button>
+            <label>Description</label> <input name="description" defaultValue={infoMenu && infoMenu.description} disabled={!changeDetails}/>
+            <label>Price</label> <input name="price" defaultValue={infoMenu && infoMenu.price} disabled={!changeDetails}/>
+            <label>Picture</label> <UploadImages infoMenu={infoMenu} rest={rest} setImageLink={setImageLink}/> <button >{imageLink}X</button>
             <label>Category</label> 
-            <select name="category" defaultValue={infoMenu.category} disabled={!changeDetails}>
+            <select name="category" defaultValue={infoMenu && infoMenu.category} disabled={!changeDetails}>
             <option disabled selected value> -- select an option -- </option>
             <option value="starters">Starters</option>
             <option value="main dishes">Main Dishes</option>            

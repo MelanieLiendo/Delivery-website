@@ -5,9 +5,9 @@ import { URL } from "../config";
 
 
 
-const UploadImages = ({restId, infoMenu, setImageLink}) => {
-  
- 
+const UploadImages = ({rest, infoMenu, setImageLink}) => {
+
+
   const uploadWidget = () => {
 
     // remember to add your credentials to the .env file
@@ -20,7 +20,7 @@ const UploadImages = ({restId, infoMenu, setImageLink}) => {
       },
       (error, result) => {
         if (error) {
-         debugger
+         
           console.log(error);
         } else {
         result.event === "queues-end" && upload_picture(result);
@@ -42,22 +42,44 @@ const UploadImages = ({restId, infoMenu, setImageLink}) => {
   const upload_picture = async (result) => {
     
     try {
-      console.log(result);
       const response = await axios.post(`${URL}/pictures/upload`, {
         files: result.info.files,
-        restaurant_id: restId ,
+        restaurant_id: rest.id ,
         menu_id: infoMenu.id,
        });
-       debugger
-       console.log(response);
-       console.log(result.info.files[0].name)
-      response.data.ok
-        ? setImageLink(result.info.files[0].name)        
-        : alert("Something went wrong"); 
+      
+      if (response.data.ok){
+        setImageLink(result.info.files[0].name) 
+        try { 
+          
+          const resp = await axios.post(`${URL}/menu/update`, {   
+           email: rest.email, 
+           name: infoMenu.name,        
+           newPicture: response.data.created[0].photo_url,
+             })
+         }catch (error) {
+           console.log(error);
+         }
+      } else {
+        alert("Something went wrong"); 
+      }  
+        
     } catch (error) {
       console.log(error);
     }
   };
+/*
+  const updatePictureOnMenu = async (props) => {
+    debugger
+    try {
+     const response = await axios.post(`${URL}/menu/update`, {   
+      email: user.userEmail,         
+      newPicture: props.data.created[0].photo_url,
+        })
+    }catch (error) {
+      console.log(error);
+    }
+  };*/
   
   // function to send data to server to create a new post
   return (
