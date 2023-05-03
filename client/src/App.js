@@ -22,6 +22,8 @@ function App() {
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')));
+  const [ pictures, setPictures ] = useState([]);
+
   useEffect(
     () => {
       const verify_token = async () => {
@@ -61,6 +63,35 @@ function App() {
   useEffect(()=>{
     console.log(user);
     },[])
+
+
+   
+/*
+	useEffect(() => {
+		fetch_pictures();
+	}, []);
+
+	const fetch_pictures = async () => {
+		try {
+			const response = await Axios.get('http://localhost:5050/pictures/get_all');
+			setPictures([ ...response.data.pictures ]);
+		} catch (error) {
+			debugger;
+		}
+	};
+
+	const remove_picture = async (_id, idx) => {
+		try {
+			await Axios.delete(`http://localhost:5050/pictures/remove/${_id}`);
+			const temp = pictures;
+			temp.splice(idx, 1);
+			setPictures([ ...temp ]);
+		} catch (error) {
+			debugger;
+		}
+	};*/
+
+
   return (
     <Router>
     <Navbar  isLoggedIn={isLoggedIn} logout={logout} user= {user}/>

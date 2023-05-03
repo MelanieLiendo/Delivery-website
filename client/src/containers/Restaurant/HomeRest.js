@@ -15,6 +15,7 @@ function HomeRest({user}) {
       
       const response = await axios.post(`${URL}/menu/restaurant`,{
         email:user.userEmail});
+        console.log(user)
 
       setMenu(response.data.message)
     }

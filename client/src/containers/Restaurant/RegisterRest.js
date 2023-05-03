@@ -3,6 +3,7 @@ import axios from 'axios';
 import { URL } from '../../config';
 import {useNavigate} from 'react-router-dom'
 import spagetti from '../../images/spagetti.png'
+import UploadImages from '../../components/Uploadimages';
 
 function ResgisterRest() {
   const [message,setMessage]= useState('')
@@ -99,9 +100,7 @@ function ResgisterRest() {
                     <input type='password' name='password'/>
                     <label>Repeat Password *</label>
                     <input type='password' name='password2'/>
-                    <label>Picture *</label>
-                    <input name='picture'/>
-                 </div>   
+                </div>   
             </section>   
             <section>
                 <label>Filter *</label>

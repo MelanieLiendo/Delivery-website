@@ -12,7 +12,6 @@ function AddDish({user, restaurantMenu, findingCategories}) {
       name: "",
       description:"",
       price: "",
-      picture: "",
       category: "",
       })
 
@@ -27,7 +26,6 @@ function AddDish({user, restaurantMenu, findingCategories}) {
             name: data.name,
             description: data.description,
             price: Number(data.price),
-            picture: data.picture,
             category: data.category
              })
 
@@ -65,8 +63,6 @@ function AddDish({user, restaurantMenu, findingCategories}) {
             <input name='description'/>
             <label>Price</label>
             <input name='price'/>
-            <label>Picture</label>
-            <input name='picture'/>
             <label>Category</label>
             <select name="category">
             <option disabled selected value> -- select an option -- </option>

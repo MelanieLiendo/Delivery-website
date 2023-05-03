@@ -79,14 +79,14 @@ const updatePassRestaurant = async (req,res)=>{
 }
 
 const registerRestaurant = async (req,res)=>{
-    let {country, city, address,restaurant, name, surname, phone, email, password, password2, filter, picture}= req.body
+    let {country, city, address,restaurant, name, surname, phone, email, password, password2, filter}= req.body
     const salt = "corazones429"
 
     if (typeof(phone)!= "number"){
         return res.json({ ok: false, message: "Invalid phone number" });
       }
 
-    if (!email || !password || !password2 || !country || !city || !address || !restaurant || !name || !surname || !phone || !filter || !picture){
+    if (!email || !password || !password2 || !country || !city || !address || !restaurant || !name || !surname || !phone || !filter){
         return res.json({ ok: false, message: "All fields required" });
       }
       if (password !== password2){
@@ -103,7 +103,7 @@ const registerRestaurant = async (req,res)=>{
         }
         else{
             const hash = await argon2.hash(password,salt);
-            await Restaurant.create({country, city, address,restaurant, name, surname, phone, email, password:hash, filter, picture})
+            await Restaurant.create({country, city, address,restaurant, name, surname, phone, email, password:hash, filter})
             res.send({ok:true, message:"The restaurant was successfully added"})
         }
     }

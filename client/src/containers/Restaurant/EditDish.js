@@ -3,40 +3,60 @@ import { useState, useEffect } from 'react';
 import Modal from 'react-modal'
 import axios from 'axios';
 import {URL} from '../../config'
+import UploadImages from '../../components/Uploadimages';
 
 function EditDish({user,dishName,restaurantMenu,findingCategories}) {
-    const [message,setMessage]= useState('')
-    const [modalIsOpen, setIsOpen] = useState(false);
-    const [changeDetails, setChangeDetails]=useState(false);
-    const [infoMenu, setInfoMenu] = useState({
-            email: "",
-            name:"",
-            description: "",
-            price:"",
-            picture: "",
-            category: ""
-    })
+
+  const [message,setMessage]= useState('')
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [changeDetails, setChangeDetails]=useState(false);
+  const [restId, setRestId] = useState("")
+  const [imageLink, setImageLink] =useState("")
+  const [infoMenu, setInfoMenu] = useState({
+          email: "",
+          name:"",
+          description: "",
+          price:"",
+          picture: "",
+          category: "",
+          id:"",
+  })
     
-      useEffect(
-        () => {
-      const menuInfo = async () => {
-        try {
-          const response = await axios.post(`${URL}/menu/dish`, {name:dishName});
-          setInfoMenu({
-            email: user.userEmail,
-            name:dishName,
-            description:response.data.message.description,
-            price:response.data.message.price,
-            picture: response.data.message.picture,
-            category: response.data.message.category
-          })
-          }
-        catch (error) {
-          console.log(error);
-        }
-      };
-      menuInfo()
-    },[]);
+  useEffect(() => {
+    const menuInfo = async () => {
+      debugger
+      try {
+        const response = await axios.post(`${URL}/menu/dish`, {name:dishName});
+        console.log(response)
+        setInfoMenu({
+          email: user.userEmail,
+          name:dishName,
+          description:response.data.message.description,
+          price:response.data.message.price,
+          picture: response.data.message.picture,
+          category: response.data.message.category,
+          id: response.data.message._id
+        })
+      }catch (error) {
+        console.log(error);
+      }
+    };
+
+    const restaurantId = async () => {
+      debugger
+      try {        
+        const response = await axios.post(`${URL}/restaurant/restaurant`,{
+          email:user.userEmail});
+        setRestId(response.data.message._id)
+      }
+      catch (error) {
+        console.log(error);
+      }
+    };
+  
+    restaurantId();     
+    menuInfo()
+  },[]);
 
     const changeButton = ()=>{
         setChangeDetails(!changeDetails)
@@ -90,7 +110,7 @@ function EditDish({user,dishName,restaurantMenu,findingCategories}) {
             <label>Dish</label> <input name="name" defaultValue={dishName} disabled={!changeDetails}/> 
             <label>Description</label> <input name="description" defaultValue={infoMenu.description} disabled={!changeDetails}/>
             <label>Price</label> <input name="price" defaultValue={infoMenu.price} disabled={!changeDetails}/>
-            <label>Picture</label> <input name="picture" defaultValue={infoMenu.picture} disabled={!changeDetails}/>
+            <label>Picture</label> <UploadImages infoMenu={infoMenu} restId={restId} setImageLink={setImageLink}/> <button >{imageLink}X</button>
             <label>Category</label> 
             <select name="category" defaultValue={infoMenu.category} disabled={!changeDetails}>
             <option disabled selected value> -- select an option -- </option>

@@ -5,6 +5,7 @@ import axios from 'axios';
 import {URL} from '../../config'
 import ChangePass from './ChangePass'
 import { useNavigate } from 'react-router-dom';
+import UploadImages from '../../components/Uploadimages';
 
 function InfoRest({user, logout}) {
   const navigate = useNavigate()
@@ -149,7 +150,7 @@ function InfoRest({user, logout}) {
     <button onClick={handleClick} disabled={!changeDetails || data.filter.length >= 3 || data.filter.includes("Fast Food")}  value= "Fast Food">Fast Food</button>
     <button onClick={handleClick} disabled={!changeDetails || data.filter.length >= 3 || data.filter.includes("Hamburger")}  value= "Hamburger">Hamburger</button>
     <button onClick={handleClick} disabled={!changeDetails || data.filter.length >= 3 || data.filter.includes("Breakfast")}  value= "Breakfast">Breakfast</button>
-    <label>Picture:</label><input name="picture"defaultValue = {data.picture} disabled={!changeDetails}/> 
+    <label>Picture:</label> <UploadImages user={user}/> 
     {data.filter.map(filtro=><div><p>{filtro}</p><button onClick = {deleteFilter} >x</button></div>)}
     <button  type="submit" name="Save Changes" disabled={!changeDetails}>Save Changes</button>
     {!changeDetails && <h3>{message}</h3>}  
