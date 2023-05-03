@@ -1,5 +1,6 @@
 const express = require('express'),
     app = express(),
+    PORT = process.env.PORT || 3000,
     mongoose = require('mongoose') 
 require("dotenv").config()
 mongoose.set('debug',true)
