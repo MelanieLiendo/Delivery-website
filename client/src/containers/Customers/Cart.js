@@ -83,13 +83,13 @@ const quantLess = (order) =>{
             {orders.map((order)=>(
               <>
               <article className='itemFlex'>
-              <div className='itemInCart'>
-              <h2>{order.quantity} x {order.name} ${order.total}</h2> 
+              <div className='itemInCartFile'>
+              <h3>{order.quantity} x {order.name} ${order.total}</h3> 
               </div>
               <div className='buttonsCartItem' >
               <button onClick= {()=>quantMore(order)} >+</button>
               <button onClick= {()=>quantLess(order)} >-</button>
-              <button onClick= {()=>deleteItem(order)} >Delete item</button>
+              <button onClick= {()=>deleteItem(order)} >&#128465;</button>
               </div>
               </article>
               </>

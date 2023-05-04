@@ -320,7 +320,8 @@ a {
 }
 
 .selectorRestFood button:disabled{
-    background-color: rgb(153, 188, 100);
+    border:solid;
+    border-color: rgb(153, 188, 100);
 }
 
 .gridHomeCust1{
@@ -582,7 +583,7 @@ a {
 
 /* cart Modal */
 
-.itemInCart{
+.itemInCartFile{
     font-size: 0.7em;
     margin-right: 1em;
 }
@@ -605,11 +606,10 @@ a {
     border: none;
 }
 
-.itemFlex{
+ .itemFlex{
     display: flex;
-    justify-content: start;
     align-items: center;
-}
+} 
 
 .buttonOrder{
     margin-top: 5em;
