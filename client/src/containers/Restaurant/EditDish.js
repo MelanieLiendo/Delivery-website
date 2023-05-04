@@ -10,7 +10,7 @@ function EditDish({user,dishName,restaurantMenu,findingCategories}) {
   const [message,setMessage]= useState('')
   const [modalIsOpen, setIsOpen] = useState(false);
   const [changeDetails, setChangeDetails]=useState(false);
-  let picReference = "dish"
+  const [picReference, setPicReference] = useState("dish")
   const [rest, setRest] = useState({
           id: "",
           email: "",
@@ -21,7 +21,7 @@ function EditDish({user,dishName,restaurantMenu,findingCategories}) {
     
   useEffect(() => {
     const menuInfo = async () => {
-      debugger
+      
       try {
         const response = await axios.post(`${URL}/menu/dish`, {name:dishName});
         console.log(response)
@@ -40,7 +40,7 @@ function EditDish({user,dishName,restaurantMenu,findingCategories}) {
     };
 
     const restaurant = async () => {
-      debugger
+      
       try {        
         const response = await axios.post(`${URL}/restaurant/restaurant`,{
           email:user.userEmail});
