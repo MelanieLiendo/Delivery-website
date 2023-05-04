@@ -121,21 +121,22 @@ const redirect = (sessionId) => {
   return (
     <section className='checkoutPage'>
         <button onClick={goBack}>&#11013;</button>
+        <div className='restaurantInfoCheckout'>
         <h2>{rest.restaurant}</h2>
-        <h2>Delivery details</h2>
-        
+        <p>&#128205;{rest.address}</p>
+        </div>
+        <div className=''>
+        <h4>Delivery details</h4>
         <h2>Mapa</h2>
-        <h2>{address}</h2>
-
-        <article>
-        <h3>Cart</h3>
+        <p>{address}</p>
+        </div>
+        <article id='cartInCheckout'>
+        <h4>Cart</h4>
         {orders.length > 0 &&
           <>
             {orders.map((order)=>(
               <div className='itemInCart'>
-              <p>{order.quantity}x</p>
-              <p>{order.name}</p>
-              <h4>$ {order.total}</h4>
+              <p>{order.quantity}x {order.name} ${order.total}</p>
               <button onClick= {()=>quantMore(order)} >+</button>
               <button onClick= {()=>quantLess(order)} >-</button>
               <button onClick= {()=>deleteItem(order)}>&#128465;</button>

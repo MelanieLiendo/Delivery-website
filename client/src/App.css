@@ -739,10 +739,9 @@ a {
 }
 
 .itemInCart{
-    display: grid;
-    grid-template-columns: 0.1fr 0.5fr 0.5fr 0.1fr 0.1fr 0.1fr;
+    display: flex;
+    gap:2em;
     align-items: center;
-    margin-right: 60em;
 }
 
 /* restaurant View Home */
