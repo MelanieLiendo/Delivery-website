@@ -744,6 +744,16 @@ a {
     align-items: center;
 }
 
+.cartInCheckout, .deliveryDetailsCheckout, .restaurantInfoCheckout{
+    border-bottom: solid thin rgb(194, 194, 194);
+}
+.titlesCheckout{
+    color: #258599;
+}
+.buttonPayCheckout{
+    width: 300px;
+}
+
 /* restaurant View Home */
 
 .dishesInCategoryRest img{

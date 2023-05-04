@@ -122,16 +122,17 @@ const redirect = (sessionId) => {
     <section className='checkoutPage'>
         <button onClick={goBack}>&#11013;</button>
         <div className='restaurantInfoCheckout'>
-        <h2>{rest.restaurant}</h2>
+        <h4 className='titlesCheckout'>Restaurant</h4>
+        <h4>{rest.restaurant}</h4>
         <p>&#128205;{rest.address}</p>
         </div>
-        <div className=''>
-        <h4>Delivery details</h4>
+        <div className='deliveryDetailsCheckout'>
+        <h4 className='titlesCheckout'>Delivery details</h4>
         <h2>Mapa</h2>
         <p>{address}</p>
         </div>
         <article id='cartInCheckout'>
-        <h4>Cart</h4>
+        <h4 className='titlesCheckout'>Cart</h4>
         {orders.length > 0 &&
           <>
             {orders.map((order)=>(
@@ -143,7 +144,7 @@ const redirect = (sessionId) => {
               </div>
             ))} 
         
-          <button onClick={() => createCheckoutSession()}>&#128179; Pay ${orders.reduce((total,acc)=>(total +(acc.price * acc.quantity)),0)}</button>
+          <button className='buttonPayCheckout'onClick={() => createCheckoutSession()}>&#128179; Pay ${orders.reduce((total,acc)=>(total +(acc.price * acc.quantity)),0)}</button>
                 
           </>
         }
