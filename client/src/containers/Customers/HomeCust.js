@@ -23,7 +23,7 @@ function HomeCust({user}) {
           try {
             const response = await axios.post(`${URL}/customer/customer`, {email:user.userEmail});
             setAddress({address:response.data.message[0].address});
-            console.log(response);}
+            }
           catch (error) {
             console.log(error);
           }

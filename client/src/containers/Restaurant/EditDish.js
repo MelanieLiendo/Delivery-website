@@ -10,6 +10,7 @@ function EditDish({user,dishName,restaurantMenu,findingCategories}) {
   const [message,setMessage]= useState('')
   const [modalIsOpen, setIsOpen] = useState(false);
   const [changeDetails, setChangeDetails]=useState(false);
+  let picReference = "dish"
   const [rest, setRest] = useState({
           id: "",
           email: "",
@@ -116,7 +117,7 @@ function EditDish({user,dishName,restaurantMenu,findingCategories}) {
             <label>Dish</label> <input name="name" defaultValue={dishName} disabled={!changeDetails}/> 
             <label>Description</label> <input name="description" defaultValue={infoMenu && infoMenu.description} disabled={!changeDetails}/>
             <label>Price</label> <input name="price" defaultValue={infoMenu && infoMenu.price} disabled={!changeDetails}/>
-            <label>Picture</label> <UploadImages infoMenu={infoMenu} rest={rest} setImageLink={setImageLink}/> <button >{imageLink}X</button>
+            <label>Picture</label> <UploadImages infoMenu={infoMenu} rest={rest} setImageLink={setImageLink} changeDetails={changeDetails} picReference={picReference}/> <button >{imageLink}X</button>
             <label>Category</label> 
             <select name="category" defaultValue={infoMenu && infoMenu.category} disabled={!changeDetails}>
             <option disabled selected value> -- select an option -- </option>

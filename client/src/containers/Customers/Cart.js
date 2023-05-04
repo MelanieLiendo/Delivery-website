@@ -78,7 +78,7 @@ const quantLess = (order) =>{
         <h2>Cart</h2>
         {(orders && orders.length > 0) &&
           <>
-          <h2>{rest.restaurant}</h2>
+          <h2>Restaurant</h2>
           <button onClick= {deleteCart} >Delete cart</button>
             {orders.map((order)=>(
               <>
