@@ -69,7 +69,7 @@ const quantLess = (order) =>{
     
   return (
     <div>
-      <button onClick={openModal}>Cart</button>
+      <button onClick={openModal}>&#128722;</button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}>

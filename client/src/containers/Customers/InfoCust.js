@@ -99,7 +99,7 @@ function InfoCust({user, logout}) {
   return (
     <div>
       <div className='iconosNavBar'>
-      <button onClick={openModal}>Customer's Info</button>
+      <button onClick={openModal}>&#128100;</button>
       </div>
       <Modal
         isOpen={modalIsOpen}

@@ -119,7 +119,7 @@ const redirect = (sessionId) => {
     });
 };
   return (
-    <div>
+    <section className='checkoutPage'>
         <button onClick={goBack}>&#11013;</button>
         <h2>{rest.restaurant}</h2>
         <h2>Delivery details</h2>
@@ -127,31 +127,27 @@ const redirect = (sessionId) => {
         <h2>Mapa</h2>
         <h2>{address}</h2>
 
-        <section className= "carrito">
-        <h2>Cart</h2>
+        <article>
+        <h3>Cart</h3>
         {orders.length > 0 &&
           <>
             {orders.map((order)=>(
-              <>
-              <h2>{order.quantity}x</h2>
-              <h2>{order.name}</h2>
-              <h2>$ {order.total}</h2>
+              <div className='itemInCart'>
+              <p>{order.quantity}x</p>
+              <p>{order.name}</p>
+              <h4>$ {order.total}</h4>
               <button onClick= {()=>quantMore(order)} >+</button>
               <button onClick= {()=>quantLess(order)} >-</button>
-              <button onClick= {()=>deleteItem(order)} >Delete item</button>
-              </>
+              <button onClick= {()=>deleteItem(order)}>&#128465;</button>
+              </div>
             ))} 
         
           <button onClick={() => createCheckoutSession()}>&#128179; Pay ${orders.reduce((total,acc)=>(total +(acc.price * acc.quantity)),0)}</button>
                 
           </>
         }
-      </section>          
-
-
-
-
-    </div>
+      </article>          
+    </section>
   )
 }
 

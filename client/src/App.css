@@ -682,8 +682,68 @@ a {
     font-size: 1em;
  }
 
+ .messageAddToCart{
+    color: green;
+    font-style: bold;
+ }
+
 
  /* modal add a dish to cart */
+
+ .modalAddtoCart button{
+    font-family: 'Rozha One';
+    text-align: center;
+    border: solid thin gray;
+    background-color: white;
+    border-radius: 1em;
+ }
+
+ .modalAddtoCart {
+    font-family: 'Rozha One' ;
+ }
+
+ .modalAddtoCart img{
+    width: 150px;
+ }
+
+ .modalAddtoCart button:hover{
+    background-color:#abdfea ;
+    border: none; 
+    border-radius: 1em;
+ }
+
+ .buttonsAddToCart{
+    display: flex;
+    align-items: center;
+    gap: 2em;
+ }
+
+ .finalButtonaddToCart{
+    width: 10%;
+ }
+
+/* CheckOut */
+
+.checkoutPage button{
+    font-family: 'Rozha One';
+    text-align: center;
+    border: solid thin gray;
+    background-color: white;
+    border-radius: 1em;
+}
+
+.checkoutPage button:hover{
+    background-color:#abdfea ;
+    border: none; 
+    border-radius: 1em; 
+}
+
+.itemInCart{
+    display: grid;
+    grid-template-columns: 0.1fr 0.5fr 0.5fr 0.1fr 0.1fr 0.1fr;
+    align-items: center;
+    margin-right: 60em;
+}
 
 /* restaurant View Home */
 

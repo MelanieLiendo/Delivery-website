@@ -127,8 +127,8 @@ useEffect(()=>{
     <section className='restaurantPage'>
       <article className='infoRestDishes'>
       <h2>{rest.restaurant}</h2>
-      <h3>&#128205;{rest.address}</h3>
-      <h2 className='messageAddToCart'>{message}</h2>
+      <p>&#128205;{rest.address}</p>
+      <p className='messageAddToCart'>{message}</p>
       </article>
       {difRestaurant && <h2>You have dishes from another restaurant in your cart.</h2>}
       <div className='categoryDishRestaurant'>
@@ -153,18 +153,19 @@ useEffect(()=>{
     {dish &&     <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}>            
-
-        <button onClick={closeModal}>Close</button>
-
-        <h2>{dish.picture}</h2>
+        <section className='modalAddtoCart'>
+        <button onClick={closeModal}>x</button>
         <h2>{dish.name}</h2>
         <h2>{dish.description}</h2>
+        <img src={dish.picture}/>
         <h2>${dish.price}</h2>
-        <button onClick= {handleSum}>+</button>
-        <h3>{quantity}</h3>
+        <div className='buttonsAddToCart'>
         <button onClick ={handleRes}>-</button>
-        
-        <button  onClick={handleOrder} >Add {quantity} for ${dish.price*quantity}</button>
+        <h3>{quantity}</h3>
+        <button onClick= {handleSum}>+</button>
+        </div>
+        <button className='finalButtonaddToCart' onClick={handleOrder} >Add {quantity} for ${dish.price*quantity}</button>
+        </section>
       </Modal>}
 
     </section>
