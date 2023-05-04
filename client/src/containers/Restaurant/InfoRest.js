@@ -9,7 +9,8 @@ import UploadImages from '../../components/Uploadimages';
 
 function InfoRest({user, logout}) {
   const navigate = useNavigate()
-  const [imageLink, setImageLink] =useState("")
+  const [imageLinkRest, setImageLinkRest] =useState("")
+  const [picReference, setPicReference] = useState("restaurant")
   const [data,setData]= useState({
     country:"", 
     city: "", 
@@ -21,7 +22,8 @@ function InfoRest({user, logout}) {
     email:"", 
     password:"",
     filter:[],
-  picture:""})
+    picture:"",
+    id: ""})
 
   const [changeDetails, setChangeDetails]=useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -49,7 +51,8 @@ function InfoRest({user, logout}) {
         phone:response.data.message.phone, 
         email:response.data.message.email, 
         filter:response.data.message.filter,
-        picture:response.data.message.picture
+        picture:response.data.message.picture,
+        id: response.data.message._id
       })
       }
     catch (error) {
@@ -151,7 +154,7 @@ function InfoRest({user, logout}) {
     <button onClick={handleClick} disabled={!changeDetails || data.filter.length >= 3 || data.filter.includes("Fast Food")}  value= "Fast Food">Fast Food</button>
     <button onClick={handleClick} disabled={!changeDetails || data.filter.length >= 3 || data.filter.includes("Hamburger")}  value= "Hamburger">Hamburger</button>
     <button onClick={handleClick} disabled={!changeDetails || data.filter.length >= 3 || data.filter.includes("Breakfast")}  value= "Breakfast">Breakfast</button>
-    <label>Picture:</label> <UploadImages user={user} setImageLink={setImageLink} changeDetails={changeDetails}/>  <button >{imageLink}X</button>
+    <label>Picture:</label> <UploadImages data={data} setImageLinkRest={setImageLinkRest} changeDetails={changeDetails} picReference={picReference}/>  <button >{imageLinkRest}X</button>
     {data.filter.map(filtro=><div><p>{filtro}</p><button onClick = {deleteFilter} >x</button></div>)}
     <button  type="submit" name="Save Changes" disabled={!changeDetails}>Save Changes</button>
     {!changeDetails && <h3>{message}</h3>}  

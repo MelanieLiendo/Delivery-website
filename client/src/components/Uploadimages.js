@@ -5,7 +5,7 @@ import { URL } from "../config";
 
 
 
-const UploadImages = ({rest, infoMenu, setImageLink, changeDetails, picReference}) => {
+const UploadImages = ({rest, data, infoMenu, setImageLink, setImageLinkRest, changeDetails, picReference}) => {
 
 
   const uploadWidget = () => {
@@ -22,8 +22,10 @@ const UploadImages = ({rest, infoMenu, setImageLink, changeDetails, picReference
         if (error) {
          
           console.log(error);
-        } else {
-        result.event === "queues-end" && upload_picture(result);
+        } else if ( result.event === "queues-end" && picReference == "dish") {
+         upload_picture(result);
+        } else if (result.event === "queues-end" && picReference == "restaurant"){
+          upload_picture_rest(result);
         }
       }
     );
@@ -31,7 +33,8 @@ const UploadImages = ({rest, infoMenu, setImageLink, changeDetails, picReference
 
 
   const upload_picture = async (result) => {
-    debugger
+    // delete pic
+    
     try {
       const response = await axios.post(`${URL}/pictures/upload`, {
         files: result.info.files,
@@ -42,7 +45,7 @@ const UploadImages = ({rest, infoMenu, setImageLink, changeDetails, picReference
       if (response.data.ok){
         setImageLink(result.info.files[0].name) 
         try { 
-          debugger
+          
           const resp = await axios.post(`${URL}/menu/update`, {   
            email: rest.email, 
            name: infoMenu.name,        
@@ -58,7 +61,35 @@ const UploadImages = ({rest, infoMenu, setImageLink, changeDetails, picReference
     } catch (error) {
       console.log(error);
     }
-  };
+  }; 
+
+  const upload_picture_rest = async (result) => {
+    console.log(data)
+    try {
+      const response = await axios.post(`${URL}/pictures/upload`, {
+        files: result.info.files,
+        restaurant_id: data.id ,
+       });
+      
+      if (response.data.ok){
+        setImageLinkRest(result.info.files[0].name) 
+        try { 
+          debugger
+          const resp = await axios.post(`${URL}/restaurant/update`, {   
+           email: data.email,         
+           newPicture: response.data.created[0].photo_url,
+             })
+         }catch (error) {
+           console.log(error);
+         }
+      } else {
+        alert("Something went wrong"); 
+      }  
+        
+    } catch (error) {
+      console.log(error);
+    }
+  }; 
 
   return (
     <div className="flex_upload">

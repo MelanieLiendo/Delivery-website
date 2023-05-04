@@ -10,18 +10,18 @@ function EditDish({user,dishName,restaurantMenu,findingCategories}) {
   const [message,setMessage]= useState('')
   const [modalIsOpen, setIsOpen] = useState(false);
   const [changeDetails, setChangeDetails]=useState(false);
-  let picReference = "dish"
+  const [picReference, setPicReference] = useState("dish")
   const [rest, setRest] = useState({
           id: "",
           email: "",
           name: "",
   })
   const [imageLink, setImageLink] =useState("")
-  const [infoMenu, setInfoMenu] = useState(null)
+  const [infoMenu, setInfoMenu] = useState({})
     
   useEffect(() => {
     const menuInfo = async () => {
-      debugger
+      
       try {
         const response = await axios.post(`${URL}/menu/dish`, {name:dishName});
         console.log(response)
@@ -40,7 +40,7 @@ function EditDish({user,dishName,restaurantMenu,findingCategories}) {
     };
 
     const restaurant = async () => {
-      debugger
+      
       try {        
         const response = await axios.post(`${URL}/restaurant/restaurant`,{
           email:user.userEmail});
@@ -107,6 +107,18 @@ function EditDish({user,dishName,restaurantMenu,findingCategories}) {
     setIsOpen(false);
   }
 
+  const removeImage = async () =>{
+    try{
+    const response = await axios.post(`${URL}/picture/remove`, {  
+      photo_url : infoMenu.picture})
+      console.log(response)
+    } catch(error) {
+      console.log(error);
+    }
+
+  }
+
+
   return (
     <div>
       <button onClick={openModal}>Edit</button>
@@ -117,7 +129,7 @@ function EditDish({user,dishName,restaurantMenu,findingCategories}) {
             <label>Dish</label> <input name="name" defaultValue={dishName} disabled={!changeDetails}/> 
             <label>Description</label> <input name="description" defaultValue={infoMenu && infoMenu.description} disabled={!changeDetails}/>
             <label>Price</label> <input name="price" defaultValue={infoMenu && infoMenu.price} disabled={!changeDetails}/>
-            <label>Picture</label> <UploadImages infoMenu={infoMenu} rest={rest} setImageLink={setImageLink} changeDetails={changeDetails} picReference={picReference}/> <button >{imageLink}X</button>
+            <label>Picture</label> <UploadImages infoMenu={infoMenu} rest={rest} setImageLink={setImageLink} changeDetails={changeDetails} picReference={picReference}/> {infoMenu.picture != null && <button onClick={removeImage}>{infoMenu.picture} X</button> }
             <label>Category</label> 
             <select name="category" defaultValue={infoMenu && infoMenu.category} disabled={!changeDetails}>
             <option disabled selected value> -- select an option -- </option>
