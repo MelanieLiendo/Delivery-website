@@ -9,14 +9,7 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(require("cors")())
 
-const path = require('path');
 
-app.use(express.static(__dirname));
-app.use(express.static(path.join(__dirname, '../client/build')));
-
-app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-});
 
 async function connecting(){
     try {
@@ -36,10 +29,19 @@ app.use('/order', require('./routes/orderRoute'))
 app.use('/payment', require('./routes/paymentRoute'));
 app.use("/pictures", require("./routes/picturesRoute"))
 
+const path = require('path');
+
+app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
+
 connecting().then(() => {
     app.listen(PORT, () => {
         console.log("listening for requests");
     })
 })
 
-app.listen(4000, () => console.log(`listening on port 4000`))
+app.listen(PORT, () => console.log(`listening on port 4000`))
