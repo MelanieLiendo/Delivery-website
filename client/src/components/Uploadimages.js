@@ -5,7 +5,7 @@ import { URL } from "../config";
 
 
 
-const UploadImages = ({rest, infoMenu, setImageLink, setImageLinkRest, changeDetails, picReference}) => {
+const UploadImages = ({rest, data, infoMenu, setImageLink, setImageLinkRest, changeDetails, picReference}) => {
 
 
   const uploadWidget = () => {
@@ -33,6 +33,8 @@ const UploadImages = ({rest, infoMenu, setImageLink, setImageLinkRest, changeDet
 
 
   const upload_picture = async (result) => {
+    // delete pic
+    
     try {
       const response = await axios.post(`${URL}/pictures/upload`, {
         files: result.info.files,
@@ -62,19 +64,19 @@ const UploadImages = ({rest, infoMenu, setImageLink, setImageLinkRest, changeDet
   }; 
 
   const upload_picture_rest = async (result) => {
+    console.log(data)
     try {
       const response = await axios.post(`${URL}/pictures/upload`, {
         files: result.info.files,
-        restaurant_id: rest.id ,
+        restaurant_id: data.id ,
        });
       
       if (response.data.ok){
         setImageLinkRest(result.info.files[0].name) 
         try { 
-          
+          debugger
           const resp = await axios.post(`${URL}/restaurant/update`, {   
-           email: rest.email, 
-           name: infoMenu.name,        
+           email: data.email,         
            newPicture: response.data.created[0].photo_url,
              })
          }catch (error) {

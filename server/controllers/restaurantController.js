@@ -35,10 +35,12 @@ const updateRestaurant = async (req,res)=>{
         const findEmail = await Restaurant.findOne({email})
         let arrayFilters = findEmail.filter
         let filterChange = false
+        if (newFilter != undefined){
         arrayFilters.forEach((ele)=>{
             if (newFilter.includes(ele) && arrayFilters.length == newFilter.length){
                 filterChange=true}
         })
+    }
         if (!findEmail){
             res.send({ok:true, message:"This email is not registered in Foodies"})
         }

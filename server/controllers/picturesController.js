@@ -38,6 +38,9 @@ const upload = async (req, res) => {
 };
 
 
+
+
+
 const getPictureMenu = async (req, res) => {
   const { menu_id } =req.body;
   try {
@@ -71,10 +74,11 @@ const getMenusOfRestaurant = async (req, res) => {
 
 
 const remove = async (req, res) => {
-  const { _id } = req.params;
+  const { photo_url } = req.body;
 
   try {
-    const deleted = await Pictures.findByIdAndRemove({ _id: _id });
+      const findPicture = await Pictures.findOne({photo_url})
+    const deleted = await Pictures.findByIdAndRemove({ _id: findPicture._id });
     if (deleted.public_id) {
       await cloudinary.v2.api.delete_resources([deleted.public_id]);
       res.json({ ok: true, deleted });

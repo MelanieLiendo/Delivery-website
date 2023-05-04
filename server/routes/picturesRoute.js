@@ -3,7 +3,7 @@ const router     = express.Router();
 const controller = require('../controllers/picturesController');
 
 router.post('/upload', controller.upload);
-router.delete('/remove/:_id', controller.remove);
+router.post('/remove', controller.remove);
 router.post('/getPictureMenu', controller.getPictureMenu);
 router.post('/getPictureRestaurant', controller.getMenusOfRestaurant);
 
