@@ -28,6 +28,7 @@ app.use('/verify_token', require('./routes/verify_token'))
 app.use('/order', require('./routes/orderRoute'))
 app.use('/payment', require('./routes/paymentRoute'));
 app.use("/pictures", require("./routes/picturesRoute"))
+app.use('/emails', require('./routes/emailsRoute'));
 
 const path = require('path');
 
