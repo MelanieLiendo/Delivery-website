@@ -133,7 +133,9 @@ function InfoRest({user, logout}) {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}>
 
-    <button onClick={closeModal}>Close</button>
+    <section className='changeInfoRest'>
+
+    <button onClick={closeModal}>X</button>
 
     <form onChange={handleChange} onSubmit={handleSubmit}>
     <label>Country:</label> <input name="country" defaultValue={data.country} disabled={!changeDetails}/> 
@@ -162,7 +164,7 @@ function InfoRest({user, logout}) {
     <button name="Edit" onClick={changeButton} disabled={changeDetails}>Edit</button> 
     <ChangePass user={user} changeDetails={changeDetails}/>
     <button onClick={deleteAccount}>Delete account</button>
-
+    </section>
       </Modal>
     </div>
   );

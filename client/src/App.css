@@ -581,6 +581,28 @@ a {
     padding: 3em 0;
 }
 
+/* change info rest*/
+
+.changeInfoRest{
+    font-family: 'Rhoza One';
+}
+
+.changeInfoRest input{
+    width: 20%;
+    border: rgb(192, 187, 187) thin solid;
+    border-radius: 0.5em;
+    margin-left: 1em;
+}
+
+.changeInfoRest button {
+    text-align: center;
+    border: solid thin gray;
+    border-radius: 1em;
+    background-color: white;
+    font-family: 'Rozha One';
+
+}
+
 /* cart Modal */
 
 .itemInCartFile{

@@ -142,7 +142,7 @@ useEffect(()=>{
       <img src={meal.picture}/>
       <div className='dishDetails'>
       <h3>{meal.name}</h3>
-      <h3>{meal.description}</h3>
+      <p>{meal.description}</p>
       </div>
       <h3>${meal.price}</h3>
       </article>

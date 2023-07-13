@@ -85,6 +85,8 @@ function HomeRest({user}) {
         dish.category == categ &&
         <article className='dishesInCategoryRest'>
         <h3>{dish.name}</h3>
+        <p>{dish.description}</p>
+        <p>${dish.price}</p>
         <img src={dish.picture}/>
         <button onClick={()=>deleteDish(dish.name,i)}>x</button>
         <EditDish user= {user} dishName={dish.name} restaurantMenu={restaurantMenu} findingCategories={findingCategories}/>
