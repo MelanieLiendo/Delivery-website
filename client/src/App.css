@@ -327,6 +327,7 @@ a {
 .gridHomeCust1{
     display: grid;
     grid-template-columns: 200px 1fr;
+    margin: 0 2em;
 }
 
 .gridHomeCust2{
@@ -512,6 +513,36 @@ a {
     color:gray;
 }
 
+/*payment successfull*/
+
+.message_box{
+    font-family: 'Rozha One';
+    font-size: 30px;
+    font-weight: 400;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#paymentsuccesstotal{
+    font-weight: 400;
+}
+
+.message_box h3{
+    font-size: 15px;
+    font-weight: 100;
+}
+
+.paymentsuccessorder{
+    text-decoration: underline;
+}
+
+
+.paymentemail{
+    text-decoration: underline;
+}
+
 /* order Modal */
 
 .order{
@@ -523,6 +554,13 @@ a {
     border-radius: 1em;
     margin-bottom: 2em;
     width: 40%;
+}
+
+.historicalOrders{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
 }
 
 .titleHistoricalOrders{

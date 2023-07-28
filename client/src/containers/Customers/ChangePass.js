@@ -7,20 +7,17 @@ import {URL} from '../../config'
 function ChangePass({user}) {
     const [passwords,setPasswords]= useState({actualPasswordInput:'', newPassword:'', newPassword2:''})
     const [message,setMessage]= useState('')
-    const [openClose, setOpenClose]= useState('')
 
     console.log(user);
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const openModal = () =>{
-    setIsOpen(true);
-    setOpenClose('open')
+    setIsOpen(true)
   }
 
   const closeModal=() => {
-    setIsOpen(false);
-    setOpenClose('close')
+    setIsOpen(false)
   }
 
 const handleChange = (e) => {setPasswords({...passwords,[e.target.name]:e.target.value})}

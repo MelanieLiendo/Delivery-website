@@ -38,6 +38,8 @@ function Orders({user}) {
         onRequestClose={closeModal}>
         <section className='historicalOrders'>
         <button onClick={closeModal}>x</button>
+        <div className='hi'> 
+       
         <h1 className='titleHistoricalOrders'>Historical Orders</h1>
         {orders.map((or)=> 
         <div className='order'>
@@ -50,8 +52,8 @@ function Orders({user}) {
         )}
         <h2>${or.totalPrice}</h2>
         </div>
-      
         )}
+        </div>
         </section>
       </Modal>
     </div>

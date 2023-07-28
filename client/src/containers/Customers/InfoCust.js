@@ -17,17 +17,14 @@ function InfoCust({user, logout}) {
   const navigate = useNavigate()
   const [changeDetails, setChangeDetails]=useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [message, setMessage] = useState('');
-  const [openClose, setOpenClose]= useState('')
+  const [message, setMessage] = useState('')
 
   const openModal = () =>{
-    setIsOpen(true);
-    setOpenClose("open")
+    setIsOpen(true)
   }
 
   const closeModal=() => {
-    setIsOpen(false);
-    setOpenClose("close")
+    setIsOpen(false)
   }
   useEffect(
     () => {
@@ -66,12 +63,11 @@ function InfoCust({user, logout}) {
           
         setMessage(response.data.message)
         
-        if (message == response.data.message) {
+      
           setTimeout(() => {
             setMessage('');
-          }, 4000);
-           }
-
+          }, 3000);
+          
 
         }
       catch (error) {

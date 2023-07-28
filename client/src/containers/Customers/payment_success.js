@@ -57,16 +57,14 @@ console.log(user);
   return (
     <div className="message_container">
       <div  className="message_box">
-        <div className="message_box_right">
           <h2>Payment Successfull</h2>
-          <h2>We sent you an email to {custEmail} with your order confirmation</h2>
-          <h2>Your order:</h2>
+          <h3>We sent you an email to <span className="paymentemail">{custEmail} </span>with your order confirmation</h3>
+          <h3 className="paymentsuccessorder">Your order:</h3>
           {recentOrder.map((item)=>
           <div>
-          <h2>{item.quantity} x {item.description}(${item.price.unit_amount/100})=${item.quantity*item.price.unit_amount/100}</h2>
+          <h3>{item.quantity} x {item.description}(${item.price.unit_amount/100})=${item.quantity*item.price.unit_amount/100}</h3>
           </div>)}
-          <h2>Total: ${recentOrder.reduce((total,acc)=>(total +(acc.amount_total/100)),0)}</h2>
-        </div>
+          <h3 id="paymentsuccesstotal">Total: ${recentOrder.reduce((total,acc)=>(total +(acc.amount_total/100)),0)}</h3>
       </div>
     </div>
   );
