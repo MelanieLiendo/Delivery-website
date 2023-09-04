@@ -2,6 +2,7 @@ import React, {useEffect,useState} from 'react'
 import axios from 'axios';
 import {URL} from '../../config'
 import { NavLink } from 'react-router-dom';
+import InfoCust from './InfoCust'
 
 function HomeCust({user}) {
   const [address,setAddress]= useState('')
@@ -112,6 +113,7 @@ function HomeCust({user}) {
   return (
     <div id='homeCustAll'>
       <h2 className='deliveringAddress'>Delivering to {address.address}</h2>
+      <InfoCust setAddress= {setAddress}/>
       <section className='searchRestaurant'>
         <input onChange= {inputSearch} type="text" placeholder="Search.."/>
         <div className='selectorRestFood'>

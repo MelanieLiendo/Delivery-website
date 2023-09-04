@@ -7,7 +7,7 @@ import ChangePass from './ChangePass'
 import { useNavigate } from 'react-router-dom';
 import iconoPersona from '../../images/iconoPersona.png'
 
-function InfoCust({user, logout}) {
+function InfoCust({user, logout, setAddress}) {
   const [data,setData]= useState({
     address: "", 
     name:"", 
@@ -73,6 +73,7 @@ function InfoCust({user, logout}) {
       catch (error) {
         console.log(error);
       }
+      setAddress({address:data.address})
     }
 
     const deleteAccount = async ()=>{

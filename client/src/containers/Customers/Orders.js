@@ -38,21 +38,20 @@ function Orders({user}) {
         onRequestClose={closeModal}>
         <section className='historicalOrders'>
         <button onClick={closeModal}>x</button>
-        <div className='hi'> 
-       
-        <h1 className='titleHistoricalOrders'>Historical Orders</h1>
-        {orders.map((or)=> 
-        <div className='order'>
-        <h2>{or.restaurant}</h2>
-        <h2>{or.picture}</h2>
-        {or.menu.map((dish)=>
-          <div>
-        <h2>{dish.quantity} x {dish.dish}</h2>
-        </div>
-        )}
-        <h2>${or.totalPrice}</h2>
-        </div>
-        )}
+        <div className='historicalOrders2'>       
+          <h1 className='titleHistoricalOrders'>Historical Orders</h1>
+          {orders.map((or)=> 
+          <div className='order'>
+            <h2>{or.restaurant}</h2>
+            <h2>{or.picture}</h2>
+            {or.menu.map((dish)=>
+            <div>
+              <h2>{dish.quantity} x {dish.dish}</h2>
+            </div>
+            )}
+            <h2>${or.totalPrice}</h2>
+          </div>
+          )}
         </div>
         </section>
       </Modal>
