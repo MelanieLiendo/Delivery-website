@@ -23,6 +23,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')));
   const [ pictures, setPictures ] = useState([]);
+  
 
   useEffect(
     () => {
@@ -94,9 +95,9 @@ function App() {
 
   return (
     <Router>
-    <Navbar  isLoggedIn={isLoggedIn} logout={logout} user= {user}/>
+    <Navbar  isLoggedIn={isLoggedIn} logout={logout} user= {user} />
     <Routes>
-    <Route path="/" element={<Home isLoggedIn={isLoggedIn} logout={logout} user={user}/>} />
+    <Route path="/" element={<Home isLoggedIn={isLoggedIn} logout={logout} user={user} />} />
     <Route
     path="/login/:type"
     element ={ isLoggedIn ? <Navigate to='/' /> : <Login  login={login} /> } 

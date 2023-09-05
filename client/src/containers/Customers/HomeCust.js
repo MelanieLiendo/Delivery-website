@@ -2,7 +2,7 @@ import React, {useEffect,useState} from 'react'
 import axios from 'axios';
 import {URL} from '../../config'
 import { NavLink } from 'react-router-dom';
-import InfoCust from './InfoCust'
+
 
 function HomeCust({user}) {
   const [address,setAddress]= useState('')
@@ -16,20 +16,18 @@ function HomeCust({user}) {
   const [menu, setMenu] = useState([])
   const [noResult,setNoResult]=useState(false)
 
+  const customerAddress = async () => {
+    try {
+      const response = await axios.post(`${URL}/customer/customer`, {email:user.userEmail});
+      setAddress({address:response.data.message[0].address});
+      }
+    catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(
     () => {
-      
-        const customerAddress = async () => {
-          try {
-            const response = await axios.post(`${URL}/customer/customer`, {email:user.userEmail});
-            setAddress({address:response.data.message[0].address});
-            }
-          catch (error) {
-            console.log(error);
-          }
-        };
-  
   const menu = async () => {
     try {
       const response = await axios.get(`${URL}/menu/all`)
@@ -57,7 +55,8 @@ function HomeCust({user}) {
   customerAddress()
   customerInfo()
   }
-},[]);
+  customerAddress()
+},[address]);
   
 
     useEffect( () => {         
@@ -108,12 +107,13 @@ function HomeCust({user}) {
     const handleSearch = () => {
       setSearching(!searching)
     }
+
+    
     
 
   return (
     <div id='homeCustAll'>
       <h2 className='deliveringAddress'>Delivering to {address.address}</h2>
-      <InfoCust setAddress= {setAddress}/>
       <section className='searchRestaurant'>
         <input onChange= {inputSearch} type="text" placeholder="Search.."/>
         <div className='selectorRestFood'>

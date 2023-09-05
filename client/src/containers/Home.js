@@ -9,7 +9,7 @@ function Home({isLoggedIn,user}) {
     return (
         <div className='home'>
         { isLoggedIn ? 
-       user.userType === "restaurant" ? <section ><HomeRest user={user} /> </section > : <section >< HomeCust  user={user}/></section>: 
+       user.userType === "restaurant" ? <section ><HomeRest user={user} /> </section > : <section >< HomeCust  user={user} /></section>: 
        <>
        <section id='splashscreen'>
        <img src={homeImage}/>

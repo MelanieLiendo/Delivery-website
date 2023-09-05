@@ -5,7 +5,7 @@ import axios from 'axios';
 import {URL} from '../../config'
 import ChangePass from './ChangePass'
 import { useNavigate } from 'react-router-dom';
-import iconoPersona from '../../images/iconoPersona.png'
+
 
 function InfoCust({user, logout, setAddress}) {
   const [data,setData]= useState({
@@ -118,7 +118,7 @@ function InfoCust({user, logout, setAddress}) {
     </div>
       </Modal>
     </div>
-  );
+  )
 }
 
 export default InfoCust

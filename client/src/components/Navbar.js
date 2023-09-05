@@ -23,7 +23,7 @@ function Navbar({isLoggedIn, logout, user}) {
 
       {isLoggedIn===true && user.userType=== 'customer'?
         <ul className='navbarUserLogged'>
-         <li><InfoCust user={user} logout={logout}/></li>
+         <li><InfoCust user={user} logout={logout} /></li>
          <li><Orders user={user}/></li>
          <li><Cart/></li>
          <li><button onClick={handleLogOut}>Log Out</button></li>
