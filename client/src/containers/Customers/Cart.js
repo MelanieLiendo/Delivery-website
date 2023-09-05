@@ -27,7 +27,8 @@ function Cart() {
 
   const openModal = () =>{
     setIsOpen(true);
-    setOrders(JSON.parse(localStorage.getItem('orders')))}
+    setOrders(JSON.parse(localStorage.getItem('orders')))
+  }
 
   const closeModal=() => {
     setIsOpen(false);
@@ -37,8 +38,10 @@ function Cart() {
     localStorage.setItem('orders', JSON.stringify(orders))
   },[orders])
 
-  const deleteCart = (order) =>{
-    setOrders([])} 
+
+  const deleteCart = () =>{
+    setOrders([])
+  } 
 
   const checkout = ( ) => {
     setIsOpen(false);
@@ -48,7 +51,8 @@ function Cart() {
     const index = orders.findIndex(c => c.name === order.name)
     let temporary = [...orders]
     temporary.splice( index, 1)
-    setOrders(temporary)}
+    setOrders(temporary)
+  }
 
 const quantMore = (order ) =>{
     let temporary = [...orders]
@@ -56,7 +60,6 @@ const quantMore = (order ) =>{
     temporary[index].quantity = order.quantity + 1
     temporary[index].total = order.price * temporary[index].quantity
     setOrders(temporary)
-
 }
 const quantLess = (order) =>{
     let temporary = [...orders]
