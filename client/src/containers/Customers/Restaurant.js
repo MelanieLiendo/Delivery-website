@@ -62,8 +62,11 @@ useEffect(()=>{
 
 },[orders])
 
+
+
   const openModal = () =>{
     setIsOpen(true);
+    setOrders(JSON.parse(localStorage.getItem('orders')))
   }
 
   const closeModal=() => {
@@ -89,6 +92,7 @@ const handleRes = () => {
 }
 
 const handleOrder = () =>{
+  debugger
 setIsOpen(false);
 
 let idx = orders.findIndex((order)=>order.name == dish.name)
