@@ -92,7 +92,6 @@ const handleRes = () => {
 }
 
 const handleOrder = () =>{
-  debugger
 setIsOpen(false);
 
 let idx = orders.findIndex((order)=>order.name == dish.name)

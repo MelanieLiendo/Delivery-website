@@ -28,7 +28,7 @@ function Orders({user}) {
     }
   };
   customerInfo()
-},[]);
+},[modalIsOpen]);
 
   return (
     <div>

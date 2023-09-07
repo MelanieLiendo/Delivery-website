@@ -28,7 +28,7 @@ console.log(user);
   const addOrderToHistory = async () => {
     
     try{
-      debugger
+      
       const response = await axios.post(`${URL}/order/add`,{
         email:user.userEmail, 
         restaurant_id: orders[0].id_rest,

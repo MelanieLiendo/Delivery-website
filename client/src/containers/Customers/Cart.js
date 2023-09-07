@@ -26,7 +26,6 @@ function Cart() {
       }, [])
 
   const openModal = () =>{
-    debugger
     setIsOpen(true);
     setOrders(JSON.parse(localStorage.getItem('orders')))
   }
@@ -51,7 +50,6 @@ function Cart() {
     navigate('/checkout')}
 
   const deleteItem = (order) => {
-    debugger
     const index = orders.findIndex(c => c.name === order.name)
     let temporary = [...orders]
     temporary.splice( index, 1)
@@ -59,7 +57,6 @@ function Cart() {
   }
 
 const quantMore = (order ) =>{
-  debugger
     let temporary = [...orders]
     let index = temporary.findIndex(c=> c.name == order.name)
     temporary[index].quantity = order.quantity + 1
