@@ -109,7 +109,7 @@ function App() {
     <Route path="/restaurant/:id" element={<Restaurant/>} />
     <Route path="/checkout" element={<Stripe user={user}/>} />
     <Route path="/payment/success" element={<PaymentSuccess user={user}/>}/>
-    <Route path="/payment/error" element={<PaymentError />}/>
+    <Route path="/payment/error" element={<PaymentError/>}/>
 
     </Routes>
     </Router>

@@ -24,7 +24,6 @@ function EditDish({user,dishName,restaurantMenu,findingCategories}) {
       
       try {
         const response = await axios.post(`${URL}/menu/dish`, {name:dishName});
-        console.log(response)
         setInfoMenu({
           email: user.userEmail,
           name:dishName,
@@ -47,7 +46,6 @@ function EditDish({user,dishName,restaurantMenu,findingCategories}) {
         setRest({
           email: response.data.message.email,
           id: response.data.message._id,
-
         })
         console.log(rest)
       }
@@ -58,11 +56,8 @@ function EditDish({user,dishName,restaurantMenu,findingCategories}) {
     if(!rest.id || !rest.email) {
       restaurant();   
     }
-    
-   if(!infoMenu){
     menuInfo()
 
-   }
   },[]);
 
     const changeButton = ()=>{

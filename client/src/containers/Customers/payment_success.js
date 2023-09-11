@@ -48,11 +48,10 @@ console.log(user);
   }
   useEffect(() => {
     if(user){
-     getSessionData(); 
-     addOrderToHistory(); 
+     getSessionData();
+     addOrderToHistory();  
     }
   }, [user]);
-
 
   return (
     <div className="message_container">
